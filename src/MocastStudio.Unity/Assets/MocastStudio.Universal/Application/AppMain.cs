@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MocastStudio.Unity.Application
+namespace MocastStudio.Universal.Application
 {
     /// <summary>
     /// Entry point
