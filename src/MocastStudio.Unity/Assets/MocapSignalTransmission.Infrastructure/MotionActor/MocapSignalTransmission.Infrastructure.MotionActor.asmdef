@@ -1,0 +1,21 @@
+{
+    "name": "MocapSignalTransmission.Infrastructure.MotionActor",
+    "rootNamespace": "MocapSignalTransmission.Infrastructure.MotionActor",
+    "references": [
+        "MocapSignalTransmission.MotionActor",
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "UniTask",
+        "UniGLTF",
+        "VRM10",
+        "VRMShaders.GLTF.IO.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
