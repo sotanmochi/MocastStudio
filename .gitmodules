@@ -1,0 +1,6 @@
+[submodule "src/__MocastStudio.Private"]
+	path = src/__MocastStudio.Private
+	url = https://github.com/sotanmochi/__MocastStudio.Private.git
+[submodule "src/__MocastStudio.ThirdParty.Private"]
+	path = src/__MocastStudio.ThirdParty.Private
+	url = https://github.com/sotanmochi/__MocastStudio.ThirdParty.Private.git
