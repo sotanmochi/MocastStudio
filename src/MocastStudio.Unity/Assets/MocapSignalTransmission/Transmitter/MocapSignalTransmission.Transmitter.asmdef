@@ -1,0 +1,17 @@
+{
+    "name": "MocapSignalTransmission.Transmitter",
+    "rootNamespace": "MocapSignalTransmission.Transmitter",
+    "references": [
+        "MocapSignalTransmission.MotionActor",
+        "MessagePipe"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
