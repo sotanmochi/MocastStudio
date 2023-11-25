@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "56662924960a53695a640af80125f1cfd334d5ee"
     },
+    "com.hecomi.uosc": {
+      "version": "https://github.com/hecomi/uOSC.git?path=Assets/uOSC#v2.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3c80df7ee3ce7c58cb33f5820921a3b192e22c04"
+    },
     "com.unity.burst": {
       "version": "1.8.8",
       "depth": 1,
