@@ -1,0 +1,17 @@
+{
+    "name": "MocapSignalTransmission.Infrastructure.Transmitter",
+    "rootNamespace": "MocapSignalTransmission.Infrastructure.Transmitter",
+    "references": [
+        "MocapSignalTransmission.Transmitter",
+        "MocapSignalTransmission.Infrastructure.Constants"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
