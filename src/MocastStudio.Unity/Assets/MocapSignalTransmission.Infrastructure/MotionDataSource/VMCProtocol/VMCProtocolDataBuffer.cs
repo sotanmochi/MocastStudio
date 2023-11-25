@@ -65,16 +65,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
         public void Enqueue(VMCProtocolStreamingReceiver.SkeletonData skeletonData)
         {
-            // Update the enqueue position to insert the next data.
-            _bufferTail++;
             var enqueueIndex = _bufferTail & _bufferMask;
-
-            // When the buffer overflows, the head data (oldest data) is deleted.
-            var bufferFreeCount = _bufferSize - (int) (_bufferTail - _bufferHead);
-            if (bufferFreeCount <= 0)
-            {
-                _bufferHead++;
-            }
 
             _bodyTrackingFrameBuffer[enqueueIndex].RootPosition = skeletonData.RootBonePosition;
             _bodyTrackingFrameBuffer[enqueueIndex].RootRotation = skeletonData.RootBoneRotation;
@@ -99,6 +90,16 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
                     // _fingerTrackingFrameBuffer[enqueueIndex].BonePositions[fingerBoneId] = skeletonData.BonePositions[i];
                     _fingerTrackingFrameBuffer[enqueueIndex].BoneRotations[fingerBoneId] = skeletonData.BoneRotations[i];
                 }
+            }
+
+            // Update the enqueue position to insert the next data.
+            _bufferTail++;
+
+            // When the buffer overflows, the head data (oldest data) is deleted.
+            var bufferFreeCount = _bufferSize - (int)(_bufferTail - _bufferHead);
+            if (bufferFreeCount <= 0)
+            {
+                _bufferHead++;
             }
         }
 
