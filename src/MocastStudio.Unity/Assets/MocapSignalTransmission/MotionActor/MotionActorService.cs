@@ -57,9 +57,10 @@ namespace MocapSignalTransmission.MotionActor
                 }
             }
 
-            foreach (var actor in _context.HumanoidMotionActors)
+            // NOTE: Avoid boxing allocation that occur when using foreach.
+            for (var actorIndex = 0; actorIndex < _context.HumanoidMotionActors.Count; actorIndex++)
             {
-                actor.UpdateHumanPose();
+                _context.HumanoidMotionActors[actorIndex].UpdateHumanPose();
             }
         }
 
