@@ -1,15 +1,16 @@
+using MessagePipe;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace MocastStudio.Universal.Application
 {
-    /// <summary>
-    /// Entry point
-    /// </summary>
-    public sealed class AppMain : MonoBehaviour
+    public sealed class AppMain : LifetimeScope
     {
-        void Awake()
+        protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log($"[{nameof(AppMain)}] Awake()");
+            builder.RegisterMessagePipe();
+            Debug.Log($"[{nameof(AppMain)}] Configure");
         }
     }
 }
