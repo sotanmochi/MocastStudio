@@ -1,0 +1,37 @@
+{
+    "name": "MocapSignalTransmission.Infrastructure.MotionDataSource",
+    "rootNamespace": "MocapSignalTransmission.Infrastructure.MotionDataSource",
+    "references": [
+        "MocapSignalTransmission.MotionData",
+        "MocapSignalTransmission.MotionDataSource",
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "uOSC.Runtime",
+        "com.sony.mocopi.receiver",
+        "MocapStreamingReceiver.MotionBuilder"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.hecomi.uosc",
+            "expression": "",
+            "define": "UOSC"
+        },
+        {
+            "name": "com.sony.mocopi.receiver",
+            "expression": "",
+            "define": "MOCOPI_RECEIVER_PLUGIN"
+        },
+        {
+            "name": "jp.sotanmochi.mocapstreamingreceiver.motionbuilder",
+            "expression": "",
+            "define": "MOTION_BUILDER_RECEIVER_PLUGIN"
+        }
+    ],
+    "noEngineReferences": false
+}
