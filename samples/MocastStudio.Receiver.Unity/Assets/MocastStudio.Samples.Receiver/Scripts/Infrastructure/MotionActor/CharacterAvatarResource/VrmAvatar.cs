@@ -1,5 +1,6 @@
 using UniGLTF;
 using UnityEngine;
+using MocastStudio.Samples.Receiver.Domain.MotionActor;
 
 namespace MocastStudio.Samples.Receiver.Infrastructure.MotionActor
 {
