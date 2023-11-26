@@ -5,7 +5,7 @@ using MocastStudio.Samples.Receiver.Domain.MotionActor;
 
 namespace MocastStudio.Samples.Receiver.Infrastructure.MotionActor
 {
-    public sealed class MotionActorFactory
+    public sealed class MotionActorFactory : IMotionActorFactory
     {
         private readonly ICharacterAvatarResourceProvider _characterAvatarResourceProvider;
 
