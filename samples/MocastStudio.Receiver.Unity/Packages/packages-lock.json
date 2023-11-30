@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.cysharp.messagepipe": {
+      "version": "https://github.com/Cysharp/MessagePipe.git?path=src/MessagePipe.Unity/Assets/Plugins/MessagePipe#1.7.4",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5c8794f95c388bec6f79aa2014438b20d948951e"
+    },
+    "com.cysharp.messagepipe.vcontainer": {
+      "version": "https://github.com/Cysharp/MessagePipe.git?path=src/MessagePipe.Unity/Assets/Plugins/MessagePipe.VContainer#1.7.4",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5c8794f95c388bec6f79aa2014438b20d948951e"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.0",
       "depth": 0,
