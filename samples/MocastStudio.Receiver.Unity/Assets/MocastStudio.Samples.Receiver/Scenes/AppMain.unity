@@ -344,6 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 331618062}
   - component: {fileID: 331618063}
+  - component: {fileID: 331618064}
   m_Layer: 0
   m_Name: AppMain
   m_TagString: Untagged
@@ -383,6 +384,33 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _motionActorLoaderUIView: {fileID: 1100895562}
+  _oscServer: {fileID: 331618064}
+--- !u!114 &331618064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331618061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed41645692348410d84991648165334c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: 3333
+  autoStart: 0
+  onDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  onServerStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onServerStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDataReceivedEditor:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &423574686
 GameObject:
   m_ObjectHideFlags: 0
