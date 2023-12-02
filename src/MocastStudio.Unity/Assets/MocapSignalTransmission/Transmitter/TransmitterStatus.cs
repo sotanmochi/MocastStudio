@@ -3,12 +3,12 @@ namespace MocapSignalTransmission.Transmitter
     public readonly struct TransmitterStatus
     {
         public readonly int TransmitterId;
-        public readonly int StatusType;
+        public readonly TransmitterStatusType StatusType;
 
         public TransmitterStatus(int dataSourceId, TransmitterStatusType statusType)
         {
             TransmitterId = dataSourceId;
-            StatusType = (int)statusType;
+            StatusType = statusType;
         }
     }
 
