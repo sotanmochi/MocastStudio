@@ -14,8 +14,8 @@ namespace MocapSignalTransmission.Transmitter
 
     public enum TransmitterStatusType
     {
-        Disconnected = -1,
-        Connecting = 0,
-        Connected = 1,
+        Disconnected = 0,
+        Connecting = 1,
+        Connected = 2,
     }
 }
