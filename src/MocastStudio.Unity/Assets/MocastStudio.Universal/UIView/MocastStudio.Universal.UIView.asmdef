@@ -1,0 +1,24 @@
+{
+    "name": "MocastStudio.Universal.UIView",
+    "rootNamespace": "MocastStudio.Universal.UIView",
+    "references": [
+        "Unity.TextMeshPro",
+        "MessagePipe",
+        "UniTask",
+        "UniRx",
+        "VContainer",
+        "VRM10.Samples.URPSample",
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "MocapSignalTransmission.MotionActor",
+        "MocapSignalTransmission.MotionDataSource"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
