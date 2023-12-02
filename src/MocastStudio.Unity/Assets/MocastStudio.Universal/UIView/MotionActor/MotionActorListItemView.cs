@@ -1,13 +1,13 @@
 using System;
-using TMPro;
 using UnityEngine;
+using Text = TMPro.TMP_Text;
 
 namespace MocastStudio.Universal.UIView.MotionActor
 {
     public sealed class MotionActorListItemView : MonoBehaviour
     {
-        [SerializeField] TMP_Text _idText;
-        [SerializeField] TMP_Text _nameText;
+        [SerializeField] Text _idText;
+        [SerializeField] Text _nameText;
 
         public void SetId(int id)
         {
