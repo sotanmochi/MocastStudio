@@ -2,7 +2,7 @@ namespace MocapSignalTransmission.Infrastructure.Constants
 {
     public enum TransportType
     {
-        Udp = 0,
-        Unknown = -1,
+        Unknown = 0,
+        Udp = 1,
     }
 }

@@ -2,7 +2,7 @@ namespace MocapSignalTransmission.Infrastructure.Constants
 {
     public enum SerializerType
     {
-        HumanPose_OSC = 0,
-        Unknown = -1,
+        Unknown = 0,
+        HumanPose_OSC = 1,
     }
 }
