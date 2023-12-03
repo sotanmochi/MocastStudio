@@ -215,6 +215,13 @@
       },
       "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
     },
+    "com.yasirkula.dynamicpanels": {
+      "version": "https://github.com/sotanmochi/UnityDynamicPanels.git#v1.3.0-customizable",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a9d7fc08abb986a2339c97e50967c11ee4900e72"
+    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.2",
       "depth": 0,
