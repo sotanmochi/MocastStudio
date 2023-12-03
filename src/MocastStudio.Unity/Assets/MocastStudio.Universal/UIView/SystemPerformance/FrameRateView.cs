@@ -8,6 +8,7 @@ namespace MocastStudio.Universal.UIView.SystemPerformance
         [SerializeField] Text _fpsText;
 
         private float _previousFrameTime;
+        private float _averageFps;
 
         void Update()
         {
@@ -16,7 +17,14 @@ namespace MocastStudio.Universal.UIView.SystemPerformance
             _previousFrameTime = currentFrameTime;
 
             var fps = 1f / deltaTime;
-            _fpsText.text = $"FPS: {fps:0.00}";
+
+            _averageFps += fps;
+            if (Time.frameCount % 10 == 0)
+            {
+                _averageFps /= 10;
+                _fpsText.text = $"FPS: {_averageFps:0.00}";
+                _averageFps = 0f;
+            }
         }
     }
 }
