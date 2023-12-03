@@ -31,7 +31,7 @@ namespace MocastStudio.Universal.Lifecycle
             builder.RegisterComponent(_transmitterListView);
             builder.RegisterComponent(_transmitterLoaderView);
 
-            // builder.RegisterEntryPoint<MotionActorPresenter>();
+            builder.RegisterEntryPoint<MotionActorPresenter>();
             // builder.RegisterEntryPoint<MotionDataSourcePresenter>();
             // builder.RegisterEntryPoint<MotionSourceMappingPresenter>();
             // builder.RegisterEntryPoint<TransmitterPresenter>();
