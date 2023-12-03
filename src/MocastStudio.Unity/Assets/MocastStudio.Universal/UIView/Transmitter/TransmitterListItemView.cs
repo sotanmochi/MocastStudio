@@ -40,8 +40,11 @@ namespace MocastStudio.Universal.UIView.Transmitter
 
         public void SetActorId(IReadOnlyCollection<int> actorIds)
         {
-            var actorIdList = string.Join(", ", actorIds);
-            _actorIdText.text = $"Actor ID: {actorIdList}";
+            if (actorIds != null && actorIds.Count > 0)
+            {
+                var actorIdList = string.Join(", ", actorIds);
+                _actorIdText.text = $"Actor ID: {actorIdList}";
+            }
         }
 
         public void SetValues(TransmitterType transmitterType, string address, int port)
