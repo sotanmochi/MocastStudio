@@ -16,6 +16,7 @@ namespace MocapSignalTransmission.MotionActor
         public string Name => _name;
 
         public HumanPose HumanPose => _humanPose;
+        public Transform ActorSpaceReferenceTransform => _bodyTrackingActorBehaviour.transform; // NOTE:
 
         public BodyTrackingActorBehaviour BodyTrackingActorBehaviour => _bodyTrackingActorBehaviour;
         public FingerTrackingActorBehaviour FingerTrackingActorBehaviour => _fingerTrackingActorBehaviour;

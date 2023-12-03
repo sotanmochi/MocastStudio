@@ -13,6 +13,8 @@ namespace MocapSignalTransmission.Transmitter
         private readonly ITransport _transport;
         private readonly HashSet<int> _actorIds = new();
 
+        private HumanPose _correctedHumanPose;
+
         public int Id => _id;
         public IReadOnlyCollection<int> ActorIds => _actorIds;
 
@@ -21,6 +23,7 @@ namespace MocapSignalTransmission.Transmitter
             _id = id;
             _serializer = serializer;
             _transport = transport;
+            _correctedHumanPose.muscles = new float[HumanTrait.MuscleCount];
         }
 
         public async Task<bool> ConnectAsync(CancellationToken cancellationToken = default)
@@ -57,10 +60,20 @@ namespace MocapSignalTransmission.Transmitter
                 return;
             }
 
+            // NOTE:
+            var worldToLocalMatrix = humanoidMotionActor.ActorSpaceReferenceTransform.worldToLocalMatrix;
+            _correctedHumanPose.bodyPosition = worldToLocalMatrix.MultiplyPoint(humanoidMotionActor.HumanPose.bodyPosition);
+            _correctedHumanPose.bodyRotation = worldToLocalMatrix.rotation * humanoidMotionActor.HumanPose.bodyRotation;
+
+            for (var i = 0; i < HumanTrait.MuscleCount; i++)
+            {
+                _correctedHumanPose.muscles[i] = humanoidMotionActor.HumanPose.muscles[i];
+            }
+
             var serializedData = _serializer.Serialize
             (
                 humanoidMotionActor.ActorId,
-                humanoidMotionActor.HumanPose
+                _correctedHumanPose
             );
 
             _transport.Send(serializedData);
