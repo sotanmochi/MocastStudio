@@ -43,6 +43,13 @@ namespace MocastStudio.Universal.UIView.MotionActor
                 })
                 .AddTo(_compositeDisposable);
 
+            _motionActorListView.RootBoneOffsetStatus
+                .Subscribe(status =>
+                {
+                    _motionActorService.EnableRootBoneOffset(status.ActorId, status.RootBoneOffsetEnabled);
+                })
+                .AddTo(_compositeDisposable);
+
             _motionActorServiceContext.OnMotionActorAdded
                 .Subscribe(motionActor =>
                 {

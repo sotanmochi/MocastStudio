@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,10 @@ namespace MocastStudio.Universal.UIView.MotionActor
         [SerializeField] MotionActorListItemView _itemViewPrefab;
         [SerializeField] VerticalLayoutGroup _contentsRoot;
 
+        private readonly Subject<(int ActorId, bool RootBoneOffsetEnabled)> _rootBoneOffsetStausNotifier = new();
         private readonly Dictionary<int, MotionActorListItemView> _listItemViews = new();
+
+        public IObservable<(int ActorId, bool RootBoneOffsetEnabled)> RootBoneOffsetStatus => _rootBoneOffsetStausNotifier;
 
         void OnDestroy() => RemoveAll();
 
@@ -34,6 +38,10 @@ namespace MocastStudio.Universal.UIView.MotionActor
 
             itemView.SetId(id);
             itemView.SetValues(name);
+
+            itemView.OnRootBoneOffsetToggleValueChanged
+                .TakeUntilDestroy(this)
+                .Subscribe(status => _rootBoneOffsetStausNotifier.OnNext(status));
 
             _listItemViews.Add(id, itemView);
         }

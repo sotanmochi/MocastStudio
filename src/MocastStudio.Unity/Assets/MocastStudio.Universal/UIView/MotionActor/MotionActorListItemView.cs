@@ -1,5 +1,7 @@
 using System;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
 
 namespace MocastStudio.Universal.UIView.MotionActor
@@ -8,6 +10,14 @@ namespace MocastStudio.Universal.UIView.MotionActor
     {
         [SerializeField] Text _idText;
         [SerializeField] Text _nameText;
+        [SerializeField] Toggle _rootBoneOffsetToggle;
+
+        private int _id;
+
+        public IObservable<(int ActorId, bool RootBoneOffsetEnabled)> OnRootBoneOffsetToggleValueChanged => 
+            _rootBoneOffsetToggle.OnValueChangedAsObservable()
+                .Select(isOn => (ActorId: _id, RootBoneOffsetEnabled: isOn))
+                .TakeUntilDestroy(this);
 
         public void SetId(int id)
         {
