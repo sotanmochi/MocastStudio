@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MocapSignalTransmission.MotionDataSource;
 using Debug = UnityEngine.Debug;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace MocapSignalTransmission.MotionActor
 {
@@ -17,6 +19,16 @@ namespace MocapSignalTransmission.MotionActor
         {
             _context = context;
             _motionActorFactory = motionActorFactory;
+        }
+
+        public void EnableRootBoneOffset(int actorId, bool enable)
+        {
+            _context._humanoidMotionActors[actorId].RootBoneOffsetEnabled = enable;
+        }
+
+        public void UpdateRootBoneOffset(int actorId, Vector3 position, Quaternion rotation)
+        {
+            _context._humanoidMotionActors[actorId].UpdateRootBoneOffset(position, rotation);
         }
 
         public void UpdateMotionActorPose(

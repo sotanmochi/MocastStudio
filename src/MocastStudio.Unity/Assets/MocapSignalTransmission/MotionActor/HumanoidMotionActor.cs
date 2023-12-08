@@ -21,17 +21,32 @@ namespace MocapSignalTransmission.MotionActor
         public BodyTrackingActorBehaviour BodyTrackingActorBehaviour => _bodyTrackingActorBehaviour;
         public FingerTrackingActorBehaviour FingerTrackingActorBehaviour => _fingerTrackingActorBehaviour;
 
+        public bool RootBoneOffsetEnabled
+        {
+            get => _bodyTrackingActorBehaviour.RootBoneOffsetEnabled;
+            set => _bodyTrackingActorBehaviour.RootBoneOffsetEnabled = value;
+        }
+
         public HumanoidMotionActor(int actorId, string name, Animator animator)
         {
             _actorId = actorId;
             _name = name;
             _humanPoseHandler = new HumanPoseHandler(animator.avatar, animator.transform);
 
+            var rootBoneTransform = animator.GetBoneTransform(HumanBodyBones.Hips);
+
             _bodyTrackingActorBehaviour = animator.gameObject.AddComponent<BodyTrackingActorBehaviour>();
             _bodyTrackingActorBehaviour.Initialize();
+            _bodyTrackingActorBehaviour.UpdateRootBoneOffset(rootBoneTransform.localPosition, rootBoneTransform.localRotation);
+            _bodyTrackingActorBehaviour.RootBoneOffsetEnabled = true;
 
             _fingerTrackingActorBehaviour = animator.gameObject.AddComponent<FingerTrackingActorBehaviour>();
             _fingerTrackingActorBehaviour.Initialize();
+        }
+
+        public void UpdateRootBoneOffset(Vector3 position, Quaternion rotation)
+        {
+            _bodyTrackingActorBehaviour.UpdateRootBoneOffset(position, rotation);
         }
 
         public void UpdateHumanPose()
