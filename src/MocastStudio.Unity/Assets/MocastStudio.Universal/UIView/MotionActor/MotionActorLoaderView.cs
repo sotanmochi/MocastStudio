@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using UniVRM10.URPSample;
+using SFB;
 
 namespace MocastStudio.Universal.UIView.MotionActor
 {
@@ -20,7 +20,7 @@ namespace MocastStudio.Universal.UIView.MotionActor
         {
             _button.OnClickAsObservable()
                 .TakeUntilDestroy(this)
-                .Subscribe(_ => 
+                .Subscribe(_ =>
                 {
                     try
                     {
@@ -37,10 +37,13 @@ namespace MocastStudio.Universal.UIView.MotionActor
 
         private string GetResourcePath()
         {
-#if UNITY_STANDALONE_WIN
-            return FileDialogForWindows.FileDialog("Open VRM", "vrm");
-#elif UNITY_EDITOR
-            return UnityEditor.EditorUtility.OpenFilePanel("Open VRM", "", "vrm");
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+            var resourcePath = "";
+
+            StandaloneFileBrowser.OpenFilePanelAsync("Open VRM", "", "vrm", false, paths =>
+                resourcePath = paths.Length > 0 ? paths[0] : "");
+
+            return resourcePath;
 #else
             throw new NotImplementedException();
 #endif

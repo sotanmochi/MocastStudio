@@ -7,7 +7,7 @@
         "UniTask",
         "UniRx",
         "VContainer",
-        "VRM10.Samples.URPSample",
+        "StandaloneFileBrowser",
         "MocapSignalTransmission.Infrastructure.Constants",
         "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.MotionDataSource",
