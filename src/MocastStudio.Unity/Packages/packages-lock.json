@@ -222,6 +222,12 @@
       "dependencies": {},
       "hash": "a9d7fc08abb986a2339c97e50967c11ee4900e72"
     },
+    "io.github.gkngkc.unity-standalone-file-browser": {
+      "version": "file:./ThirdParty/UnityStandaloneFileBrowser/Assets/StandaloneFileBrowser",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.2",
       "depth": 0,
