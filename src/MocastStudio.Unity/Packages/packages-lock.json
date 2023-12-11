@@ -238,6 +238,13 @@
       },
       "hash": "af7bd4ecabaf6ea3f9e58ecc4352dd5296e5ef29"
     },
+    "org.mattatz.unity-transform-control": {
+      "version": "https://github.com/sotanmochi/unity-transform-control.git?path=Assets/Packages/TransformControl#v1.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "84f097276a525ef4e9a11152bff80349fc280ece"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
