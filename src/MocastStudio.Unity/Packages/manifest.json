@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "io.github.gkngkc.unity-standalone-file-browser": "file:./ThirdParty/UnityStandaloneFileBrowser/Assets/StandaloneFileBrowser",
+    "io.github.gkngkc.unity-standalone-file-browser": "https://github.com/sotanmochi/UnityStandaloneFileBrowser.git?path=Assets/StandaloneFileBrowser#upm",
     "com.yasirkula.dynamicpanels": "https://github.com/sotanmochi/UnityDynamicPanels.git#v1.3.0-customizable",
     "com.hecomi.uosc": "https://github.com/hecomi/uOSC.git?path=Assets/uOSC#v2.2.0",
     "com.vrmc.vrmshaders": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRMShaders#v0.115.0",

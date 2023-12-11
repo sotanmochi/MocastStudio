@@ -223,10 +223,11 @@
       "hash": "a9d7fc08abb986a2339c97e50967c11ee4900e72"
     },
     "io.github.gkngkc.unity-standalone-file-browser": {
-      "version": "file:./ThirdParty/UnityStandaloneFileBrowser/Assets/StandaloneFileBrowser",
+      "version": "https://github.com/sotanmochi/UnityStandaloneFileBrowser.git?path=Assets/StandaloneFileBrowser#upm",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "cf6c871581a052e62ece6aa5d9d461a38e858fa2"
     },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.2",
