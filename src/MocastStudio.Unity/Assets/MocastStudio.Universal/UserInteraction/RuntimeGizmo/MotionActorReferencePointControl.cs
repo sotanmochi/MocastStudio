@@ -37,6 +37,8 @@ namespace MocastStudio.Universal.UserInteraction.RuntimeGizmo
                     {
                         var control = humanoidMotionActor.BodyTrackingActorBehaviour.gameObject.AddComponent<TransformController>();
                         control.renderTargetCamera = _cameraSystemContext.SceneViewCamera;
+                        control.global = true;
+                        control.useDistance = true;
                     }
                 })
                 .AddTo(disposableBag);
