@@ -1,0 +1,21 @@
+{
+    "name": "MocastStudio.Universal.UserInteraction",
+    "rootNamespace": "MocastStudio.Universal.UserInteraction",
+    "references": [
+        "VContainer",
+        "MessagePipe",
+        "UniTask",
+        "TransformControl",
+        "MocapSignalTransmission.MotionActor",
+        "MocastStudio.CameraSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
