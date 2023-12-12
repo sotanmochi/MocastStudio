@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MocastStudio.Universal.UserInteraction.Camera
+namespace MocastStudio.Universal.UserInteraction.CameraSystem
 {
     public sealed class SceneViewCameraController : MonoBehaviour
     {
