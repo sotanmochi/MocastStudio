@@ -32,7 +32,7 @@ namespace MocastStudio.Universal.UserInteraction.CameraSystem
                 -input.DeltaY * _moveScaleFactor.y,
                 input.ScrollDelta * _moveScaleFactor.z);
 
-            if (input.ButtonType != MouseButtonType.Left)
+            if (input.ButtonType != MouseButtonType.Middle)
             {
                 deltaPosition.x = 0;
                 deltaPosition.y = 0;
