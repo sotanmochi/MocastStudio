@@ -10,12 +10,15 @@ namespace MocastStudio.Universal.UIView.About
     {
         [SerializeField] Text _text;
         [SerializeField] Button _close;
+        [SerializeField] TextAsset _license;
+        [SerializeField] TextAsset _thirdPartyNotices;
 
         public IObservable<Unit> OnClose => _close.OnClickAsObservable();
 
-        public void SetText(string text)
+        void Awake()
         {
-            _text.text = text;
+            _text.text = Environment.NewLine + _license.text
+                        + Environment.NewLine + _thirdPartyNotices.text;
         }
     }
 }

@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acknowledgements
+  m_text: License and Third Party Notices
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -299,7 +299,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _close: {fileID: 8360989030790997306}
   _acknowledgements: {fileID: 4958813306248057976}
-  _acknowledgementsView: {fileID: 0}
 --- !u!1 &4693857169039715742
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +725,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -270}
-  m_SizeDelta: {x: 240, y: 40}
+  m_SizeDelta: {x: 360, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1000552782528798807
 CanvasRenderer:
