@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace MocastStudio.Universal.UserInteraction.CameraSystem
 {
@@ -19,6 +20,9 @@ namespace MocastStudio.Universal.UserInteraction.CameraSystem
         void Update()
         {
             if (_camera == null) return;
+
+            // NOTE: Enable the scene view camera controller when the pointer is not over any UI element.
+            if (EventSystem.current.IsPointerOverGameObject()) return;
 
             var input = ProcessMouseInput();
 
