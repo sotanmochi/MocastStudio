@@ -21,6 +21,7 @@ namespace MocastStudio.Universal.UIView.MotionActor
 
         public void SetId(int id)
         {
+            _id = id;
             _idText.text = $"ID: {id}";
         }
 
