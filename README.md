@@ -1,5 +1,9 @@
 # MocastStudio
 
+## Screenshots
+<img src="./docs/MocastStudio_20231218.jpg">
+
+## System Overview
 <img src="./docs/MocastStudio_Overview.png">
 
 ## Dependencies
