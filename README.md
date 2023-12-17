@@ -1,5 +1,7 @@
 # MocastStudio
 
+<img src="./docs/MocastStudio_Overview.png">
+
 ## Dependencies
 - [mocopi Receiver Plugin for Unity](https://www.sony.net/mocopi-dev/)  
   License ([日本語](https://www.sony.net/Products/mocopi-dev/jp/others/Licence.html) | [English](https://www.sony.net/Products/mocopi-dev/en/others/Licence.html))    
