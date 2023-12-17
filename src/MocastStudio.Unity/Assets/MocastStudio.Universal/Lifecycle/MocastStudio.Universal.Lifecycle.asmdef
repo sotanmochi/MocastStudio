@@ -1,0 +1,32 @@
+{
+    "name": "MocastStudio.Universal.Lifecycle",
+    "rootNamespace": "MocastStudio.Universal.Lifecycle",
+    "references": [
+        "VContainer",
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "MocapSignalTransmission.Infrastructure.MotionActor",
+        "MocapSignalTransmission.Infrastructure.MotionDataSource",
+        "MocapSignalTransmission.Infrastructure.Transmitter",
+        "MocapSignalTransmission.MotionActor",
+        "MocapSignalTransmission.MotionDataSource",
+        "MocapSignalTransmission.Transmitter",
+        "MocastStudio.CameraSystem",
+        "MocastStudio.Universal.UIView",
+        "MocastStudio.Universal.UserInteraction"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.sony.mocopi.receiver",
+            "expression": "",
+            "define": "MOCOPI_RECEIVER_PLUGIN"
+        }
+    ],
+    "noEngineReferences": false
+}
