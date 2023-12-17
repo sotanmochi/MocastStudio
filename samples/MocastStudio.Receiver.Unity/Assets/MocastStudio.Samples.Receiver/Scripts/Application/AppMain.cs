@@ -38,6 +38,8 @@ namespace MocastStudio.Samples.Receiver.Application
 
         void IInitializable.Initialize()
         {
+            UnityEngine.Application.targetFrameRate = 60;
+
             _streamingReceiver.Start();
 
             _disposable = _humanPoseSubscriber.Subscribe(humanPose =>
