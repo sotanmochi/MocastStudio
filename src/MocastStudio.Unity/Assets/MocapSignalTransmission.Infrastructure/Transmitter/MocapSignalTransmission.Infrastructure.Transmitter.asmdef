@@ -3,7 +3,8 @@
     "rootNamespace": "MocapSignalTransmission.Infrastructure.Transmitter",
     "references": [
         "MocapSignalTransmission.Transmitter",
-        "MocapSignalTransmission.Infrastructure.Constants"
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "ENet-CSharp"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -12,6 +13,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.nxrighthere.enet-csharp",
+            "expression": "",
+            "define": "ENET_CSHARP"
+        }
+    ],
     "noEngineReferences": false
 }
