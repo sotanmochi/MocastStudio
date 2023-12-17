@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +21,11 @@ namespace MocastStudio.Universal.UIView.MotionActor
         {
             _button.OnClickAsObservable()
                 .TakeUntilDestroy(this)
-                .Subscribe(_ =>
+                .Subscribe(async _ =>
                 {
                     try
                     {
-                        var resourcePath = GetResourcePath();
+                        var resourcePath = await GetResourcePathAsync();
                         if (string.IsNullOrEmpty(resourcePath)) return;
                         _loadingSubject.OnNext(new MotionActorLoadingParameters(resourcePath));
                     }
@@ -35,14 +36,19 @@ namespace MocastStudio.Universal.UIView.MotionActor
                 });
         }
 
-        private string GetResourcePath()
+        private async Task<string> GetResourcePathAsync()
         {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
             var resourcePath = "";
+            var taskCompletionSource = new TaskCompletionSource<string>();
 
             StandaloneFileBrowser.OpenFilePanelAsync("Open VRM", "", "vrm", false, paths =>
-                resourcePath = paths.Length > 0 ? paths[0] : "");
-
+            {
+                var path = paths.Length > 0 ? paths[0] : "";
+                taskCompletionSource.SetResult(path);
+            });
+ 
+            resourcePath = await taskCompletionSource.Task;
             return resourcePath;
 #else
             throw new NotImplementedException();
