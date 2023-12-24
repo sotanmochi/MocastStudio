@@ -251,6 +251,18 @@
       },
       "hash": "af7bd4ecabaf6ea3f9e58ecc4352dd5296e5ef29"
     },
+    "jp.sotanmochi.signalstreaming": {
+      "version": "file:../../SignalStreaming",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "jp.sotanmochi.signalstreaming.infrastructure": {
+      "version": "file:../../SignalStreaming.Infrastructure",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "org.mattatz.unity-transform-control": {
       "version": "https://github.com/sotanmochi/unity-transform-control.git?path=Assets/Packages/TransformControl#v1.1.0",
       "depth": 0,
