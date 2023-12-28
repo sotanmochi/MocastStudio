@@ -10,7 +10,7 @@ namespace SignalStreaming.Samples.ENetSample
         [SerializeField] ushort _port = 3333;
         [SerializeField] string _connectionKey = "SignalStreaming";
 
-        SignalStreamingHub _streamingHub;
+        ISignalStreamingHub _streamingHub;
         ISignalTransportHub _transportHub;
 
         void Awake()

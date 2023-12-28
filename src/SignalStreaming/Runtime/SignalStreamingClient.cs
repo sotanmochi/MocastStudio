@@ -6,13 +6,8 @@ using DebugLogger = SignalStreaming.DevelopmentOnlyLogger;
 
 namespace SignalStreaming
 {
-    public sealed class SignalStreamingClient : IDisposable
+    public sealed class SignalStreamingClient : ISignalStreamingClient
     {
-        /// <summary>
-        /// Some message IDs are reserved by the core module of SignalStreaming. (ID: 250 ~ 255)
-        /// </summary>
-        public delegate void OnDataReceivedEventHandler(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlyMemory<byte> payload);
-
         static readonly string DefaultDisconnectionReason = "Disconnected from server";
 
         ISignalTransport _transport;
@@ -24,13 +19,9 @@ namespace SignalStreaming
         byte[] _connectionRequestData = new byte[0];
         TaskCompletionSource<bool> _connectionTcs;
 
+        public event ISignalStreamingClient.OnDataReceivedEventHandler OnDataReceived;
         public event Action<uint> OnConnected;
         public event Action<string> OnDisconnected;
-
-        /// <summary>
-        /// Some message IDs are reserved by the core module of SignalStreaming. (ID: 250 ~ 255)
-        /// </summary>
-        public event OnDataReceivedEventHandler OnDataReceived;
 
         public uint ClientId => _clientId;
         public bool IsConnecting => _connecting;

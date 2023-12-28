@@ -1,0 +1,31 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace SignalStreaming
+{
+    public interface ISignalStreamingClient : IDisposable
+    {
+        /// <summary>
+        /// Some message IDs are reserved by the core module of SignalStreaming (ID: 250 ~ 255).
+        /// </summary>
+        public delegate void OnDataReceivedEventHandler(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlyMemory<byte> payload);
+
+        /// <summary>
+        /// Some message IDs are reserved by the core module of SignalStreaming (ID: 250 ~ 255).
+        /// </summary>
+        event OnDataReceivedEventHandler OnDataReceived;
+
+        event Action<uint> OnConnected;
+        event Action<string> OnDisconnected;
+
+        uint ClientId { get; }
+        bool IsConnecting { get; }
+        bool IsConnected { get; }
+
+        Task<bool> ConnectAsync<T>(T connectParameters, CancellationToken cancellationToken = default) where T : IConnectParameters;
+        Task DisconnectAsync(CancellationToken cancellationToken = default);
+
+        void Send<T>(int messageId, T data, SendOptions sendOptions, uint[] destinationClientIds = null);
+    }
+}

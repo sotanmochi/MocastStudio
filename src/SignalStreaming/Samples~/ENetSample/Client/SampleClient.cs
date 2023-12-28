@@ -11,7 +11,7 @@ namespace SignalStreaming.Samples.ENetSample
         [SerializeField] ushort _port = 3333;
         [SerializeField] string _connectionKey = "SignalStreaming";
 
-        SignalStreamingClient _streamingClient;
+        ISignalStreamingClient _streamingClient;
         ISignalTransport _transport;
         IConnectParameters _connectParameters;
 

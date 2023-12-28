@@ -5,25 +5,14 @@ using DebugLogger = SignalStreaming.DevelopmentOnlyLogger;
 
 namespace SignalStreaming
 {
-    public class SignalStreamingHub : IDisposable
+    public sealed class SignalStreamingHub : ISignalStreamingHub
     {
-        /// <summary>
-        /// Some message IDs are reserved by the core module of SignalStreaming. (ID: 250 ~ 255)
-        /// </summary>
-        public delegate void OnDataReceivedEventHandler(int messageId, uint senderClientId, long originTimestamp, SendOptions sendOptions, ReadOnlyMemory<byte> payload);
-
-        public delegate RequestApprovalResult ConnectionRequestValidationFunction(byte[] connectionRequestData);
-
         ISignalTransportHub _transportHub;
 
-        public event ConnectionRequestValidationFunction ConnectionRequestValidationFunc;
+        public event ISignalStreamingHub.ConnectionRequestValidationFunction ConnectionRequestValidationFunc;
+        public event ISignalStreamingHub.OnDataReceivedEventHandler OnDataReceived;
         public event Action<uint> OnClientConnected;
         public event Action<uint> OnClientDisconnected;
-
-        /// <summary>
-        /// Some message IDs are reserved by the core module of SignalStreaming. (ID: 250 ~ 255)
-        /// </summary>
-        public event OnDataReceivedEventHandler OnDataReceived;
 
         public SignalStreamingHub(ISignalTransportHub transportHub)
         {
