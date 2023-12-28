@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Universal.Application.AppMainLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.AppMainLifecycle
   autoRun: 1
   autoInjectGameObjects: []
 --- !u!114 &882500183

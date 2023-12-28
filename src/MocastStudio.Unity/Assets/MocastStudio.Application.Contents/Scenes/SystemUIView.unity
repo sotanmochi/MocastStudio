@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Universal.Lifecycle.MotionCaptureSystemLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.MotionCaptureSystemLifecycle
   autoRun: 1
   autoInjectGameObjects: []
   _motionActorListView: {fileID: 1150619401}
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Universal.Lifecycle.MotionCaptureSystemLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.MotionCaptureSystemLifecycle
   autoRun: 1
   autoInjectGameObjects: []
 --- !u!114 &617664929
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Universal.Application.AppMainLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.AppMainLifecycle
   autoRun: 1
   autoInjectGameObjects: []
   _systemMenuView: {fileID: 1106136855}

@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.UIView
+namespace MocastStudio.Presentation.UIView
 {
     public sealed class SystemMenuPresenter : IDisposable, IInitializable
     {

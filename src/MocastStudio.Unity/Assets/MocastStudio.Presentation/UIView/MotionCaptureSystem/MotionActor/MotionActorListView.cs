@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MocastStudio.Universal.UIView.MotionActor
+namespace MocastStudio.Presentation.UIView.MotionActor
 {
     public sealed class MotionActorListView : MonoBehaviour
     {

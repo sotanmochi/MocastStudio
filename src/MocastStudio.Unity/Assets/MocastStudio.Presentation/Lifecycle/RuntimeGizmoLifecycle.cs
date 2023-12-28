@@ -1,9 +1,9 @@
-using MocastStudio.Universal.UserInteraction.RuntimeGizmo;
+using MocastStudio.Presentation.UserInteraction.RuntimeGizmo;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Lifecycle
+namespace MocastStudio.Presentation.Lifecycle
 {
     public sealed class RuntimeGizmoLifecycle : LifetimeScope
     {

@@ -1,4 +1,4 @@
-namespace MocastStudio.Universal.UIView.Transmitter
+namespace MocastStudio.Presentation.UIView.Transmitter
 {
     public enum TransmitterType
     {

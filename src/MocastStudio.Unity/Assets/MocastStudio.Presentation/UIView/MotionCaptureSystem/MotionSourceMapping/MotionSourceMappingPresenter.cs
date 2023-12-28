@@ -6,7 +6,7 @@ using MocapSignalTransmission.MotionDataSource;
 using UniRx;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.UIView.MotionSourceMapping
+namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 {
     public sealed class MotionSourceMappingPresenter : IInitializable, IDisposable
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
 
-namespace MocastStudio.Universal.UIView.About
+namespace MocastStudio.Presentation.UIView.About
 {
     public sealed class AcknowledgementsView : MonoBehaviour
     {

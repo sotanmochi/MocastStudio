@@ -1,10 +1,10 @@
-using MocastStudio.Universal.UIView;
-using MocastStudio.Universal.UIView.About;
+using MocastStudio.Presentation.UIView;
+using MocastStudio.Presentation.UIView.About;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Lifecycle
+namespace MocastStudio.Presentation.Lifecycle
 {
     public sealed class UIViewLifecycle : LifetimeScope
     {

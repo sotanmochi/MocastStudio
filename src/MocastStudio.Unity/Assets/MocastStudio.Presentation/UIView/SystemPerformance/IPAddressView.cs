@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
 
-namespace MocastStudio.Universal.UIView.SystemPerformance
+namespace MocastStudio.Presentation.UIView.SystemPerformance
 {
     public sealed class IPAddressView : MonoBehaviour
     {

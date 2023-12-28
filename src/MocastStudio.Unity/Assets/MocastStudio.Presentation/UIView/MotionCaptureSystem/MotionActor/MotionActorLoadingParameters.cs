@@ -1,4 +1,4 @@
-namespace MocastStudio.Universal.UIView.MotionActor
+namespace MocastStudio.Presentation.UIView.MotionActor
 {
     public sealed class MotionActorLoadingParameters
     {

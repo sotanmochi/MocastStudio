@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MocastStudio.Universal.UIView
+namespace MocastStudio.Presentation.UIView
 {
     public class SystemMenuView : MonoBehaviour
     {

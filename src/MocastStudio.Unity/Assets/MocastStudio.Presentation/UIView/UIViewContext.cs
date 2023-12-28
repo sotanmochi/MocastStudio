@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MessagePipe;
 
-namespace MocastStudio.Universal.UIView
+namespace MocastStudio.Presentation.UIView
 {
     public sealed class UIViewContext : IDisposable
     {

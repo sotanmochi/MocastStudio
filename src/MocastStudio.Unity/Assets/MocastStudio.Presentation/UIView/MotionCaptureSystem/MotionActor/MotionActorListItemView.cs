@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
 
-namespace MocastStudio.Universal.UIView.MotionActor
+namespace MocastStudio.Presentation.UIView.MotionActor
 {
     public sealed class MotionActorListItemView : MonoBehaviour
     {

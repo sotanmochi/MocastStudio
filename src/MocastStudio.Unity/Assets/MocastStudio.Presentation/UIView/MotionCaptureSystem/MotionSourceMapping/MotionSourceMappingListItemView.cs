@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
 
-namespace MocastStudio.Universal.UIView.MotionSourceMapping
+namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 {
     public sealed class MotionSourceMappingListItemView : MonoBehaviour
     {

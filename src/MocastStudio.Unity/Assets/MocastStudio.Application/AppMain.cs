@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Application
+namespace MocastStudio.Application
 {
     /// <summary>
     /// Entry point

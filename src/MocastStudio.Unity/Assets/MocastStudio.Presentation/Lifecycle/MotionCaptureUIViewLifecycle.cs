@@ -1,12 +1,12 @@
-using MocastStudio.Universal.UIView.MotionActor;
-using MocastStudio.Universal.UIView.MotionDataSource;
-using MocastStudio.Universal.UIView.MotionSourceMapping;
-using MocastStudio.Universal.UIView.Transmitter;
+using MocastStudio.Presentation.UIView.MotionActor;
+using MocastStudio.Presentation.UIView.MotionDataSource;
+using MocastStudio.Presentation.UIView.MotionSourceMapping;
+using MocastStudio.Presentation.UIView.Transmitter;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Lifecycle
+namespace MocastStudio.Presentation.Lifecycle
 {
     public sealed class MotionCaptureUIViewLifecycle : LifetimeScope
     {

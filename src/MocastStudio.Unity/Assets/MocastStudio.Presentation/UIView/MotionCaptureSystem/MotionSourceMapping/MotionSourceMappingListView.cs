@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
 
-namespace MocastStudio.Universal.UIView.MotionSourceMapping
+namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 {
     public sealed class MotionSourceMappingListView : MonoBehaviour
     {

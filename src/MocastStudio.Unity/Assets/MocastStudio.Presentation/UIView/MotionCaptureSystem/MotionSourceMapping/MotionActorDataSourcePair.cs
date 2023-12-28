@@ -1,4 +1,4 @@
-namespace MocastStudio.Universal.UIView.MotionSourceMapping
+namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 {
     public readonly struct MotionActorDataSourcePair
     {

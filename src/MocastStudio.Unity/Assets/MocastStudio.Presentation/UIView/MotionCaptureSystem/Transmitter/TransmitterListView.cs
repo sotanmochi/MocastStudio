@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TransmitterStatusType = MocapSignalTransmission.Transmitter.TransmitterStatusType;
 
-namespace MocastStudio.Universal.UIView.Transmitter
+namespace MocastStudio.Presentation.UIView.Transmitter
 {
     public sealed class TransmitterListView : MonoBehaviour
     {

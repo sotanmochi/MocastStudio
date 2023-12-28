@@ -1,8 +1,9 @@
 {
-    "name": "MocastStudio.Universal.Lifecycle",
-    "rootNamespace": "MocastStudio.Universal.Lifecycle",
+    "name": "MocastStudio.Presentation.Lifecycle",
+    "rootNamespace": "MocastStudio.Presentation.Lifecycle",
     "references": [
         "VContainer",
+        "MocastStudio.Application.Lifecycle",
         "MocapSignalTransmission.Infrastructure.Constants",
         "MocapSignalTransmission.Infrastructure.MotionActor",
         "MocapSignalTransmission.Infrastructure.MotionDataSource",
@@ -11,8 +12,8 @@
         "MocapSignalTransmission.MotionDataSource",
         "MocapSignalTransmission.Transmitter",
         "MocastStudio.CameraSystem",
-        "MocastStudio.Universal.UIView",
-        "MocastStudio.Universal.UserInteraction"
+        "MocastStudio.Presentation.UIView",
+        "MocastStudio.Presentation.UserInteraction"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

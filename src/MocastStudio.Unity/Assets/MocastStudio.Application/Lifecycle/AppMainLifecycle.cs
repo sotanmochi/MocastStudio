@@ -4,7 +4,7 @@ using VContainer;
 using VContainer.Unity;
 using CameraSystemContext = MocastStudio.CameraSystem.CameraSystemContext;
 
-namespace MocastStudio.Universal.Application
+namespace MocastStudio.Application.Lifecycle
 {
     public sealed class AppMainLifecycle : LifetimeScope
     {

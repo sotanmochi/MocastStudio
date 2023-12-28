@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MocastStudio.Universal.UIView.MotionDataSource
+namespace MocastStudio.Presentation.UIView.MotionDataSource
 {
     public sealed class MotionDataSourceListView : MonoBehaviour
     {

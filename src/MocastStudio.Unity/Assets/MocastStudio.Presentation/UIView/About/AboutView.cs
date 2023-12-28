@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MocastStudio.Universal.UIView.About
+namespace MocastStudio.Presentation.UIView.About
 {
     public sealed class AboutView : MonoBehaviour
     {

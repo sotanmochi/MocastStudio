@@ -4,7 +4,7 @@ using MocapSignalTransmission.Transmitter;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Lifecycle
+namespace MocastStudio.Application.Lifecycle
 {
     public sealed class MotionCaptureSystemEntryPoint : IPostLateTickable
     {

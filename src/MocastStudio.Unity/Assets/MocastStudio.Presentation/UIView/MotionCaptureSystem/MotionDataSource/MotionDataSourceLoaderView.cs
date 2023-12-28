@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
 using InputField = TMPro.TMP_InputField;
 
-namespace MocastStudio.Universal.UIView.MotionDataSource
+namespace MocastStudio.Presentation.UIView.MotionDataSource
 {
     public sealed class MotionDataSourceLoaderView : MonoBehaviour
     {

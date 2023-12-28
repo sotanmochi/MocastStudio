@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
 using InputField = TMPro.TMP_InputField;
 
-namespace MocastStudio.Universal.UIView.Transmitter
+namespace MocastStudio.Presentation.UIView.Transmitter
 {
     public sealed class TransmitterLoaderView : MonoBehaviour
     {

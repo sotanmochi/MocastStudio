@@ -9,7 +9,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.Lifecycle
+namespace MocastStudio.Application.Lifecycle
 {
     public sealed class MotionCaptureSystemLifecycle : LifetimeScope
     {

@@ -7,7 +7,7 @@ using VContainer;
 using VContainer.Unity;
 using Camera = UnityEngine.Camera;
 
-namespace MocastStudio.Universal.UserInteraction.RuntimeGizmo
+namespace MocastStudio.Presentation.UserInteraction.RuntimeGizmo
 {
     public sealed class MotionActorReferencePointControl : IInitializable, IDisposable
     {

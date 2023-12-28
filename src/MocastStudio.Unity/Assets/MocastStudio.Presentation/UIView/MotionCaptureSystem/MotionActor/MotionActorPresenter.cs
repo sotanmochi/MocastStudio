@@ -5,7 +5,7 @@ using MocapSignalTransmission.MotionActor;
 using UniRx;
 using VContainer.Unity;
 
-namespace MocastStudio.Universal.UIView.MotionActor
+namespace MocastStudio.Presentation.UIView.MotionActor
 {
     public sealed class MotionActorPresenter : IInitializable, IDisposable
     {

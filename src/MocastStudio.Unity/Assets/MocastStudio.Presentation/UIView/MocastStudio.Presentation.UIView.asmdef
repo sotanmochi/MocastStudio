@@ -1,13 +1,17 @@
 {
-    "name": "MocastStudio.Universal.UserInteraction",
-    "rootNamespace": "MocastStudio.Universal.UserInteraction",
+    "name": "MocastStudio.Presentation.UIView",
+    "rootNamespace": "MocastStudio.Presentation.UIView",
     "references": [
-        "VContainer",
+        "Unity.TextMeshPro",
         "MessagePipe",
         "UniTask",
-        "TransformControl",
+        "UniRx",
+        "VContainer",
+        "StandaloneFileBrowser",
+        "MocapSignalTransmission.Infrastructure.Constants",
         "MocapSignalTransmission.MotionActor",
-        "MocastStudio.CameraSystem"
+        "MocapSignalTransmission.MotionDataSource",
+        "MocapSignalTransmission.Transmitter"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

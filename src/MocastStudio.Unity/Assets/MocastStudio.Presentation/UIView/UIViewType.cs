@@ -1,4 +1,4 @@
-namespace MocastStudio.Universal.UIView
+namespace MocastStudio.Presentation.UIView
 {
     public enum UIViewType
     {
