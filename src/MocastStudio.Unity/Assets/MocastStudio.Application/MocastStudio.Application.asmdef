@@ -1,0 +1,19 @@
+{
+    "name": "MocastStudio.Application",
+    "rootNamespace": "MocastStudio.Application",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "MessagePipe",
+        "MessagePipe.VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
