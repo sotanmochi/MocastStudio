@@ -46,23 +46,23 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
             });
 
             _motionDataSourceLoaderView.OnDataSourceAdditionRequested
-                .Subscribe(dataSourceSettings =>
+                .Subscribe(async dataSourceSettings =>
                 {
-                    _motionDataSourceService.AddMotionDataSourceAsync(dataSourceSettings);
+                    await _motionDataSourceService.AddMotionDataSourceAsync(dataSourceSettings);
                 })
                 .AddTo(_compositeDisposable);
 
             _motionDataSourceListView.OnConnectionRequested
-                .Subscribe(dataSourceId =>
+                .Subscribe(async dataSourceId =>
                 {
-                    _motionDataSourceService.ConnectAsync(dataSourceId);
+                    await _motionDataSourceService.ConnectAsync(dataSourceId);
                 })
                 .AddTo(_compositeDisposable);
 
             _motionDataSourceListView.OnDisconnectionRequested
-                .Subscribe(dataSourceId =>
+                .Subscribe(async dataSourceId =>
                 {
-                    _motionDataSourceService.DisconnectAsync(dataSourceId);
+                    await _motionDataSourceService.DisconnectAsync(dataSourceId);
                 })
                 .AddTo(_compositeDisposable);
 
