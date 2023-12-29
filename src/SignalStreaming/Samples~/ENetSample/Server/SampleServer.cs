@@ -42,6 +42,11 @@ namespace SignalStreaming.Samples.ENetSample
 
         RequestApprovalResult IsValidConnectionRequest(byte[] connectionRequestData)
         {
+            if (connectionRequestData == null)
+            {
+                return new RequestApprovalResult(false, "Connection request is rejected. Invalid connection request data.");
+            }
+
             var connectionKey = System.Text.Encoding.UTF8.GetString(connectionRequestData);
 
             var approved = (connectionKey == _connectionKey);

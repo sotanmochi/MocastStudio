@@ -4,6 +4,6 @@ namespace SignalStreaming.Infrastructure.ENet
     {
         public string ServerAddress { get; set; }
         public ushort ServerPort { get; set; }
-        public byte[] ConnectionRequestData { get; set; }
+        public byte[] ConnectionRequestData { get; set; } = new byte[0];
     }
 }

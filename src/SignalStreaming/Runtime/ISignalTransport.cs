@@ -10,6 +10,8 @@ namespace SignalStreaming
         event Action OnDisconnected;
         event Action<ArraySegment<byte>> OnDataReceived;
 
+        bool IsConnected { get; }
+
         Task<bool> ConnectAsync<T>(T connectParameters, CancellationToken cancellationToken = default) where T : IConnectParameters;
         Task DisconnectAsync(CancellationToken cancellationToken = default);
 
