@@ -82,6 +82,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         {
             return settings.DataSourceType switch
             {
+                (int)MotionDataSourceType.MocastStudio_Remote => await _mocastStudioDataSourceManager.CreateAsync(dataSourceId, settings),
                 (int)MotionDataSourceType.VMCProtocol_TypeA => await _vmcProtocolDataSourceManager.CreateAsync(dataSourceId, settings),
                 (int)MotionDataSourceType.VMCProtocol_TypeB => await _vmcProtocolDataSourceManager.CreateAsync(dataSourceId, settings),
 #if MOCOPI_RECEIVER_PLUGIN
