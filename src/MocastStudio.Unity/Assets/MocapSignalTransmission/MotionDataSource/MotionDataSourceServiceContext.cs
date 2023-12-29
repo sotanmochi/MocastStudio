@@ -12,6 +12,7 @@ namespace MocapSignalTransmission.MotionDataSource
         internal readonly List<MotionDataSourceSettings> _dataSourceSettingsList = new();
         internal readonly List<IBodyTrackingDataSource> _bodyTrackingDataSources = new();
         internal readonly List<IFingerTrackingDataSource> _fingerTrackingDataSources = new();
+        internal readonly List<IHumanPoseTrackingDataSource> _humanPoseTrackingDataSources = new();
 
         public ISubscriber<MotionDataSourceSettings> OnDataSourceAdded { get; }
         public ISubscriber<MotionDataSourceStatus> OnDataSourceStatusUpdated { get; }
@@ -19,6 +20,7 @@ namespace MocapSignalTransmission.MotionDataSource
         public IReadOnlyList<MotionDataSourceSettings> DataSourceSettingsList => _dataSourceSettingsList;
         public IReadOnlyList<IBodyTrackingDataSource> BodyTrackingDataSources => _bodyTrackingDataSources;
         public IReadOnlyList<IFingerTrackingDataSource> FingerTrackingDataSources => _fingerTrackingDataSources;
+        public IReadOnlyList<IHumanPoseTrackingDataSource> HumanPoseTrackingDataSources => _humanPoseTrackingDataSources;
 
         public MotionDataSourceServiceContext(EventFactory eventFactory)
         {

@@ -4,5 +4,6 @@ namespace MocapSignalTransmission.Infrastructure.Constants
     {
         Unknown = 0,
         HumanPose_OSC = 1,
+        HumanPose_MessagePack = 2,
     }
 }

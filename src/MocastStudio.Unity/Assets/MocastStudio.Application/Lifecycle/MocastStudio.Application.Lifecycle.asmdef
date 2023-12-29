@@ -13,7 +13,8 @@
         "MocapSignalTransmission.Infrastructure.Constants",
         "MocapSignalTransmission.Infrastructure.MotionActor",
         "MocapSignalTransmission.Infrastructure.MotionDataSource",
-        "MocapSignalTransmission.Infrastructure.Transmitter"
+        "MocapSignalTransmission.Infrastructure.Transmitter",
+        "SignalStreaming.Infrastructure"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

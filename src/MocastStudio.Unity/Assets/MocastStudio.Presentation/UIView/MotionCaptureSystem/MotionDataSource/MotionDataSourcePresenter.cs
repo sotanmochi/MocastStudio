@@ -42,6 +42,7 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
                 MotionDataSourceType.VMCProtocol_TypeB,
                 MotionDataSourceType.Mocopi,
                 MotionDataSourceType.MotionBuilder,
+                MotionDataSourceType.MocastStudio_Remote,
             });
 
             _motionDataSourceLoaderView.OnDataSourceAdditionRequested
@@ -74,6 +75,7 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
                         (int)MotionDataSourceType.VMCProtocol_TypeB => "VMCProtocol_TypeB",
                         (int)MotionDataSourceType.Mocopi => "mocopi",
                         (int)MotionDataSourceType.MotionBuilder => "MotionBuilder",
+                        (int)MotionDataSourceType.MocastStudio_Remote => "MocastStudio_Remote",
                         _ => "Unknown",
                     };
                     _motionDataSourceListView.UpdateView(dataSource.DataSourceId, dataSourceType, dataSource.ServerAddress, dataSource.Port, dataSource.StreamingDataId);

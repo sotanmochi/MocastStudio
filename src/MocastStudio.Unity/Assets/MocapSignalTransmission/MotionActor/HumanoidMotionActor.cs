@@ -32,6 +32,7 @@ namespace MocapSignalTransmission.MotionActor
             _actorId = actorId;
             _name = name;
             _humanPoseHandler = new HumanPoseHandler(animator.avatar, animator.transform);
+            _humanPose.muscles = new float[HumanTrait.MuscleCount];
 
             var rootBoneTransform = animator.GetBoneTransform(HumanBodyBones.Hips);
 
@@ -51,6 +52,12 @@ namespace MocapSignalTransmission.MotionActor
 
         public void UpdateHumanPose()
         {
+            _humanPoseHandler.GetHumanPose(ref _humanPose);
+        }
+
+        public void UpdateHumanPose(ref HumanPose inputData)
+        {
+            _humanPoseHandler.SetHumanPose(ref inputData);
             _humanPoseHandler.GetHumanPose(ref _humanPose);
         }
     }

@@ -39,6 +39,7 @@ namespace MocastStudio.Presentation.UIView.Transmitter
             _transmitterLoaderView.UpdateTransmitterTypeDropdown(new TransmitterType[]
             {
                 TransmitterType.HumanPose_OSC_Local,
+                TransmitterType.HumanPose_Remote,
             });
 
             _transmitterLoaderView.OnAdditionRequested
@@ -47,12 +48,14 @@ namespace MocastStudio.Presentation.UIView.Transmitter
                     var serializerType = settingsRequest.TransmitterType switch 
                     {
                         TransmitterType.HumanPose_OSC_Local => (int)SerializerType.HumanPose_OSC,
+                        TransmitterType.HumanPose_Remote => (int)SerializerType.HumanPose_MessagePack,
                         _ => throw new ArgumentException($"Unknown TransmitterType: {settingsRequest.TransmitterType}"),
                     };
 
                     var transportType = settingsRequest.TransmitterType switch 
                     {
                         TransmitterType.HumanPose_OSC_Local => (int)TransportType.Udp,
+                        TransmitterType.HumanPose_Remote => (int)TransportType.SignalStreaming_ENet,
                         _ => throw new ArgumentException($"Unknown TransmitterType: {settingsRequest.TransmitterType}"),
                     };
 

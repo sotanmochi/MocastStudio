@@ -31,6 +31,10 @@ namespace MocastStudio.Application.Lifecycle
                 _motionDataSourceServiceContext.BodyTrackingDataSources,
                 _motionDataSourceServiceContext.FingerTrackingDataSources);
 
+            _motionActorService.UpdateMotionActorPose(_motionDataSourceServiceContext.HumanPoseTrackingDataSources);
+
+            _motionActorService.UpdateHumanPose();
+
             _transmitterService.SendMotionActorPose(_motionActorServiceContext.MotionActors);
         }
     }

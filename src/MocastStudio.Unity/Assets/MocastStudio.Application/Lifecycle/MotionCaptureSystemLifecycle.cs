@@ -5,6 +5,7 @@ using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.Infrastructure.MotionActor;
 using MocapSignalTransmission.Infrastructure.MotionDataSource;
 using MocapSignalTransmission.Infrastructure.Transmitter;
+using SignalStreaming.Infrastructure;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,8 @@ namespace MocastStudio.Application.Lifecycle
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log($"[{nameof(MotionCaptureSystemLifecycle)}] Configure");
+
+            builder.Register<SignalStreamingClientFactory>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.RegisterEntryPoint<MotionCaptureSystemEntryPoint>(Lifetime.Singleton);
 
@@ -35,6 +38,7 @@ namespace MocastStudio.Application.Lifecycle
                 .WithParameter<IBinaryDataProvider>(new LocalFileBinaryDataProvider());
 
             builder.Register<MotionDataSourceManager>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MocastStudioDataSourceManager>(Lifetime.Singleton).AsSelf();
             builder.Register<VMCProtocolDataSourceManager>(Lifetime.Singleton).AsSelf();
 #if MOCOPI_RECEIVER_PLUGIN
             builder.Register<MocopiDataSourceManager>(Lifetime.Singleton).AsSelf();

@@ -4,7 +4,9 @@
     "references": [
         "MocapSignalTransmission.Transmitter",
         "MocapSignalTransmission.Infrastructure.Constants",
-        "ENet-CSharp"
+        "SignalStreaming",
+        "MessagePack",
+        "MessagePack.Annotations"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -15,9 +17,9 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.nxrighthere.enet-csharp",
+            "name": "jp.sotanmochi.signalstreaming",
             "expression": "",
-            "define": "ENET_CSHARP"
+            "define": "SIGNAL_STREAMING"
         }
     ],
     "noEngineReferences": false

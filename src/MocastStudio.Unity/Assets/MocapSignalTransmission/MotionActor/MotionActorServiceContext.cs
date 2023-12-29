@@ -16,6 +16,7 @@ namespace MocapSignalTransmission.MotionActor
         internal readonly List<(int ActorId, int DataSourceId)> _motionActorDataSourcePairs = new();
         internal readonly Dictionary<int, List<int>> _bodyTrackingActorIds = new(); // Key: DataSourceId, Value: ActorIds
         internal readonly Dictionary<int, List<int>> _fingerTrackingActorIds = new(); // Key: DataSourceId, Value: ActorIds
+        internal readonly Dictionary<int, List<int>> _humanPoseTrackingActorIds = new(); // Key: DataSourceId, Value: ActorIds
 
         public ISubscriber<IMotionActor> OnMotionActorAdded { get; }
         public ISubscriber<IReadOnlyList<(int ActorId, int DataSourceId)>> OnDataSourceMappingUpdated { get; }
@@ -44,6 +45,7 @@ namespace MocapSignalTransmission.MotionActor
             _motionActorDataSourcePairs.Clear();
             _bodyTrackingActorIds.Clear();
             _fingerTrackingActorIds.Clear();
+            _humanPoseTrackingActorIds.Clear();
         }
     }
 }

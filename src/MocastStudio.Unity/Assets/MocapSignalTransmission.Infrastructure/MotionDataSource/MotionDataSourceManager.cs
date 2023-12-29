@@ -11,6 +11,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
     {
         private readonly List<IMotionDataSourceManager> _dataSourceManagers = new();
 
+        private MocastStudioDataSourceManager _mocastStudioDataSourceManager;
         private VMCProtocolDataSourceManager _vmcProtocolDataSourceManager;
 #if MOCOPI_RECEIVER_PLUGIN
         private MocopiDataSourceManager _mocopiDataSourceManager;
@@ -21,6 +22,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
         public MotionDataSourceManager
         (
+            MocastStudioDataSourceManager mocastStudioDataSourceManager,
             VMCProtocolDataSourceManager vmcProtocolDataSourceManager
 #if MOCOPI_RECEIVER_PLUGIN
             ,MocopiDataSourceManager mocopiDataSourceManager
@@ -30,8 +32,14 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 #endif
         )
         {
+            // Mocast Studio
+            _mocastStudioDataSourceManager = mocastStudioDataSourceManager;
+            _dataSourceManagers.Add(mocastStudioDataSourceManager);
+
+            // VMC Protocol
             _vmcProtocolDataSourceManager = vmcProtocolDataSourceManager;
             _dataSourceManagers.Add(vmcProtocolDataSourceManager);
+
 #if MOCOPI_RECEIVER_PLUGIN
             _mocopiDataSourceManager = mocopiDataSourceManager;
             _dataSourceManagers.Add(mocopiDataSourceManager);

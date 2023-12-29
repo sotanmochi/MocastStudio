@@ -5,7 +5,10 @@
         "VContainer",
         "UniTask",
         "MessagePipe",
-        "MessagePipe.VContainer"
+        "MessagePipe.VContainer",
+        "MessagePack",
+        "SignalStreaming.MessagePackGenerated",
+        "MocapSignalTransmission.Infrastructure.Transmitter"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -4,6 +4,9 @@ using MocapSignalTransmission.Transmitter;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.Infrastructure.Transmitter.Serialization;
 using MocapSignalTransmission.Infrastructure.Transmitter.Transport;
+#if SIGNAL_STREAMING
+using SignalStreaming;
+#endif
 
 namespace MocapSignalTransmission.Infrastructure.Transmitter
 {
@@ -11,6 +14,15 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
     {
         private readonly Dictionary<int, ISerializer> _serializers = new Dictionary<int, ISerializer>();
         private readonly Dictionary<int, ITransport> _transports = new Dictionary<int, ITransport>();
+
+#if SIGNAL_STREAMING
+        private readonly ISignalStreamingClientFactory _signalStreamingClientFactory;
+
+        public TransmitterFactory(ISignalStreamingClientFactory signalStreamingClientFactory)
+        {
+            _signalStreamingClientFactory = signalStreamingClientFactory;
+        }
+#endif
 
         public void Dispose()
         {
@@ -34,6 +46,14 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
                 {
                     _transports[transmitterId] = new UdpTransport(settings.ServerAddress, settings.Port);
                 }
+#if SIGNAL_STREAMING
+                else if (settings.TransportType == (int)TransportType.SignalStreaming_ENet)
+                {
+                    var signalStreamingClient = _signalStreamingClientFactory.Create(settings.TransportType);
+                    var connectParameters = _signalStreamingClientFactory.CreateConnectParameters(settings.TransportType, settings.ServerAddress, (ushort)settings.Port);
+                    _transports[transmitterId] = new SignalStreamingTransportAdapter(signalStreamingClient, connectParameters, (int)SignalType.MotionCaptureData);
+                }
+#endif
             }
 
             if (TryGetSerializer(settings, out var serializer))
@@ -48,6 +68,10 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
                     {
                         MessageAddress = OscMessageAddress.HumanPose
                     };
+                }
+                else if (settings.SerializerType == (int)SerializerType.HumanPose_MessagePack)
+                {
+                    _serializers[transmitterId] = new HumanPoseMessagePackSerializer();
                 }
             }
 

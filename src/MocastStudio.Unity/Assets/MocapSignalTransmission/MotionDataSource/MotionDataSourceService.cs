@@ -57,6 +57,16 @@ namespace MocapSignalTransmission.MotionDataSource
                     _context._fingerTrackingDataSources.Add(null); // TODO: Add comment
                 }
 
+                // HumanPose
+                if (dataSource is IHumanPoseTrackingDataSource humanPoseTrackingDataSource)
+                {
+                    _context._humanPoseTrackingDataSources.Add(humanPoseTrackingDataSource);
+                }
+                else
+                {
+                    _context._humanPoseTrackingDataSources.Add(null); // TODO: Add comment
+                }
+
                 // Data source settings
                 _context._dataSourceSettingsList.Add(dataSourceSettings);
 
@@ -71,6 +81,7 @@ namespace MocapSignalTransmission.MotionDataSource
                  // TODO: Add comment
                 _context._bodyTrackingDataSources.Add(null);
                 _context._fingerTrackingDataSources.Add(null);
+                _context._humanPoseTrackingDataSources.Add(null);
                 _context._dataSourceSettingsList.Add(null);
             }
 

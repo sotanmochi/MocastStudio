@@ -7,7 +7,10 @@
         "MocapSignalTransmission.Infrastructure.Constants",
         "uOSC.Runtime",
         "com.sony.mocopi.receiver",
-        "MocapStreamingReceiver.MotionBuilder"
+        "MocapStreamingReceiver.MotionBuilder",
+        "SignalStreaming",
+        "SignalStreaming.Infrastructure",
+        "MessagePack"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

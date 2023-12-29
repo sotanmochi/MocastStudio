@@ -4,5 +4,6 @@ namespace MocapSignalTransmission.Infrastructure.Constants
     {
         Unknown = 0,
         Udp = 1,
+        SignalStreaming_ENet = 2,
     }
 }
