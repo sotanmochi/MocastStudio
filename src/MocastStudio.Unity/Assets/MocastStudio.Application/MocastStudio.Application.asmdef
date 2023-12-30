@@ -8,7 +8,7 @@
         "MessagePipe.VContainer",
         "MessagePack",
         "SignalStreaming.MessagePackGenerated",
-        "MocapSignalTransmission.Infrastructure.Transmitter"
+        "MocapSignalTransmission.Infrastructure.Serialization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,7 +1,10 @@
 {
-    "name": "MocapSignalTransmission.MotionData",
-    "rootNamespace": "MocapSignalTransmission.MotionData",
+    "name": "MocapSignalTransmission.Infrastructure.Serialization",
+    "rootNamespace": "MocapSignalTransmission.Infrastructure.Serialization",
     "references": [
+        "MocapSignalTransmission.MotionData",
+        "MocapSignalTransmission.Transmitter",
+        "MocapSignalTransmission.Infrastructure.Constants",
         "MessagePack",
         "MessagePack.Annotations"
     ],

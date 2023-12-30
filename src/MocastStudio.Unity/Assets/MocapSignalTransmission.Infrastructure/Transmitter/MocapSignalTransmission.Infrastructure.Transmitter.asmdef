@@ -4,9 +4,8 @@
     "references": [
         "MocapSignalTransmission.Transmitter",
         "MocapSignalTransmission.Infrastructure.Constants",
-        "SignalStreaming",
-        "MessagePack",
-        "MessagePack.Annotations"
+        "MocapSignalTransmission.Infrastructure.Serialization",
+        "SignalStreaming"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -46,6 +46,7 @@ namespace MessagePack.Resolvers
             lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(1)
             {
                 { typeof(global::UnityEngine.HumanPose), 0 },
+                { typeof(global::MocapSignalTransmission.MotionData.ActorHumanPose), 1 },
             };
         }
 
@@ -60,6 +61,7 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new MessagePack.Formatters.MocapSignalTransmission.HumanPoseFormatter();
+                case 1: return new MessagePack.Formatters.MocapSignalTransmission.ActorHumanPoseFormatter();
                 default: return null;
             }
         }

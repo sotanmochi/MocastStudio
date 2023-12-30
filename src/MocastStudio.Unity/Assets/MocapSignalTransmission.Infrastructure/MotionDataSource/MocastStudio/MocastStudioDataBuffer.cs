@@ -1,3 +1,4 @@
+using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.MotionDataSource;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -6,7 +7,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 {
     public sealed class MocastStudioDataBuffer : IHumanPoseTrackingDataSource
     {
-        private readonly HumanPose[] _humanPoseFrameBuffer;
+        private readonly ActorHumanPose[] _humanPoseFrameBuffer;
         private readonly int _bufferSize;
         private readonly long _bufferMask;
 
@@ -23,11 +24,13 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
             Id = id;
 
-            _humanPoseFrameBuffer = new HumanPose[bufferSize];
+            _humanPoseFrameBuffer = new ActorHumanPose[bufferSize];
 
             for (var i = 0; i < bufferSize; i++)
             {
-                _humanPoseFrameBuffer[i].muscles = new float[HumanTrait.MuscleCount];
+                var humanPose = new HumanPose();
+                humanPose.muscles = new float[HumanTrait.MuscleCount];
+                _humanPoseFrameBuffer[i].HumanPose = humanPose;
             }
         }
 
@@ -41,15 +44,15 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         public bool TryPeek(ref HumanPose humanPoseFrame)
         {
             var bufferIndex = _bufferHead & _bufferMask;
-            humanPoseFrame = _humanPoseFrameBuffer[bufferIndex];
+            humanPoseFrame = _humanPoseFrameBuffer[bufferIndex].HumanPose;
             return true;
         }
 
-        public void Enqueue(HumanPose humanPose)
+        public void Enqueue(ActorHumanPose actorHumanPose)
         {
             var enqueueIndex = _bufferTail & _bufferMask;
 
-            _humanPoseFrameBuffer[enqueueIndex] = humanPose;
+            _humanPoseFrameBuffer[enqueueIndex] = actorHumanPose;
 
             // _humanPoseFrameBuffer[enqueueIndex].bodyPosition = bodyPosition;
             // _humanPoseFrameBuffer[enqueueIndex].bodyRotation = bodyRotation;

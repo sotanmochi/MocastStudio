@@ -4,11 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using MessagePack;
 using MocapSignalTransmission.Infrastructure.Constants;
+using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.MotionDataSource;
 using SignalStreaming;
 using SignalStreaming.Infrastructure;
 using Debug = UnityEngine.Debug;
-using HumanPose = UnityEngine.HumanPose;
 
 namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 {
@@ -93,7 +93,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
             if (_dataBuffers.TryGetValue(senderClientId, out var dataBuffer))
             {
-                dataBuffer.Enqueue(MessagePackSerializer.Deserialize<HumanPose>(payload));
+                dataBuffer.Enqueue(MessagePackSerializer.Deserialize<ActorHumanPose>(payload));
             }
         }
     }

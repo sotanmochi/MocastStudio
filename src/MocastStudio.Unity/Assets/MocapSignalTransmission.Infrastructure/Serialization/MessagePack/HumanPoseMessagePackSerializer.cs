@@ -1,5 +1,6 @@
 using System;
 using MessagePack;
+using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.Transmitter;
 using HumanPose = UnityEngine.HumanPose;
 
@@ -13,7 +14,13 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
             {
                 throw new ArgumentException($"Invalid value type: {typeof(T)}");
             }
-            return new ArraySegment<byte>(MessagePackSerializer.Serialize(value));
+
+            var actorHumanPose = new ActorHumanPose()
+            {
+                ActorId = actorId,
+                HumanPose = (HumanPose)(object)value,
+            };
+            return new ArraySegment<byte>(MessagePackSerializer.Serialize(actorHumanPose));
         }
     }
 }
