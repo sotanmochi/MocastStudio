@@ -28,9 +28,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
             for (var i = 0; i < bufferSize; i++)
             {
-                var humanPose = new HumanPose();
-                humanPose.muscles = new float[HumanTrait.MuscleCount];
-                _humanPoseFrameBuffer[i].HumanPose = humanPose;
+                _humanPoseFrameBuffer[i].Muscles = new float[HumanTrait.MuscleCount];
             }
         }
 
@@ -44,22 +42,21 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         public bool TryPeek(ref HumanPose humanPoseFrame)
         {
             var bufferIndex = _bufferHead & _bufferMask;
-            humanPoseFrame = _humanPoseFrameBuffer[bufferIndex].HumanPose;
+
+            humanPoseFrame.bodyPosition = _humanPoseFrameBuffer[bufferIndex].BodyPosition;
+            humanPoseFrame.bodyRotation = _humanPoseFrameBuffer[bufferIndex].BodyRotation;
+            for (var i = 0; i < humanPoseFrame.muscles.Length; i++)
+            {
+                humanPoseFrame.muscles[i] = _humanPoseFrameBuffer[bufferIndex].Muscles[i];
+            }
+
             return true;
         }
 
         public void Enqueue(ActorHumanPose actorHumanPose)
         {
             var enqueueIndex = _bufferTail & _bufferMask;
-
             _humanPoseFrameBuffer[enqueueIndex] = actorHumanPose;
-
-            // _humanPoseFrameBuffer[enqueueIndex].bodyPosition = bodyPosition;
-            // _humanPoseFrameBuffer[enqueueIndex].bodyRotation = bodyRotation;
-            // for (var i = 0; i < muscles.Length; i++)
-            // {
-            //     _humanPoseFrameBuffer[enqueueIndex].muscles[i] = muscles[i];
-            // }
 
             // Update the enqueue position to insert the next data.
             _bufferTail++;

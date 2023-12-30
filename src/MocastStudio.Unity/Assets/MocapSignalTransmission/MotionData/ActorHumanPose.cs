@@ -1,6 +1,7 @@
 using System;
 using MessagePack;
-using HumanPose = UnityEngine.HumanPose;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace MocapSignalTransmission.MotionData
 {
@@ -11,6 +12,12 @@ namespace MocapSignalTransmission.MotionData
         public int ActorId { get; set; }
 
         [Key(1)]
-        public HumanPose HumanPose { get; set; }
+        public Vector3 BodyPosition { get; set; }
+
+        [Key(2)]
+        public Quaternion BodyRotation { get; set; }
+
+        [Key(3)]
+        public float[] Muscles { get; set; }
     }
 }

@@ -15,11 +15,16 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
                 throw new ArgumentException($"Invalid value type: {typeof(T)}");
             }
 
+            var humanPose = (HumanPose)(object)value;
+
             var actorHumanPose = new ActorHumanPose()
             {
                 ActorId = actorId,
-                HumanPose = (HumanPose)(object)value,
+                BodyPosition = humanPose.bodyPosition,
+                BodyRotation = humanPose.bodyRotation,
+                Muscles = humanPose.muscles,
             };
+
             return new ArraySegment<byte>(MessagePackSerializer.Serialize(actorHumanPose));
         }
     }

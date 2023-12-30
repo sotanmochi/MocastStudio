@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MocapSignalTransmission.MotionDataSource;
 using Debug = UnityEngine.Debug;
 using HumanPose = UnityEngine.HumanPose;
+using HumanTrait = UnityEngine.HumanTrait;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
 
@@ -15,11 +16,13 @@ namespace MocapSignalTransmission.MotionActor
         private readonly IMotionActorFactory _motionActorFactory;
 
         private int _humanoidMotionActorCount;
+        private HumanPose _humanPoseFrame;
 
         public MotionActorService(MotionActorServiceContext context, IMotionActorFactory motionActorFactory)
         {
             _context = context;
             _motionActorFactory = motionActorFactory;
+            _humanPoseFrame.muscles = new float[HumanTrait.MuscleCount];
         }
 
         public void EnableRootBoneOffset(int actorId, bool enable)
@@ -77,16 +80,15 @@ namespace MocapSignalTransmission.MotionActor
             for (var dataSourceIndex = 0; dataSourceIndex < humanPoseTrackingDataSources.Count; dataSourceIndex++)
             {
                 var humanPoseDataSource = humanPoseTrackingDataSources[dataSourceIndex];
-                var humanPoseFrame = new HumanPose();
 
                 if (humanPoseDataSource != null &&
-                    humanPoseDataSource.TryPeek(ref humanPoseFrame) &&
+                    humanPoseDataSource.TryPeek(ref _humanPoseFrame) &&
                     _context._humanPoseTrackingActorIds.ContainsKey(humanPoseDataSource.Id))
                 {
                     var humanPoseTrackingActorIds = _context._humanPoseTrackingActorIds[humanPoseDataSource.Id];
                     for (var index = 0; index < humanPoseTrackingActorIds.Count; index++)
                     {
-                        _context.HumanoidMotionActors[humanPoseTrackingActorIds[index]]?.UpdateHumanPose(ref humanPoseFrame);
+                        _context.HumanoidMotionActors[humanPoseTrackingActorIds[index]]?.UpdateHumanPose(ref _humanPoseFrame);
                     }
                 }
             }

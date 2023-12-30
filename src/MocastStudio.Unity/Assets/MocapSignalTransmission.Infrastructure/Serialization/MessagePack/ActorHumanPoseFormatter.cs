@@ -18,9 +18,11 @@ namespace MessagePack.Formatters.MocapSignalTransmission
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::MocapSignalTransmission.MotionData.ActorHumanPose value, global::MessagePack.MessagePackSerializerOptions options)
         {
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
-            writer.WriteArrayHeader(2);
+            writer.WriteArrayHeader(4);
             writer.Write(value.ActorId);
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.HumanPose>(formatterResolver).Serialize(ref writer, value.HumanPose, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.Vector3>(formatterResolver).Serialize(ref writer, value.BodyPosition, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.Quaternion>(formatterResolver).Serialize(ref writer, value.BodyRotation, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<float[]>(formatterResolver).Serialize(ref writer, value.Muscles, options);
         }
 
         public global::MocapSignalTransmission.MotionData.ActorHumanPose Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -43,7 +45,13 @@ namespace MessagePack.Formatters.MocapSignalTransmission
                         ____result.ActorId = reader.ReadInt32();
                         break;
                     case 1:
-                        ____result.HumanPose = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.HumanPose>(formatterResolver).Deserialize(ref reader, options);
+                        ____result.BodyPosition = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.Vector3>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    case 2:
+                        ____result.BodyRotation = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.Quaternion>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    case 3:
+                        ____result.Muscles = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<float[]>(formatterResolver).Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();
