@@ -12,8 +12,13 @@ namespace MocastStudio.Application.Lifecycle
         {
             Debug.Log($"[{nameof(AppMainLifecycle)}] Configure");
 
-            builder.RegisterEntryPoint<AppMain>(Lifetime.Singleton);
             builder.RegisterMessagePipe();
+
+            builder.RegisterEntryPoint<AppMain>(Lifetime.Singleton);
+
+            builder.Register<AppSettingsRepository>(Lifetime.Singleton)
+                .WithParameter("directoryPath", UnityEngine.Application.persistentDataPath)
+                .WithParameter("filename", "appsettings.json");
 
             builder.Register<CameraSystemContext>(Lifetime.Singleton);
         }
