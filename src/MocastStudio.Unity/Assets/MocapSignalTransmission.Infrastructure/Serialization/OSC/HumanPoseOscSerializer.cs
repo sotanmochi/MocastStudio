@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using HumanPose = UnityEngine.HumanPose;
 using MocapSignalTransmission.Transmitter;
 
@@ -27,7 +28,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
             MessageAddress = "/HumanPose";
         }
 
-        public ArraySegment<byte> Serialize<T>(int actorId, T value)
+        public ReadOnlySequence<byte> Serialize<T>(int actorId, T value)
         {
             if (typeof(T) != typeof(HumanPose))
             {
@@ -57,7 +58,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
                 _encoder.Append(muscle);
             }
 
-            return new ArraySegment<byte>(_encoder.Buffer, 0, _encoder.Length);
+            return new ReadOnlySequence<byte>(_encoder.Buffer, 0, _encoder.Length);
         }
     }
 }

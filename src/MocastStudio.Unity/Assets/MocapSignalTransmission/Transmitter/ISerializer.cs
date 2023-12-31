@@ -1,9 +1,10 @@
 using System;
+using System.Buffers;
 
 namespace MocapSignalTransmission.Transmitter
 {
     public interface ISerializer
     {
-        ArraySegment<byte> Serialize<T>(int actorId, T value);
+        ReadOnlySequence<byte> Serialize<T>(int actorId, T value);
     }
 }

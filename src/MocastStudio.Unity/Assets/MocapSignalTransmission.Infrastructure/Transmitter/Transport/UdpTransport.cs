@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -56,11 +57,12 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Transport
             return _connected;
         }
 
-        public void Send(ArraySegment<byte> data)
+        public void Send(ReadOnlySequence<byte> buffer)
         {
             if (_connected)
             {
-                _client.Send(data.Array, data.Count);
+                var byteArray = buffer.ToArray();
+                _client.Send(byteArray, byteArray.Length);
             }
         }
 

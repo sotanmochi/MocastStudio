@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Threading;
 using System.Threading.Tasks;
 using MessagePack;
@@ -72,6 +73,14 @@ namespace SignalStreaming
         {
             await _transport.DisconnectAsync(cancellationToken);
             _connected = false;
+        }
+
+        public void Send(int messageId, ReadOnlySequence<byte> rawMessageBuffer, SendOptions sendOptions, uint[] destinationClientIds = null)
+        {
+            if (!_connected) return;
+            var originTimestamp = TimestampProvider.GetCurrentTimestamp();
+            var payload = Serialize(messageId, senderClientId: _clientId, originTimestamp, sendOptions, rawMessageBuffer);
+            _transport.Send(payload, sendOptions, destinationClientIds);
         }
 
         public void Send<T>(int messageId, T data, SendOptions sendOptions, uint[] destinationClientIds = null)
@@ -170,6 +179,21 @@ namespace SignalStreaming
                 _disconnectionReason = result.Message;
                 _connectionTcs.SetResult(false);
             }
+        }
+
+        byte[] Serialize(int messageId, uint senderClientId, long originTimestamp, SendOptions sendOptions, ReadOnlySequence<byte> rawMessageBuffer)
+        {
+            using var bufferWriter = ArrayPoolBufferWriter.RentThreadStaticWriter();
+            var writer = new MessagePackWriter(bufferWriter);
+            writer.WriteArrayHeader(5);
+            writer.Write(messageId);
+            writer.Write(senderClientId);
+            writer.Write(originTimestamp);
+            writer.Flush();
+            MessagePackSerializer.Serialize(bufferWriter, sendOptions);
+            writer.WriteRaw(rawMessageBuffer); // NOTE
+            writer.Flush();
+            return bufferWriter.WrittenSpan.ToArray();
         }
 
         byte[] Serialize<T>(int messageId, uint senderClientId, long originTimestamp, SendOptions sendOptions, T message)

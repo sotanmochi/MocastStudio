@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using MessagePack;
 using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.Transmitter;
@@ -8,7 +9,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
 {
     public sealed class HumanPoseMessagePackSerializer : ISerializer
     {
-        public ArraySegment<byte> Serialize<T>(int actorId, T value)
+        public ReadOnlySequence<byte> Serialize<T>(int actorId, T value)
         {
             if (typeof(T) != typeof(HumanPose))
             {
@@ -25,7 +26,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
                 Muscles = humanPose.muscles,
             };
 
-            return new ArraySegment<byte>(MessagePackSerializer.Serialize(actorHumanPose));
+            return new ReadOnlySequence<byte>(MessagePackSerializer.Serialize(actorHumanPose));
         }
     }
 }

@@ -1,6 +1,7 @@
 #if SIGNAL_STREAMING
 
 using System;
+using System.Buffers;
 using System.Threading;
 using System.Threading.Tasks;
 using MocapSignalTransmission.Transmitter;
@@ -39,10 +40,10 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Transport
         public async Task DisconnectAsync()
             => await _signalStreamingClient.DisconnectAsync();
 
-        public void Send(ArraySegment<byte> data)
+        public void Send(ReadOnlySequence<byte> buffer)
         {
             if (!_signalStreamingClient.IsConnected) return;
-            _signalStreamingClient.Send(_messageId, data, _sendOptions);
+            _signalStreamingClient.Send(_messageId, buffer, _sendOptions);
         }
     }
 }
