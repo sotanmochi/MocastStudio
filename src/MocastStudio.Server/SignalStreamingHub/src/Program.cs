@@ -23,7 +23,7 @@ namespace MocastStudio.Server.SignalStreaming
             var cancellationTokenSource = new CancellationTokenSource();
             RegisterAppEventHandlers(cancellationTokenSource);
 
-            using var streamingHub = new StreamingHubServer();
+            using var streamingHub = new StreamingHubServer((ushort)listenPort);
 
             // var mainLoopTask = Task.Run(() => streamingHub.RunMainLoop(cancellationTokenSource.Token));
             // var signalDispatcherTask = Task.Run(() => streamingHub.RunSignalDispatcher(cancellationTokenSource.Token));

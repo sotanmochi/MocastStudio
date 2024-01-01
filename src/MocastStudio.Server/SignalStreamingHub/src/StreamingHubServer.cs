@@ -16,9 +16,9 @@ namespace MocastStudio.Server.SignalStreaming
         bool _signalDispatcherIsRunning;
         bool _transportEventLoopIsRunning;
 
-        public StreamingHubServer()
+        public StreamingHubServer(ushort port)
         {
-            _signalTransportHub = new ENetTransportHub(port: 50010, useAnotherThread: false, targetFrameRate: 0, isBackground: true);
+            _signalTransportHub = new ENetTransportHub(port, useAnotherThread: false, targetFrameRate: 0, isBackground: true);
             _signalStreamingHub = new SignalStreamingHub(_signalTransportHub);
 
             _signalStreamingHub.OnClientConnected += transportClientId =>
