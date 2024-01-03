@@ -1,4 +1,5 @@
 using MocastStudio.Presentation.UIView.MotionActor;
+using MocastStudio.Presentation.UIView.MotionCapture;
 using MocastStudio.Presentation.UIView.MotionDataSource;
 using MocastStudio.Presentation.UIView.MotionSourceMapping;
 using MocastStudio.Presentation.UIView.Transmitter;
@@ -11,6 +12,7 @@ namespace MocastStudio.Presentation.Lifecycle
     public sealed class MotionCaptureUIViewLifecycle : LifetimeScope
     {
         [Header("UIView Components")]
+        [SerializeField] MotionCaptureSystemView _motionCaptureSystemView;
         [SerializeField] MotionActorListView _motionActorListView;
         [SerializeField] MotionActorLoaderView _motionActorLoaderView;
         [SerializeField] MotionDataSourceListView _motionDataSourceListView;
@@ -23,6 +25,7 @@ namespace MocastStudio.Presentation.Lifecycle
         {
             Debug.Log($"[{nameof(MotionCaptureUIViewLifecycle)}] Configure");
 
+            builder.RegisterComponent(_motionCaptureSystemView);
             builder.RegisterComponent(_motionActorListView);
             builder.RegisterComponent(_motionActorLoaderView);
             builder.RegisterComponent(_motionDataSourceListView);
@@ -31,6 +34,7 @@ namespace MocastStudio.Presentation.Lifecycle
             builder.RegisterComponent(_transmitterListView);
             builder.RegisterComponent(_transmitterLoaderView);
 
+            builder.RegisterEntryPoint<MotionCaptureSystemPresenter>();
             builder.RegisterEntryPoint<MotionActorPresenter>();
             builder.RegisterEntryPoint<MotionDataSourcePresenter>();
             builder.RegisterEntryPoint<MotionSourceMappingPresenter>();

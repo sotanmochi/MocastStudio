@@ -19,16 +19,29 @@ namespace MocastStudio.Presentation.UIView
         void IInitializable.Initialize()
         {
             _menuView.OnItemSelected
-                .Subscribe(uiViewType =>
-                {
-                    _context.UpdateViewStatus(uiViewType, UIViewStatusType.Visible);
-                })
+                .Subscribe(UpdateViewStatus)
                 .AddTo(_compositeDisposable);
         }
 
         void IDisposable.Dispose()
         {
             _compositeDisposable.Dispose();
+        }
+
+        void UpdateViewStatus(UIViewType uiViewType)
+        {
+            if (uiViewType == UIViewType.MainCamera)
+            {
+                _context.UpdateViewStatus(UIViewType.MainCamera, UIViewStatusType.Visible);
+
+                _context.UpdateViewStatus(UIViewType.About, UIViewStatusType.Invisible);
+                _context.UpdateViewStatus(UIViewType.Acknowledgements, UIViewStatusType.Invisible);
+                _context.UpdateViewStatus(UIViewType.MotionCaptureSystem, UIViewStatusType.Invisible);
+            }
+            else
+            {
+                _context.UpdateViewStatus(uiViewType, UIViewStatusType.Visible);
+            }
         }
     }
 }

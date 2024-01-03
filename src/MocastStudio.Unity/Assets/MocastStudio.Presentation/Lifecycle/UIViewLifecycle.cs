@@ -16,7 +16,6 @@ namespace MocastStudio.Presentation.Lifecycle
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log($"[{nameof(UIViewLifecycle)}] Configure");
-            builder.Register<UIViewContext>(Lifetime.Singleton);
 
             builder.RegisterComponent(_systemMenuView);
             builder.RegisterComponent(_aboutView);

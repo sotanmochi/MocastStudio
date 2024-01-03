@@ -4,7 +4,7 @@ namespace MocastStudio.Presentation.UIView
     {
         About = 0,
         Acknowledgements = 1,
-        MotionCaptureSystem = 10,
-        CameraSystem = 20,
+        MainCamera = 10,
+        MotionCaptureSystem = 20,
     }
 }
