@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace MocastStudio.Presentation.UserInteraction.CameraSystem
+namespace MocastStudio.Presentation.CameraSystem
 {
     public sealed class SimpleCameraController : MonoBehaviour
     {
