@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace MocastStudio.Presentation.UserInteraction.CameraSystem
 {
-    public sealed class SceneViewCameraController : MonoBehaviour
+    public sealed class SimpleCameraController : MonoBehaviour
     {
         [SerializeField] UnityEngine.Camera _camera;
         [SerializeField] Vector3 _moveScaleFactor = new Vector3(0.1f, 0.1f, 0.3f);
