@@ -1,0 +1,20 @@
+{
+    "name": "MocastStudio.Presentation.CameraSystem",
+    "rootNamespace": "MocastStudio.Presentation.CameraSystem",
+    "references": [
+        "MessagePipe",
+        "UniTask",
+        "UniRx",
+        "VContainer",
+        "MocastStudio.Presentation.UIView"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

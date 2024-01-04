@@ -13,7 +13,8 @@
         "MocapSignalTransmission.Transmitter",
         "MocastStudio.CameraSystem",
         "MocastStudio.Presentation.UIView",
-        "MocastStudio.Presentation.UserInteraction"
+        "MocastStudio.Presentation.UserInteraction",
+        "MocastStudio.Presentation.CameraSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

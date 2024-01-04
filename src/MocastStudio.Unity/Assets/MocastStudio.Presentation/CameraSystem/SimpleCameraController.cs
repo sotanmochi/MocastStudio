@@ -45,6 +45,11 @@ namespace MocastStudio.Presentation.CameraSystem
             Move(deltaPosition);
         }
 
+        public void SetCamera(Camera camera)
+        {
+            _camera = camera;
+        }
+
         private void Move(Vector3 deltaPosition)
         {
             var right = _camera.transform.right * deltaPosition.x;
