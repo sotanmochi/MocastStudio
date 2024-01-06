@@ -9,7 +9,7 @@ namespace MocapSignalTransmission.MotionData
     public struct ActorHumanPose
     {
         [Key(0)]
-        public int ActorId { get; set; }
+        public uint ActorId { get; set; }
 
         [Key(1)]
         public Vector3 BodyPosition { get; set; }

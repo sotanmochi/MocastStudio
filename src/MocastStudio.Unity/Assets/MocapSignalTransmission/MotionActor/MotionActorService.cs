@@ -12,6 +12,8 @@ namespace MocapSignalTransmission.MotionActor
 {
     public sealed class MotionActorService
     {
+        public static readonly int MaxLocalActors = 100;
+
         private readonly MotionActorServiceContext _context;
         private readonly IMotionActorFactory _motionActorFactory;
 

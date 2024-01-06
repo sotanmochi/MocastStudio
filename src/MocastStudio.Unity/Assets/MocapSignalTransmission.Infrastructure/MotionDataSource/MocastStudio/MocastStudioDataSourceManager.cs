@@ -61,8 +61,8 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
                 return null;
             }
 
-            var streamingDataId = dataSourceSettings.StreamingDataId;
-            var dataBuffer = new MocastStudioDataBuffer(streamingDataId);
+            var streamingDataId = dataSourceSettings.StreamingDataId; // TODO
+            var dataBuffer = new MocastStudioDataBuffer(streamingDataId); // TODO
 
             _dataSourceId = dataSourceId;
             _dataBuffers.Add((uint)streamingDataId, dataBuffer);
@@ -91,9 +91,11 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         {
             if (messageId != _streamingMessageId) return;
 
-            if (_dataBuffers.TryGetValue(senderClientId, out var dataBuffer))
+            var data = MessagePackSerializer.Deserialize<ActorHumanPose>(payload);
+
+            if (_dataBuffers.TryGetValue(data.ActorId, out var dataBuffer))
             {
-                dataBuffer.Enqueue(MessagePackSerializer.Deserialize<ActorHumanPose>(payload));
+                dataBuffer.Enqueue(data);
             }
         }
     }

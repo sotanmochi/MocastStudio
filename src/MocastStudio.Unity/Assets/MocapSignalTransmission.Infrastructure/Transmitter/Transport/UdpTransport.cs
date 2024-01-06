@@ -22,6 +22,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Transport
 
         public bool IsConnected => _connected;
         public bool IsConnecting => _connecting;
+        public uint ClientId => 0;
 
         public UdpTransport(string serverHost, int serverPort)
         {

@@ -70,9 +70,11 @@ namespace MocapSignalTransmission.Transmitter
                 _correctedHumanPose.muscles[i] = humanoidMotionActor.HumanPose.muscles[i];
             }
 
+            var streamingActorId = TransmitterService.GetStreamingActorId(_transport.ClientId, (byte)humanoidMotionActor.ActorId);
+
             var serializedData = _serializer.Serialize
             (
-                humanoidMotionActor.ActorId,
+                streamingActorId,
                 _correctedHumanPose
             );
 

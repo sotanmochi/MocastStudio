@@ -116,5 +116,11 @@ namespace MocapSignalTransmission.Transmitter
                 _context._transmitterStatusUpdatedEventPublisher.Publish(new TransmitterStatus(transmitterId, TransmitterStatusType.Disconnected));
             }
         }
+
+        public static uint GetStreamingActorId(uint transmitterId, byte localActorId)
+        {
+            var maxLocalActors = MotionActorService.MaxLocalActors;
+            return (uint)(localActorId % maxLocalActors + transmitterId * maxLocalActors);
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Transport
         int _messageId;
 
         public bool IsConnected => _signalStreamingClient.IsConnected;
+        public uint ClientId => _signalStreamingClient.ClientId;
 
         public SignalStreamingTransportAdapter(
             ISignalStreamingClient signalStreamingClient, IConnectParameters connectParameters, int messageId)

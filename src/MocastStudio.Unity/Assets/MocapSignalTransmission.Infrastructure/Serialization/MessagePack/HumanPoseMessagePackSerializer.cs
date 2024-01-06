@@ -9,7 +9,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
 {
     public sealed class HumanPoseMessagePackSerializer : ISerializer
     {
-        public ReadOnlySequence<byte> Serialize<T>(int actorId, T value)
+        public ReadOnlySequence<byte> Serialize<T>(uint actorId, T value)
         {
             if (typeof(T) != typeof(HumanPose))
             {

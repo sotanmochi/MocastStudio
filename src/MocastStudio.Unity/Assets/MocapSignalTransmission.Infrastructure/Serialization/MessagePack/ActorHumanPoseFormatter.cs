@@ -42,7 +42,7 @@ namespace MessagePack.Formatters.MocapSignalTransmission
                 switch (i)
                 {
                     case 0:
-                        ____result.ActorId = reader.ReadInt32();
+                        ____result.ActorId = reader.ReadUInt32();
                         break;
                     case 1:
                         ____result.BodyPosition = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<UnityEngine.Vector3>(formatterResolver).Deserialize(ref reader, options);
