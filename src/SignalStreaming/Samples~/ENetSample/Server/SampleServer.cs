@@ -26,7 +26,7 @@ namespace SignalStreaming.Samples.ENetSample
 
         void Start()
         {
-            _streamingHub.Initialize();
+            _transportHub.Start();
         }
 
         void OnDestroy()

@@ -75,8 +75,8 @@ namespace SignalStreaming.Infrastructure.ENet
 
             DisconnectAll();
 
-            _loopCts.Cancel();
-            _loopCts.Dispose();
+            _loopCts?.Cancel();
+            _loopCts?.Dispose();
 
             _server.Flush();
             _server.Dispose();

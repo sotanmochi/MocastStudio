@@ -30,11 +30,6 @@ namespace SignalStreaming
             _transportHub = null;
         }
 
-        public void Initialize()
-        {
-            _transportHub.Start();
-        }
-
         public void Send<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, uint destinationClientId)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();

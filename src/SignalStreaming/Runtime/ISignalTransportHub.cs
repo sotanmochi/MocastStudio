@@ -14,6 +14,8 @@ namespace SignalStreaming
         void Start();
         void Shutdown();
 
+        void PollEvent();
+
         void Disconnect(uint clientId);
         void DisconnectAll();
 

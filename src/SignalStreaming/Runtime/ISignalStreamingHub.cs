@@ -27,8 +27,6 @@ namespace SignalStreaming
 
         event Action<uint> OnClientConnected;
         event Action<uint> OnClientDisconnected;
-
-        void Initialize();
     
         void Send<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, uint destinationClientId);
         void Send(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint destinationClientId);
