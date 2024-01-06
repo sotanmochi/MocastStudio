@@ -166,6 +166,20 @@ namespace MocapSignalTransmission.MotionActor
                 _context._fingerTrackingActorIds.Add(dataSourceId, new List<int> { actorId });
             }
 
+            // Human pose tracking
+            if (_context._humanPoseTrackingActorIds.ContainsKey(dataSourceId))
+            {
+                if (!_context._humanPoseTrackingActorIds[dataSourceId].Contains(actorId))
+                {
+                    _context._humanPoseTrackingActorIds[dataSourceId].Add(actorId);
+                    _context._humanPoseTrackingActorIds[dataSourceId].Sort();
+                }
+            }
+            else
+            {
+                _context._humanPoseTrackingActorIds.Add(dataSourceId, new List<int> { actorId });
+            }
+
             // Data source mapping
             _context._motionActorDataSourcePairs.Add((actorId, dataSourceId));
             _context._dataSourceMappingUpdatedEventPublisher.Publish(_context._motionActorDataSourcePairs);
@@ -177,6 +191,7 @@ namespace MocapSignalTransmission.MotionActor
         {
             _context._bodyTrackingActorIds[dataSourceId].Remove(actorId);
             _context._fingerTrackingActorIds[dataSourceId].Remove(actorId);
+            _context._humanPoseTrackingActorIds[dataSourceId].Remove(actorId);
             _context._motionActorDataSourcePairs.Remove((actorId, dataSourceId));
             _context._dataSourceMappingUpdatedEventPublisher.Publish(_context._motionActorDataSourcePairs);
         }
