@@ -65,13 +65,9 @@ namespace MocastStudio.Server.SignalStreaming
         // WIP
         void OnDataReceived(int messageId, uint senderClientId, long originTimestamp, SendOptions sendOptions, ReadOnlyMemory<byte> payload)
         {
-            Console.WriteLine($"[{nameof(StreamingHubServer)}] Data received from Client[{senderClientId}]. " +
-                $"Message ID: {messageId}, Payload.Length: {payload.Length}");
-
             if (messageId == 0)
             {
                 var message = MessagePackSerializer.Deserialize<string>(payload);
-                Console.WriteLine($"[{nameof(StreamingHubServer)}] Received message: {message}");
             }
 
             if (sendOptions.StreamingType == StreamingType.All)
