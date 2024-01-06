@@ -45,7 +45,7 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
         {
             _serverAddressText.text = $"Address: {address}";
             _portText.text = $"Port: {port}";
-            _streamingDataIdText.text = $"Streaming Data ID: {port}";
+            _streamingDataIdText.text = $"Streaming Data ID: {streamingDataId}";
         }
 
         public void SetStausColor(Color color)
