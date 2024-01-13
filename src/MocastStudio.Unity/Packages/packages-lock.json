@@ -28,6 +28,13 @@
       "dependencies": {},
       "hash": "56662924960a53695a640af80125f1cfd334d5ee"
     },
+    "com.github-glitchenzo.nugetforunity": {
+      "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity#v4.0.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a9e8c39d86c91a193be2dd24bb564a1d130d7c2d"
+    },
     "com.hecomi.uosc": {
       "version": "https://github.com/hecomi/uOSC.git?path=Assets/uOSC#v2.2.0",
       "depth": 0,
