@@ -2,45 +2,41 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using MessagePack;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.MotionDataSource;
 using SignalStreaming;
-using SignalStreaming.Infrastructure;
 using Debug = UnityEngine.Debug;
 
 namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 {
     public sealed class MocastStudioDataSourceManager : IMotionDataSourceManager
     {
-        readonly Dictionary<uint, MocastStudioDataBuffer> _dataBuffers = new();
-        readonly int _streamingMessageId = (int)SignalType.MotionCaptureData;
+        readonly Dictionary<int, MotionDataSourceSettings> _dataSourceSettings = new();
+        readonly Dictionary<int, ISignalStreamingClient> _streamingReceivers = new();
 
-        ISignalStreamingClientFactory _clientFactory;
-        ISignalStreamingClient _client;
-        IConnectParameters _connectParameters;
-        int _dataSourceId = -1;
+        ISignalStreamingClientFactory _streamingClientFactory;
+        int _signalTransportType;
 
-        public MocastStudioDataSourceManager(ISignalStreamingClientFactory clientFactory)
+        public MocastStudioDataSourceManager(ISignalStreamingClientFactory streamingClientFactory, int signalTransportType)
         {
-            _clientFactory = clientFactory;
+            _streamingClientFactory = streamingClientFactory;
+            _signalTransportType = signalTransportType;
         }
 
         public void Dispose()
         {
-            _dataSourceId = -1;
-
-            if (_client != null)
+            foreach (var streamingReceiver in _streamingReceivers.Values)
             {
-                _client.OnDataReceived -= OnDataReceivedInternal;
-                _client = null;
+                streamingReceiver.Dispose();
             }
+            _streamingReceivers.Clear();
+            _dataSourceSettings.Clear();
         }
 
         public bool Contains(int dataSourceId)
         {
-            return _dataSourceId == dataSourceId;
+            return _dataSourceSettings.ContainsKey(dataSourceId) && _streamingReceivers.ContainsKey(dataSourceId);
         }
 
         public async Task<IMotionDataSource> CreateAsync(int dataSourceId, MotionDataSourceSettings dataSourceSettings)
@@ -55,47 +51,69 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
                 throw new ArgumentException($"{nameof(dataSourceId)} must be greater than or equal to 0.");
             }
 
-            if (_dataSourceId == dataSourceId)
+            if (_dataSourceSettings.ContainsKey(dataSourceId))
             {
                 Debug.Log($"<color=orange>[{nameof(MocastStudioDataSourceManager)}] DataSource[{dataSourceId}] is already created.</color>");
                 return null;
             }
 
-            var streamingDataId = dataSourceSettings.StreamingDataId; // TODO
-            var dataBuffer = new MocastStudioDataBuffer(streamingDataId); // TODO
+            var streamingReceiverId = -1;
+            foreach (var registeredData in _dataSourceSettings)
+            {
+                if (dataSourceSettings.ServerAddress == registeredData.Value.ServerAddress
+                && dataSourceSettings.Port == registeredData.Value.Port)
+                {
+                    streamingReceiverId = registeredData.Key;
+                    break;
+                }
+            }
 
-            _dataSourceId = dataSourceId;
-            _dataBuffers.Add((uint)streamingDataId, dataBuffer);
+            if (streamingReceiverId < 0)
+            {
+                var streamingClient = _streamingClientFactory.Create(_signalTransportType);
+                _streamingReceivers.Add(dataSourceId, streamingClient);
+            }
+            else
+            {
+                _streamingReceivers.Add(dataSourceId, _streamingReceivers[streamingReceiverId]);
+            }
 
-            _client = _clientFactory.Create((int)SignalTransportType.ENet);
-            _client.OnDataReceived += OnDataReceivedInternal;
-            _connectParameters = _clientFactory.CreateConnectParameters(
-                (int)SignalTransportType.ENet, dataSourceSettings.ServerAddress, (ushort)dataSourceSettings.Port);
+            var dataBuffer = new MocastStudioDataBuffer(dataSourceId, (uint)dataSourceSettings.StreamingDataId);
+            _streamingReceivers[dataSourceId].OnDataReceived += dataBuffer.Enqueue;
+            _dataSourceSettings.Add(dataSourceId, dataSourceSettings);
 
             return dataBuffer;
         }
 
         public async Task<bool> ConnectAsync(int dataSourceId, CancellationToken cancellationToken = default)
         {
-            if (_dataSourceId != dataSourceId) return false;
-            return await _client.ConnectAsync(_connectParameters, cancellationToken);
+            if (!_streamingReceivers.TryGetValue(dataSourceId, out var streamingReceiver))
+            {
+                return false;
+            }
+
+            if (!_dataSourceSettings.TryGetValue(dataSourceId, out var dataSourceSettings))
+            {
+                return false;
+            }
+
+            if (streamingReceiver.IsConnected)
+            {
+                return true;
+            }
+
+            var settings = _dataSourceSettings[dataSourceId];
+            var connectParameters = _streamingClientFactory.CreateConnectParameters(
+                _signalTransportType, settings.ServerAddress, (ushort)settings.Port);
+
+            return await streamingReceiver.ConnectAsync(connectParameters, cancellationToken);
         }
 
         public async Task DisconnectAsync(int dataSourceId, CancellationToken cancellationToken = default)
         {
-            if (_dataSourceId != dataSourceId) return;
-            await _client.DisconnectAsync(cancellationToken);
-        }
-
-        void OnDataReceivedInternal(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlyMemory<byte> payload)
-        {
-            if (messageId != _streamingMessageId) return;
-
-            var data = MessagePackSerializer.Deserialize<ActorHumanPose>(payload);
-
-            if (_dataBuffers.TryGetValue(data.ActorId, out var dataBuffer))
+            if (_streamingReceivers.TryGetValue(dataSourceId, out var streamingReceiver))
             {
-                dataBuffer.Enqueue(data);
+                await streamingReceiver.DisconnectAsync(cancellationToken);
             }
         }
     }

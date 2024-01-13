@@ -1,3 +1,6 @@
+using System;
+using MessagePack;
+using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.MotionData;
 using MocapSignalTransmission.MotionDataSource;
 using UnityEngine;
@@ -7,28 +10,33 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 {
     public sealed class MocastStudioDataBuffer : IHumanPoseTrackingDataSource
     {
-        private readonly ActorHumanPose[] _humanPoseFrameBuffer;
-        private readonly int _bufferSize;
-        private readonly long _bufferMask;
+        public static readonly int MotionCaptureMessageId = (int)SignalType.MotionCaptureData;
+        public static readonly int MuscleCount = HumanTrait.MuscleCount;
 
-        private long _bufferHead = 0;
-        private long _bufferTail = 0;
+        readonly ActorHumanPose[] _humanPoseDataBuffer;
+        readonly int _bufferSize;
+        readonly long _bufferMask;
+
+        long _bufferHead = 0;
+        long _bufferTail = 0;
 
         public int Id { get; }
+        public uint StreamingDataId { get; }
 
-        public MocastStudioDataBuffer(int id, int bufferSize = 2)
+        public MocastStudioDataBuffer(int id, uint streamingDataId, int bufferSize = 2)
         {
             Assert.IsTrue(Utils.IsPowerOfTwo(bufferSize), "The buffer size must be a power of two.");
             _bufferSize = bufferSize;
             _bufferMask = bufferSize - 1;
 
             Id = id;
+            StreamingDataId = streamingDataId;
 
-            _humanPoseFrameBuffer = new ActorHumanPose[bufferSize];
+            _humanPoseDataBuffer = new ActorHumanPose[bufferSize];
 
             for (var i = 0; i < bufferSize; i++)
             {
-                _humanPoseFrameBuffer[i].Muscles = new float[HumanTrait.MuscleCount];
+                _humanPoseDataBuffer[i].Muscles = new float[MuscleCount];
             }
         }
 
@@ -43,20 +51,25 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         {
             var bufferIndex = _bufferHead & _bufferMask;
 
-            humanPoseFrame.bodyPosition = _humanPoseFrameBuffer[bufferIndex].BodyPosition;
-            humanPoseFrame.bodyRotation = _humanPoseFrameBuffer[bufferIndex].BodyRotation;
+            humanPoseFrame.bodyPosition = _humanPoseDataBuffer[bufferIndex].BodyPosition;
+            humanPoseFrame.bodyRotation = _humanPoseDataBuffer[bufferIndex].BodyRotation;
             for (var i = 0; i < humanPoseFrame.muscles.Length; i++)
             {
-                humanPoseFrame.muscles[i] = _humanPoseFrameBuffer[bufferIndex].Muscles[i];
+                humanPoseFrame.muscles[i] = _humanPoseDataBuffer[bufferIndex].Muscles[i];
             }
 
             return true;
         }
 
-        public void Enqueue(ActorHumanPose actorHumanPose)
+        public void Enqueue(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlyMemory<byte> serializedMessage)
         {
+            if (messageId != MotionCaptureMessageId) return;
+
+            var actorHumanPose = MessagePackSerializer.Deserialize<ActorHumanPose>(serializedMessage);
+            if (actorHumanPose.ActorId != StreamingDataId) return;
+
             var enqueueIndex = _bufferTail & _bufferMask;
-            _humanPoseFrameBuffer[enqueueIndex] = actorHumanPose;
+            _humanPoseDataBuffer[enqueueIndex] = actorHumanPose;
 
             // Update the enqueue position to insert the next data.
             _bufferTail++;

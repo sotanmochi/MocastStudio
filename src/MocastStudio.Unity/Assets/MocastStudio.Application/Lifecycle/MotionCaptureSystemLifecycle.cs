@@ -38,7 +38,6 @@ namespace MocastStudio.Application.Lifecycle
                 .WithParameter<IBinaryDataProvider>(new LocalFileBinaryDataProvider());
 
             builder.Register<MotionDataSourceManager>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<MocastStudioDataSourceManager>(Lifetime.Singleton).AsSelf();
             builder.Register<VMCProtocolDataSourceManager>(Lifetime.Singleton).AsSelf();
 #if MOCOPI_RECEIVER_PLUGIN
             builder.Register<MocopiDataSourceManager>(Lifetime.Singleton).AsSelf();
@@ -46,6 +45,8 @@ namespace MocastStudio.Application.Lifecycle
 #if MOTION_BUILDER_RECEIVER_PLUGIN
             builder.Register<MotionBuilderDataSourceManager>(Lifetime.Singleton).AsSelf();
 #endif
+            builder.Register<MocastStudioDataSourceManager>(Lifetime.Singleton).AsSelf()
+                .WithParameter<int>((int)SignalTransportType.ENet);
         }
     }
 }
