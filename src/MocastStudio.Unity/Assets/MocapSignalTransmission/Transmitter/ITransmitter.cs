@@ -7,6 +7,7 @@ namespace MocapSignalTransmission.Transmitter
 {
     public interface ITransmitter
     {
+        uint TransportClientId { get; }
         IReadOnlyCollection<int> ActorIds { get; }
         Task<bool> ConnectAsync(CancellationToken cancellationToken = default);
         Task DisconnectAsync();

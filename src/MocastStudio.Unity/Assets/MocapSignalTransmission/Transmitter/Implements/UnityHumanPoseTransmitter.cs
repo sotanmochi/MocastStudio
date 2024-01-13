@@ -16,6 +16,7 @@ namespace MocapSignalTransmission.Transmitter
         private HumanPose _correctedHumanPose;
 
         public int Id => _id;
+        public uint TransportClientId => _transport.ClientId;
         public IReadOnlyCollection<int> ActorIds => _actorIds;
 
         public UnityHumanPoseTransmitter(int id, ISerializer serializer, ITransport transport)

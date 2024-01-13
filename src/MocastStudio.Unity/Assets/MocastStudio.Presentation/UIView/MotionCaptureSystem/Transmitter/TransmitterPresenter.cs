@@ -97,7 +97,25 @@ namespace MocastStudio.Presentation.UIView.Transmitter
             _transmitterServiceContext.OnTransmitterStatusUpdated
                 .Subscribe(status =>
                 {
-                    _transmitterListView.UpdateStatus(status.TransmitterId, status.StatusType);
+                    var transmitterId = status.TransmitterId;
+                    var statusType = status.StatusType;
+
+                    _transmitterListView.UpdateStatus(transmitterId, statusType);
+
+                    if (statusType == TransmitterStatusType.Connected)
+                    {
+                        if (_transmitterService.TryGetStreamingActorIds(transmitterId, out var streamingActorIds))
+                        {
+                            _transmitterListView.UpdateActorIdList(transmitterId, streamingActorIds);
+                        }
+                    }
+                    else if (statusType == TransmitterStatusType.Disconnected)
+                    {
+                        if (_transmitterService.TryGetLocalActorIds(transmitterId, out var localActorIds))
+                        {
+                            _transmitterListView.UpdateActorIdList(transmitterId, localActorIds);
+                        }
+                    }
                 })
                 .AddTo(_compositeDisposable);
 

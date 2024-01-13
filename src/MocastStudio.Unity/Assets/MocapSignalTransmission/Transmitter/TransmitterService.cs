@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MocapSignalTransmission.MotionActor;
@@ -117,7 +118,33 @@ namespace MocapSignalTransmission.Transmitter
             }
         }
 
-        public static uint GetStreamingActorId(uint transmitterId, byte localActorId)
+        public bool TryGetLocalActorIds(int transmitterId, out IReadOnlyCollection<int> localActorIds)
+        {
+            if (_context._transmitters.TryGetValue(transmitterId, out var transmitter))
+            {
+                localActorIds = transmitter.ActorIds;
+                return true;
+            }
+
+            localActorIds = null;
+            return false;
+        }
+
+        public bool TryGetStreamingActorIds(int transmitterId, out IReadOnlyCollection<int> streamingActorIds)
+        {
+            if (_context._transmitters.TryGetValue(transmitterId, out var transmitter))
+            {
+                streamingActorIds = transmitter.ActorIds
+                                        .Select(localActorId => (int)GetStreamingActorId(transmitter.TransportClientId, localActorId))
+                                        .ToArray();
+                return true;
+            }
+
+            streamingActorIds = null;
+            return false;
+        }
+
+        public static uint GetStreamingActorId(uint transmitterId, int localActorId)
         {
             var maxLocalActors = MotionActorService.MaxLocalActors;
             return (uint)(localActorId % maxLocalActors + transmitterId * maxLocalActors);
