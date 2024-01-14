@@ -38,9 +38,9 @@ namespace MocastStudio.Presentation.UIView.Transmitter
 
             _transmitterLoaderView.UpdateTransmitterTypeDropdown(new TransmitterType[]
             {
-                TransmitterType.HumanPose_OSC_Local,
-                TransmitterType.HumanPose_Remote,
                 TransmitterType.MotionActor_VMCProtocol_Local,
+                TransmitterType.HumanPose_MocastStudio_Online,
+                TransmitterType.HumanPose_OSC_Local,
             });
 
             _transmitterLoaderView.OnAdditionRequested
@@ -49,7 +49,7 @@ namespace MocastStudio.Presentation.UIView.Transmitter
                     var serializerType = settingsRequest.TransmitterType switch 
                     {
                         TransmitterType.HumanPose_OSC_Local => (int)SerializerType.HumanPose_OSC,
-                        TransmitterType.HumanPose_Remote => (int)SerializerType.HumanPose_MessagePack,
+                        TransmitterType.HumanPose_MocastStudio_Online => (int)SerializerType.HumanPose_MessagePack,
                         TransmitterType.MotionActor_VMCProtocol_Local => (int)SerializerType.MotionActor_VMCProtocol,
                         _ => throw new ArgumentException($"Unknown TransmitterType: {settingsRequest.TransmitterType}"),
                     };
@@ -57,7 +57,7 @@ namespace MocastStudio.Presentation.UIView.Transmitter
                     var transportType = settingsRequest.TransmitterType switch 
                     {
                         TransmitterType.HumanPose_OSC_Local => (int)TransportType.Udp,
-                        TransmitterType.HumanPose_Remote => (int)TransportType.SignalStreaming_ENet,
+                        TransmitterType.HumanPose_MocastStudio_Online => (int)TransportType.SignalStreaming_ENet,
                         TransmitterType.MotionActor_VMCProtocol_Local => (int)TransportType.Udp,
                         _ => throw new ArgumentException($"Unknown TransmitterType: {settingsRequest.TransmitterType}"),
                     };
