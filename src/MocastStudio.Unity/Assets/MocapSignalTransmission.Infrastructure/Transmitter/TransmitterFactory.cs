@@ -54,7 +54,13 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
                     _transports[transmitterId] = new SignalStreamingTransportAdapter(signalStreamingClient, connectParameters, (int)SignalType.MotionCaptureData);
                 }
 #endif
+                else
+                {
+                    throw new ArgumentException($"Invalid transport type: {settings.TransportType}");
+                }
             }
+
+            var isHumanPoseTransmitter = false;
 
             if (TryGetSerializer(settings, out var serializer))
             {
@@ -64,6 +70,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
             {
                 if (settings.SerializerType == (int)SerializerType.HumanPose_OSC)
                 {
+                    isHumanPoseTransmitter = true;
                     _serializers[transmitterId] = new HumanPoseOscSerializer()
                     {
                         MessageAddress = OscMessageAddress.HumanPose
@@ -71,11 +78,28 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter
                 }
                 else if (settings.SerializerType == (int)SerializerType.HumanPose_MessagePack)
                 {
+                    isHumanPoseTransmitter = true;
                     _serializers[transmitterId] = new HumanPoseMessagePackSerializer();
+                }
+                else if (settings.SerializerType == (int)SerializerType.MotionActor_VMCProtocol)
+                {
+                    isHumanPoseTransmitter = false;
+                    _serializers[transmitterId] = new HumanoidMotionActorVmcpSerializer();
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid serializer type: {settings.SerializerType}");
                 }
             }
 
-            return new UnityHumanPoseTransmitter(transmitterId, _serializers[transmitterId], _transports[transmitterId]);
+            if (isHumanPoseTransmitter)
+            {
+                return new UnityHumanPoseTransmitter(transmitterId, _serializers[transmitterId], _transports[transmitterId]);
+            }
+            else
+            {
+                return new HumanoidMotionActorTransmitter(transmitterId, _serializers[transmitterId], _transports[transmitterId]);
+            }
         }
 
         public bool TryGetTransport(TransmitterSettings settings, out ITransport output)

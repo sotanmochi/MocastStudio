@@ -9,9 +9,10 @@ namespace MocapSignalTransmission.MotionActor
         [SerializeField] Animator _animator;
 
         private bool _initialized;
-        private Transform[] _bones = new Transform[(int)FingerTrackingBones.Count];
+        private TransformReference[] _bones = new TransformReference[(int)FingerTrackingBones.Count];
 
         public bool Initialized => _initialized;
+        public TransformReference[] Bones => _bones;
 
         void Awake()
         {
@@ -35,7 +36,8 @@ namespace MocapSignalTransmission.MotionActor
                 for (var i = 0; i < FingerTrackingFrame.BoneCount; i++)
                 {                
                     var humanBodyBone = FingerTrackingHelper.GetHumanBodyBone(i);
-                    _bones[i] = _animator.GetBoneTransform(humanBodyBone);
+                    var boneTransform = _animator.GetBoneTransform(humanBodyBone);
+                    _bones[i] = new TransformReference(humanBodyBone.ToString(), boneTransform);
                 }
                 _initialized = true;
             }
@@ -49,7 +51,7 @@ namespace MocapSignalTransmission.MotionActor
             {
                 if (boneId != (int)FingerTrackingBones.LeftHand && boneId != (int)FingerTrackingBones.RightHand)
                 {
-                    _bones[boneId].localRotation = frame.BoneRotations[boneId];
+                    _bones[boneId].Transform.localRotation = frame.BoneRotations[boneId];
                 }
             }
         }

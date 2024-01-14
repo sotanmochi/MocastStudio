@@ -2,6 +2,7 @@
     "name": "MocapSignalTransmission.Infrastructure.Serialization",
     "rootNamespace": "MocapSignalTransmission.Infrastructure.Serialization",
     "references": [
+        "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.MotionData",
         "MocapSignalTransmission.Transmitter",
         "MocapSignalTransmission.Infrastructure.Constants",

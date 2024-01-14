@@ -21,6 +21,9 @@ namespace MocapSignalTransmission.MotionActor
         public BodyTrackingActorBehaviour BodyTrackingActorBehaviour => _bodyTrackingActorBehaviour;
         public FingerTrackingActorBehaviour FingerTrackingActorBehaviour => _fingerTrackingActorBehaviour;
 
+        public TransformReference[] BodyBones => _bodyTrackingActorBehaviour.Bones;
+        public TransformReference[] FingerBones => _fingerTrackingActorBehaviour.Bones;
+
         public bool RootBoneOffsetEnabled
         {
             get => _bodyTrackingActorBehaviour.RootBoneOffsetEnabled;

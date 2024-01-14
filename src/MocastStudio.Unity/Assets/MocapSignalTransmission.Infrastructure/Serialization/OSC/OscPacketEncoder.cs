@@ -73,7 +73,7 @@ namespace MocapSignalTransmission.Infrastructure.Transmitter.Serialization
             _buffer[_length++] = _tempByte[0];
         }
 
-        Byte[] _buffer = new Byte[4096];
+        Byte[] _buffer = new Byte[8192];
         int _length;
 
         // Used to change byte order

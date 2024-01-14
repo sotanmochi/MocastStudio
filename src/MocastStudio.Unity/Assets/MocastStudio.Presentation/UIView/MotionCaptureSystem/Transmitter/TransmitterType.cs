@@ -5,5 +5,6 @@ namespace MocastStudio.Presentation.UIView.Transmitter
         Unknown = 0,
         HumanPose_OSC_Local = 1,
         HumanPose_Remote = 2,
+        MotionActor_VMCProtocol_Local = 3,
     }
 }
