@@ -1,0 +1,15 @@
+{
+    "TargetAssemblyNamePatterns": [
+        "Assembly-CSharp",
+        "MocapSignalTransmission.*"
+    ],
+    "TargetInfoList": [
+        {
+            "IsBaseType": false,
+            "TypeName": "HumanoidMotionActorVmcpSerializer",
+            "MethodNames": [
+                "Serialize"
+            ]
+        }
+    ]
+}

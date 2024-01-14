@@ -290,6 +290,15 @@
       },
       "hash": "af7bd4ecabaf6ea3f9e58ecc4352dd5296e5ef29"
     },
+    "jp.sotanmochi.ilpostprocessingkit": {
+      "version": "https://github.com/sotanmochi/ILPostProcessingKit.git?path=Packages/ILPostProcessingKit#v1.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.mono-cecil": "1.11.4"
+      },
+      "hash": "3c3b9e9761c0c7b3d3ce89d5cef336df4e0a410c"
+    },
     "jp.sotanmochi.signalstreaming": {
       "version": "file:../../SignalStreaming",
       "depth": 0,

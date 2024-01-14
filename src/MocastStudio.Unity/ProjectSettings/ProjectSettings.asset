@@ -802,7 +802,24 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: ENABLE_PROFILING_BLOCK_WEAVER
+    EmbeddedLinux: ENABLE_PROFILING_BLOCK_WEAVER
+    GameCoreScarlett: ENABLE_PROFILING_BLOCK_WEAVER
+    GameCoreXboxOne: ENABLE_PROFILING_BLOCK_WEAVER
+    LinuxHeadlessSimulation: ENABLE_PROFILING_BLOCK_WEAVER
+    Nintendo Switch: ENABLE_PROFILING_BLOCK_WEAVER
+    PS4: ENABLE_PROFILING_BLOCK_WEAVER
+    PS5: ENABLE_PROFILING_BLOCK_WEAVER
+    QNX: ENABLE_PROFILING_BLOCK_WEAVER
+    Stadia: ENABLE_PROFILING_BLOCK_WEAVER
+    Standalone: ENABLE_PROFILING_BLOCK_WEAVER
+    VisionOS: ENABLE_PROFILING_BLOCK_WEAVER
+    WebGL: ENABLE_PROFILING_BLOCK_WEAVER
+    Windows Store Apps: ENABLE_PROFILING_BLOCK_WEAVER
+    XboxOne: ENABLE_PROFILING_BLOCK_WEAVER
+    iPhone: ENABLE_PROFILING_BLOCK_WEAVER
+    tvOS: ENABLE_PROFILING_BLOCK_WEAVER
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
