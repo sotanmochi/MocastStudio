@@ -3,11 +3,10 @@ using MessagePipe;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.Transmitter;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView.Transmitter
 {
-    public sealed class TransmitterPresenter : IInitializable, IDisposable
+    public sealed class TransmitterPresenter : IDisposable
     {
         private readonly TransmitterService _transmitterService;
         private readonly TransmitterServiceContext _transmitterServiceContext;
@@ -27,12 +26,12 @@ namespace MocastStudio.Presentation.UIView.Transmitter
             _transmitterLoaderView = transmitterLoaderView;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _compositeDisposable.Dispose();
         }
 
-        void IInitializable.Initialize()
+        public void Initialize()
         {
             UnityEngine.Debug.Log($"<color=lime>[{nameof(TransmitterPresenter)}] Initialize</color>");
 

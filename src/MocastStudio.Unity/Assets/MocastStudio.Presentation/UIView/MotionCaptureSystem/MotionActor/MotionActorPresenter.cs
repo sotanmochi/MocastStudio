@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using MessagePipe;
 using MocapSignalTransmission.MotionActor;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView.MotionActor
 {
-    public sealed class MotionActorPresenter : IInitializable, IDisposable
+    public sealed class MotionActorPresenter : IDisposable
     {
         readonly MotionActorService _motionActorService;
         readonly MotionActorServiceContext _motionActorServiceContext;
@@ -27,12 +26,12 @@ namespace MocastStudio.Presentation.UIView.MotionActor
             _motionActorLoaderView = motionActorLoaderView;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _compositeDisposable.Dispose();
         }
 
-        void IInitializable.Initialize()
+        public void Initialize()
         {
             UnityEngine.Debug.Log($"<color=lime>[{nameof(MotionActorPresenter)}] Initialize</color>");
 

@@ -25,6 +25,8 @@ namespace MocastStudio.Presentation.Lifecycle
         {
             Debug.Log($"[{nameof(MotionCaptureUIViewLifecycle)}] Configure");
 
+            builder.RegisterEntryPoint<MotionCaptureUIViewEntryPoint>();
+
             builder.RegisterComponent(_motionCaptureSystemView);
             builder.RegisterComponent(_motionActorListView);
             builder.RegisterComponent(_motionActorLoaderView);
@@ -34,11 +36,11 @@ namespace MocastStudio.Presentation.Lifecycle
             builder.RegisterComponent(_transmitterListView);
             builder.RegisterComponent(_transmitterLoaderView);
 
-            builder.RegisterEntryPoint<MotionCaptureSystemPresenter>();
-            builder.RegisterEntryPoint<MotionActorPresenter>();
-            builder.RegisterEntryPoint<MotionDataSourcePresenter>();
-            builder.RegisterEntryPoint<MotionSourceMappingPresenter>();
-            builder.RegisterEntryPoint<TransmitterPresenter>();
+            builder.Register<MotionCaptureSystemPresenter>(Lifetime.Singleton);
+            builder.Register<MotionActorPresenter>(Lifetime.Singleton);
+            builder.Register<MotionDataSourcePresenter>(Lifetime.Singleton);
+            builder.Register<MotionSourceMappingPresenter>(Lifetime.Singleton);
+            builder.Register<TransmitterPresenter>(Lifetime.Singleton);
         }
     }
 }

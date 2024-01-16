@@ -1,11 +1,10 @@
 using System;
 using MessagePipe;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView.MotionCapture
 {
-    public sealed class MotionCaptureSystemPresenter : IDisposable, IInitializable
+    public sealed class MotionCaptureSystemPresenter : IDisposable
     {
         readonly UIViewContext _context;
         readonly MotionCaptureSystemView _motionCaptureSystemView;
@@ -17,12 +16,12 @@ namespace MocastStudio.Presentation.UIView.MotionCapture
             _motionCaptureSystemView = view;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _compositeDisposable.Dispose();
         }
 
-        void IInitializable.Initialize()
+        public void Initialize()
         {
             _context.OnStatusUpdated
                 .Subscribe(status =>

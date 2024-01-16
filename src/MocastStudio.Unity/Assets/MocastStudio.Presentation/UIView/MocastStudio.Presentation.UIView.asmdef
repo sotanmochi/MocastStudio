@@ -6,7 +6,6 @@
         "MessagePipe",
         "UniTask",
         "UniRx",
-        "VContainer",
         "StandaloneFileBrowser",
         "MocapSignalTransmission.Infrastructure.Constants",
         "MocapSignalTransmission.MotionActor",

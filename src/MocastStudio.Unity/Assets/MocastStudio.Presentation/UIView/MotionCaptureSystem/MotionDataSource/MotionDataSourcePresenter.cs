@@ -3,11 +3,10 @@ using MessagePipe;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.MotionDataSource;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView.MotionDataSource
 {
-    public sealed class MotionDataSourcePresenter : IInitializable, IDisposable
+    public sealed class MotionDataSourcePresenter : IDisposable
     {
         readonly MotionDataSourceService _motionDataSourceService;
         readonly MotionDataSourceServiceContext _motionDataSourceContext;
@@ -27,12 +26,12 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
             _motionDataSourceLoaderView = motionDataSourceLoaderView;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _compositeDisposable.Dispose();
         }
 
-        void IInitializable.Initialize()
+        public void Initialize()
         {
             UnityEngine.Debug.Log($"<color=lime>[{nameof(MotionDataSourcePresenter)}] Initialize</color>");
 
