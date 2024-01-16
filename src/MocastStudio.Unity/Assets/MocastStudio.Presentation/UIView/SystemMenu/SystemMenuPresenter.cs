@@ -1,10 +1,9 @@
 using System;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView
 {
-    public sealed class SystemMenuPresenter : IDisposable, IInitializable
+    public sealed class SystemMenuPresenter : IDisposable
     {
         readonly UIViewContext _context;
         readonly SystemMenuView _menuView;
@@ -16,16 +15,16 @@ namespace MocastStudio.Presentation.UIView
             _menuView = menuView;
         }
 
-        void IInitializable.Initialize()
+        public void Dispose()
+        {
+            _compositeDisposable.Dispose();
+        }
+
+        public void Initialize()
         {
             _menuView.OnItemSelected
                 .Subscribe(UpdateViewStatus)
                 .AddTo(_compositeDisposable);
-        }
-
-        void IDisposable.Dispose()
-        {
-            _compositeDisposable.Dispose();
         }
 
         void UpdateViewStatus(UIViewType uiViewType)

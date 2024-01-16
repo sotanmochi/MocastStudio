@@ -17,12 +17,14 @@ namespace MocastStudio.Presentation.Lifecycle
         {
             Debug.Log($"[{nameof(UIViewLifecycle)}] Configure");
 
+            builder.RegisterEntryPoint<UIViewEntryPoint>();
+
             builder.RegisterComponent(_systemMenuView);
             builder.RegisterComponent(_aboutView);
             builder.RegisterComponent(_acknowledgementsView);
 
-            builder.RegisterEntryPoint<SystemMenuPresenter>();
-            builder.RegisterEntryPoint<AboutPresenter>();
+            builder.Register<SystemMenuPresenter>(Lifetime.Singleton);
+            builder.Register<AboutPresenter>(Lifetime.Singleton);
         }
     }
 }

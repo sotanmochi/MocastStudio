@@ -1,11 +1,10 @@
 using System;
 using MessagePipe;
 using UniRx;
-using VContainer.Unity;
 
 namespace MocastStudio.Presentation.UIView.About
 {
-    public sealed class AboutPresenter : IDisposable, IInitializable
+    public sealed class AboutPresenter : IDisposable
     {
         readonly UIViewContext _context;
         readonly AboutView _aboutView;
@@ -19,12 +18,12 @@ namespace MocastStudio.Presentation.UIView.About
             _acknowledgementsView = acknowledgementsView;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _compositeDisposable.Dispose();
         }
 
-        void IInitializable.Initialize()
+        public void Initialize()
         {
             _context.OnStatusUpdated
                 .Subscribe(status =>

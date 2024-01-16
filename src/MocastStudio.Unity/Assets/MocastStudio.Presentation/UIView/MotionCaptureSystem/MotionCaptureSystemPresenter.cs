@@ -34,8 +34,6 @@ namespace MocastStudio.Presentation.UIView.MotionCapture
                     }
                 })
                 .AddTo(_compositeDisposable);
-
-            _context.UpdateViewStatus(UIViewType.MotionCaptureSystem, UIViewStatusType.Invisible);
         }
     }
 }
