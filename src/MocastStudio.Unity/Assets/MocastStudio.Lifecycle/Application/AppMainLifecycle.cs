@@ -15,8 +15,9 @@ namespace MocastStudio.Application.Lifecycle
 
             builder.RegisterMessagePipe();
 
-            builder.RegisterEntryPoint<AppMain>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<AppMainEntryPoint>();
 
+            builder.Register<AppMain>(Lifetime.Singleton);
             builder.Register<AppSettingsRepository>(Lifetime.Singleton)
                 .WithParameter("directoryPath", UnityEngine.Application.persistentDataPath)
                 .WithParameter("filename", "appsettings.json");

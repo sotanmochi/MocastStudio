@@ -2,15 +2,10 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VContainer;
-using VContainer.Unity;
 
 namespace MocastStudio.Application
 {
-    /// <summary>
-    /// Entry point
-    /// </summary>
-    public sealed class AppMain : IInitializable
+    public sealed class AppMain
     {
         readonly List<string> _sceneNames = new List<string>
         {
@@ -26,7 +21,7 @@ namespace MocastStudio.Application
             _appSettingsRepository = appSettingsRepository;
         }
 
-        async void IInitializable.Initialize()
+        public async UniTask InitializeAsync()
         {
             var loaded = await _appSettingsRepository.LoadAsync();
             if (!loaded)

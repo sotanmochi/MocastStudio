@@ -3,6 +3,7 @@
     "rootNamespace": "MocastStudio.Application.Lifecycle",
     "references": [
         "VContainer",
+        "UniTask",
         "MessagePipe",
         "MessagePipe.VContainer",
         "MocastStudio.Application",
