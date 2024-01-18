@@ -6,7 +6,7 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 
-namespace MocastStudio.Application
+namespace MocastStudio.Lifecycle.Application
 {
     public sealed class FrameRateController : MonoBehaviour
     {
