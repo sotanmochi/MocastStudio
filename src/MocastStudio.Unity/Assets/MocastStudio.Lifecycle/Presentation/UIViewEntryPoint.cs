@@ -3,7 +3,7 @@ using MocastStudio.Presentation.UIView.About;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Presentation.Lifecycle
+namespace MocastStudio.Lifecycle.Presentation
 {
     public sealed class UIViewEntryPoint : IInitializable, IStartable
     {

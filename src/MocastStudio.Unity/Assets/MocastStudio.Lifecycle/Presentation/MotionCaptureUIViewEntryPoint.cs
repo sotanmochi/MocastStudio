@@ -6,7 +6,7 @@ using MocastStudio.Presentation.UIView.Transmitter;
 using VContainer;
 using VContainer.Unity;
 
-namespace MocastStudio.Presentation.Lifecycle
+namespace MocastStudio.Lifecycle.Presentation
 {
     public sealed class MotionCaptureUIViewEntryPoint : IInitializable
     {
