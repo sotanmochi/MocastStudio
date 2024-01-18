@@ -290,6 +290,24 @@
       },
       "hash": "af7bd4ecabaf6ea3f9e58ecc4352dd5296e5ef29"
     },
+    "jp.keijiro.klak.spout": {
+      "version": "https://github.com/keijiro/KlakSpout.git?path=Packages/jp.keijiro.klak.spout#2.0.3",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.screencapture": "1.0.0"
+      },
+      "hash": "981206ab46fc2289d3bcc963234eaac65aac4eab"
+    },
+    "jp.keijiro.klak.syphon": {
+      "version": "https://github.com/keijiro/KlakSyphon.git?path=jp.keijiro.klak.syphon#1.0.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.screencapture": "1.0.0"
+      },
+      "hash": "eab9641856e943f13d5516f113846e70a66f60c6"
+    },
     "jp.sotanmochi.ilpostprocessingkit": {
       "version": "https://github.com/sotanmochi/ILPostProcessingKit.git?path=Packages/ILPostProcessingKit#v1.2.0",
       "depth": 0,
