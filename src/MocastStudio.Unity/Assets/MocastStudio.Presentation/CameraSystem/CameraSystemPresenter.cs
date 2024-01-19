@@ -1,5 +1,6 @@
 using System;
 using MessagePipe;
+using MocastStudio.Application.VideoFrameStreaming;
 using MocastStudio.Presentation.UIView;
 using UniRx;
 using VContainer.Unity;
@@ -10,12 +11,14 @@ namespace MocastStudio.Presentation.CameraSystem
     {
         readonly UIViewContext _context;
         readonly CameraSwitcher _cameraSwitcher;
+        readonly IVideoFrameStreamer _videoFrameStreamer;
         readonly CompositeDisposable _compositeDisposable = new();
 
-        public CameraSystemPresenter(UIViewContext context, CameraSwitcher view)
+        public CameraSystemPresenter(UIViewContext context, CameraSwitcher view, IVideoFrameStreamer videoFrameStreamer)
         {
             _context = context;
             _cameraSwitcher = view;
+            _videoFrameStreamer = videoFrameStreamer;
         }
 
         void IDisposable.Dispose()
@@ -41,6 +44,10 @@ namespace MocastStudio.Presentation.CameraSystem
                     }
                 })
                 .AddTo(_compositeDisposable);
+
+            _cameraSwitcher.Initialize();
+            _videoFrameStreamer.SourceTexture = _cameraSwitcher.MainRenderTexture;
+            _videoFrameStreamer.SetEnable(true);
         }
     }
 }

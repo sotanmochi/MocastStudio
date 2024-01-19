@@ -6,6 +6,7 @@
         "UniTask",
         "UniRx",
         "VContainer",
+        "MocastStudio.Application",
         "MocastStudio.Presentation.UIView"
     ],
     "includePlatforms": [],
