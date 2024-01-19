@@ -11,10 +11,18 @@ namespace MocastStudio.Presentation.CameraSystem
         [SerializeField] Camera _sceneViewCamera;
         [SerializeField] List<Camera> _cameras = new();
 
+        bool _initialized;
         Camera _currentMainCamera;
 
-        void Start()
+        public bool Initialized => _initialized;
+        public Texture MainRenderTexture => _outputView.MainRenderTexture;
+
+        void Start() => Initialize();
+
+        public void Initialize()
         {
+            if (_initialized) return;
+
             _outputView.Initialize();
 
             for (var i = 0; i < _cameras.Count; i++)
@@ -34,6 +42,8 @@ namespace MocastStudio.Presentation.CameraSystem
             _cameras[1].targetTexture = _outputView.PreviewRenderTexture;
 
             _currentMainCamera = _cameras[0];
+
+            _initialized = true;
         }
 
         public void SwitchToMainCamera()
@@ -60,8 +70,11 @@ namespace MocastStudio.Presentation.CameraSystem
             _outputViewCamera.enabled = false;
             _outputView.Hide();
 
+            // NOTE: Spout/Syphonで映像を送信するためにMainCameraは有効にしておく
+            _currentMainCamera.enabled = true;
             foreach (var camera in _cameras)
             {
+                if (camera == _currentMainCamera) continue;
                 camera.enabled = false;
             }
         }
