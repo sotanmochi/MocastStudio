@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spoutSender: {fileID: 532402886}
-  _resources: {fileID: 11400000, guid: f449ebbe2051c2e4d993eaa773a410de, type: 2}
+  _resources: {fileID: 11400000, guid: 77d007170821c8640a5ea1add22f3680, type: 2}
 --- !u!114 &532402886
 MonoBehaviour:
   m_ObjectHideFlags: 0
