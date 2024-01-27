@@ -10,7 +10,7 @@
 - [mocopi Receiver Plugin for Unity](https://www.sony.net/mocopi-dev/)  
   License ([日本語](https://www.sony.net/Products/mocopi-dev/jp/others/Licence.html) | [English](https://www.sony.net/Products/mocopi-dev/en/others/Licence.html))
 
-- [MessagePack for C#](https://github.com/MessagePack-CSharp/MessagePack-CSharp)
+- [MessagePack for C#](https://github.com/MessagePack-CSharp/MessagePack-CSharp)  
   MIT License  
   Copyright (c) 2017 Yoshifumi Kawai and contributors
 
@@ -18,7 +18,7 @@
   MIT License  
   Copyright (c) 2021 Cysharp, Inc.
 
-- [Ulid](https://github.com/Cysharp/Ulid)
+- [Ulid](https://github.com/Cysharp/Ulid)  
   MIT License  
   Copyright (c) 2019 Cysharp, Inc.
 
@@ -47,10 +47,10 @@
   MIT License  
   Copyright (c) 2017 hecomi
 
-- [KlakSpout](https://github.com/keijiro/KlakSpout)
+- [KlakSpout](https://github.com/keijiro/KlakSpout)  
   The Unlicense  
 
-- [KlakSyphon](https://github.com/keijiro/KlakSyphon)
+- [KlakSyphon](https://github.com/keijiro/KlakSyphon)  
   [Syphon Framework License](https://github.com/keijiro/KlakSyphon/blob/master/LICENSE)  
   Copyright 2010 bangnoise (Tom Butterworth) & vade (Anton Marini).
 
