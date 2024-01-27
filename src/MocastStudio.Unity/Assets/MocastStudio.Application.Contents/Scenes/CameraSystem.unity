@@ -1373,10 +1373,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Application.Lifecycle.AppMainLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.AppMainLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
-  _cameraSystemEntryPoint: {fileID: 1230940613}
+  _cameraSystemLifecycle: {fileID: 1230940613}
   _spoutVideoFrameStreamer: {fileID: 532402885}
   _syphonVideoFrameStreamer: {fileID: 532402884}
 --- !u!114 &1230940615
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Application.Lifecycle.CameraSystemLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.CameraSystemLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _cameraSwitcher: {fileID: 1712373839}

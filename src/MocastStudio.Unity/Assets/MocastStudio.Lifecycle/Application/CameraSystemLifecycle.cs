@@ -1,28 +1,24 @@
-using MocastStudio.Infrastructure.VideoFrameStreaming;
+using MocastStudio.CameraSystem;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace MocastStudio.Application.Lifecycle
 {
-    public sealed class CameraSystemLifecycle : LifetimeScope
+    public sealed class CameraSystemLifecycle : MonoBehaviour
     {
-        [Header("Components")]
-        [SerializeField] CameraSystemEntryPoint _cameraSystemEntryPoint;
-        [SerializeField] SpoutVideoFrameStreamer _spoutVideoFrameStreamer;
-        [SerializeField] SyphonVideoFrameStreamer _syphonVideoFrameStreamer;
+        [SerializeField] Camera _sceneViewCamera;
 
-        protected override void Configure(IContainerBuilder builder)
+        CameraSystemContext _cameraSystemContext;
+
+        [Inject]
+        public void Construct(CameraSystemContext cameraSystemContext)
         {
-            Debug.Log($"[{nameof(CameraSystemLifecycle)}] Configure");
-
-            builder.RegisterComponent(_cameraSystemEntryPoint);
-
-#if UNITY_STANDALONE_WIN
-            builder.RegisterComponent(_spoutVideoFrameStreamer).AsImplementedInterfaces();
-#elif UNITY_STANDALONE_OSX
-            builder.RegisterComponent(_syphonVideoFrameStreamer).AsImplementedInterfaces();
-#endif
+            _cameraSystemContext = cameraSystemContext;
+        }
+ 
+        void Awake()
+        {
+            _cameraSystemContext.SceneViewCamera = _sceneViewCamera;
         }
     }
 }
