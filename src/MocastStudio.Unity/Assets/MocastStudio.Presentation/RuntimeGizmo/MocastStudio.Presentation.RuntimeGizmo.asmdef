@@ -1,6 +1,6 @@
 {
-    "name": "MocastStudio.Presentation.UserInteraction",
-    "rootNamespace": "MocastStudio.Presentation.UserInteraction",
+    "name": "MocastStudio.Presentation.RuntimeGizmo",
+    "rootNamespace": "",
     "references": [
         "VContainer",
         "MessagePipe",
