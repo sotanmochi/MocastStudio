@@ -7,7 +7,6 @@
         "MessagePipe",
         "MessagePipe.VContainer",
         "MocastStudio.Application",
-        "MocastStudio.CameraSystem",
         "MocastStudio.Infrastructure.VideoFrameStreaming",
         "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.MotionDataSource",

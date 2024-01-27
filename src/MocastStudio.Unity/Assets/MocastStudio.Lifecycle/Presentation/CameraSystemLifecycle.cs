@@ -1,8 +1,8 @@
-using MocastStudio.CameraSystem;
+using MocastStudio.Presentation.CameraSystem;
 using UnityEngine;
 using VContainer;
 
-namespace MocastStudio.Application.Lifecycle
+namespace MocastStudio.Lifecycle.Presentation
 {
     public sealed class CameraSystemLifecycle : MonoBehaviour
     {

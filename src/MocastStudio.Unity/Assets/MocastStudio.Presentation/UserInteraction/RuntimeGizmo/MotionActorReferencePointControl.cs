@@ -1,7 +1,7 @@
 using System;
 using MessagePipe;
 using MocapSignalTransmission.MotionActor;
-using MocastStudio.CameraSystem;
+using MocastStudio.Presentation.CameraSystem;
 using TransformControl;
 using VContainer;
 using VContainer.Unity;

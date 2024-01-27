@@ -7,7 +7,7 @@
         "UniTask",
         "TransformControl",
         "MocapSignalTransmission.MotionActor",
-        "MocastStudio.CameraSystem"
+        "MocastStudio.Presentation.CameraSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

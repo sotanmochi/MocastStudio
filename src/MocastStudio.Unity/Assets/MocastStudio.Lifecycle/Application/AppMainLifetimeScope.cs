@@ -1,6 +1,5 @@
 using VContainer;
 using VContainer.Unity;
-using CameraSystemContext = MocastStudio.CameraSystem.CameraSystemContext;
 using Debug = UnityEngine.Debug;
 
 namespace MocastStudio.Application.Lifecycle
@@ -17,8 +16,6 @@ namespace MocastStudio.Application.Lifecycle
             builder.Register<AppSettingsRepository>(Lifetime.Singleton)
                 .WithParameter("directoryPath", UnityEngine.Application.persistentDataPath)
                 .WithParameter("filename", "appsettings.json");
-
-            builder.Register<CameraSystemContext>(Lifetime.Singleton);
         }
     }
 }
