@@ -5,14 +5,14 @@ using VContainer.Unity;
 
 namespace MocastStudio.Lifecycle.Presentation
 {
-    public sealed class CameraSystemLifecycle : LifetimeScope
+    public sealed class CameraSystemLifetimeScope : LifetimeScope
     {
         [Header("CameraSystem Components")]
         [SerializeField] CameraSwitcher _cameraSwitcher;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log($"[{nameof(CameraSystemLifecycle)}] Configure");
+            Debug.Log($"[{nameof(CameraSystemLifetimeScope)}] Configure");
             builder.RegisterComponent(_cameraSwitcher);
             builder.RegisterEntryPoint<CameraSystemPresenter>();
         }

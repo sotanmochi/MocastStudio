@@ -5,11 +5,11 @@ using VContainer.Unity;
 
 namespace MocastStudio.Lifecycle.Presentation
 {
-    public sealed class RuntimeGizmoLifecycle : LifetimeScope
+    public sealed class RuntimeGizmoLifetimeScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log($"[{nameof(RuntimeGizmoLifecycle)}] Configure");
+            Debug.Log($"[{nameof(RuntimeGizmoLifetimeScope)}] Configure");
 
             builder.RegisterEntryPoint<MotionActorReferencePointControl>();
         }

@@ -1,30 +1,39 @@
 using MocastStudio.Presentation.UIView;
 using MocastStudio.Presentation.UIView.About;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace MocastStudio.Lifecycle.Presentation
 {
-    public sealed class UIViewLifecycle : LifetimeScope
+    public sealed class UIViewLifecycle : IInitializable, IStartable
     {
-        [Header("UIView Components")]
-        [SerializeField] SystemMenuView _systemMenuView;
-        [SerializeField] AboutView _aboutView;
-        [SerializeField] AcknowledgementsView _acknowledgementsView;
+        readonly UIViewContext _context;
+        readonly SystemMenuPresenter _systemMenuPresenter;
+        readonly AboutPresenter _aboutPresenter;
 
-        protected override void Configure(IContainerBuilder builder)
+        public UIViewLifecycle(
+            UIViewContext contxt,
+            SystemMenuPresenter systemMenuPresenter,
+            AboutPresenter aboutPresenter)
         {
-            Debug.Log($"[{nameof(UIViewLifecycle)}] Configure");
+            _context = contxt;
+            _systemMenuPresenter = systemMenuPresenter;
+            _aboutPresenter = aboutPresenter;
+        }
 
-            builder.RegisterEntryPoint<UIViewEntryPoint>();
+        void IInitializable.Initialize()
+        {
+            _systemMenuPresenter.Initialize();
+            _aboutPresenter.Initialize();
+        }
+ 
+        void IStartable.Start()
+        {
+            _context.UpdateViewStatus(UIViewType.MotionCaptureSystem, UIViewStatusType.Visible);
 
-            builder.RegisterComponent(_systemMenuView);
-            builder.RegisterComponent(_aboutView);
-            builder.RegisterComponent(_acknowledgementsView);
-
-            builder.Register<SystemMenuPresenter>(Lifetime.Singleton);
-            builder.Register<AboutPresenter>(Lifetime.Singleton);
+            _context.UpdateViewStatus(UIViewType.MainCamera, UIViewStatusType.Invisible);
+            _context.UpdateViewStatus(UIViewType.About, UIViewStatusType.Invisible);
+            _context.UpdateViewStatus(UIViewType.Acknowledgements, UIViewStatusType.Invisible);
         }
     }
 }
