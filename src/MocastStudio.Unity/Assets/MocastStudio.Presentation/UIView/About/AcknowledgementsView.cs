@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
@@ -13,7 +13,7 @@ namespace MocastStudio.Presentation.UIView.About
         [SerializeField] TextAsset _license;
         [SerializeField] TextAsset _thirdPartyNotices;
 
-        public IObservable<Unit> OnClose => _close.OnClickAsObservable();
+        public Observable<Unit> OnClose => _close.OnClickAsObservable();
 
         void Awake()
         {

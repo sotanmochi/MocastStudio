@@ -2,7 +2,7 @@ using System;
 using MessagePipe;
 using MocastStudio.Application.VideoFrameStreaming;
 using MocastStudio.Presentation.UIView;
-using UniRx;
+using R3;
 using VContainer.Unity;
 
 namespace MocastStudio.Presentation.CameraSystem

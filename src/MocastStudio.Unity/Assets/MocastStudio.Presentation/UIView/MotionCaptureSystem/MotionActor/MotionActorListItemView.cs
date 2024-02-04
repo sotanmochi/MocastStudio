@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
@@ -14,10 +14,9 @@ namespace MocastStudio.Presentation.UIView.MotionActor
 
         private int _id;
 
-        public IObservable<(int ActorId, bool RootBoneOffsetEnabled)> OnRootBoneOffsetToggleValueChanged => 
+        public Observable<(int ActorId, bool RootBoneOffsetEnabled)> OnRootBoneOffsetToggleValueChanged =>
             _rootBoneOffsetToggle.OnValueChangedAsObservable()
-                .Select(isOn => (ActorId: _id, RootBoneOffsetEnabled: isOn))
-                .TakeUntilDestroy(this);
+                .Select(isOn => (ActorId: _id, RootBoneOffsetEnabled: isOn));
 
         public void SetId(int id)
         {

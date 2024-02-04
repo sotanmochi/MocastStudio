@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,30 +13,30 @@ namespace MocastStudio.Presentation.UIView
 
         readonly Subject<UIViewType> _itemSelected = new();
 
-        public IObservable<UIViewType> OnItemSelected => _itemSelected;
+        public Observable<UIViewType> OnItemSelected => _itemSelected;
 
         void Awake()
         {
             _mainCamera.OnClickAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(_ => 
                 {
                     _itemSelected.OnNext(UIViewType.MainCamera);
-                });
+                })
+                .AddTo(this);
 
             _motionCapture.OnClickAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(_ => 
                 {
                     _itemSelected.OnNext(UIViewType.MotionCaptureSystem);
-                });
+                })
+                .AddTo(this);
 
             _about.OnClickAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(_ => 
                 {
                     _itemSelected.OnNext(UIViewType.About);
-                });
+                })
+                .AddTo(this);
         }
     }
 }

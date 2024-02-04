@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
@@ -27,8 +27,8 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
         private int _currentMotionActorId;
         private int _currentDataSourceId;
 
-        public IObservable<MotionActorDataSourcePair> OnAdditionRequested => _additionNotifier;
-        public IObservable<MotionActorDataSourcePair> OnRemovalRequested => _removalNotifier;
+        public Observable<MotionActorDataSourcePair> OnAdditionRequested => _additionNotifier;
+        public Observable<MotionActorDataSourcePair> OnRemovalRequested => _removalNotifier;
 
         void Awake() => Initialize();
 
@@ -37,14 +37,13 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
         private void Initialize()
         {
             _addButton.OnClickAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(_ => 
                 {
                     _additionNotifier.OnNext(new MotionActorDataSourcePair(_currentMotionActorId, _currentDataSourceId));
-                });
+                })
+                .AddTo(this);
 
             _motionActorDropdown.OnValueChangedAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(selectedIndex => 
                 {
                     if (selectedIndex < 1)
@@ -56,10 +55,10 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
                         var index = selectedIndex - 1;
                         _currentMotionActorId = _motionActorIds[index];
                     }
-                });
+                })
+                .AddTo(this);
 
             _dataSourceDropdown.OnValueChangedAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(selectedIndex => 
                 {
                     if (selectedIndex < 1)
@@ -71,7 +70,8 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
                         var index = selectedIndex - 1;
                         _currentDataSourceId = _dataSourceIds[index];
                     }
-                });
+                })
+                .AddTo(this);
         }
 
         public void UpdatMotionActorDropdown(IReadOnlyList<int> dropdownItems)
@@ -143,8 +143,8 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
             itemView.SetValue(data);
 
             itemView.OnRemovalRequested
-                .TakeUntilDestroy(this)
-                .Subscribe(value => _removalNotifier.OnNext(value));
+                .Subscribe(value => _removalNotifier.OnNext(value))
+                .AddTo(this);
 
             _listItemViews.Add(data, itemView);
         }

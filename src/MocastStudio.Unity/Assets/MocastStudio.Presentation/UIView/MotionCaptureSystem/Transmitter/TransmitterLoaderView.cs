@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
@@ -24,18 +24,17 @@ namespace MocastStudio.Presentation.UIView.Transmitter
         private IReadOnlyList<TransmitterType> _transmitterTypes;
         private TransmitterType _selectedTransmitterType;
 
-        public IObservable<TransmitterSettingsRequest> OnAdditionRequested => _additionNotifier;
+        public Observable<TransmitterSettingsRequest> OnAdditionRequested => _additionNotifier;
 
         void Awake() => Initialize();
 
         private void Initialize()
         {
             _addButton.OnClickAsObservable()
-                .TakeUntilDestroy(this)
-                .Subscribe(_ => NotifyAdditionRequest());
+                .Subscribe(_ => NotifyAdditionRequest())
+                .AddTo(this);
 
             _dropdown.OnValueChangedAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(selectedIndex =>
                 {
                     if (selectedIndex < 1)
@@ -47,7 +46,8 @@ namespace MocastStudio.Presentation.UIView.Transmitter
                         var index = selectedIndex - 1;
                         _selectedTransmitterType = _transmitterTypes[index];
                     }
-                });
+                })
+                .AddTo(this);
         }
 
         public void UpdateTransmitterTypeDropdown(IReadOnlyList<TransmitterType> dropdownItems)

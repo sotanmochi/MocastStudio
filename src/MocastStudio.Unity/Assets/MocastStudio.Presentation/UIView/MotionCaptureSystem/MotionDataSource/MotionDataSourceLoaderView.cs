@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.MotionDataSource;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Dropdown = TMPro.TMP_Dropdown;
@@ -25,19 +25,18 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
         private IReadOnlyList<MotionDataSourceType> _dataSourceTypes;
         private MotionDataSourceType _currentDataSourceType;
 
-        public IObservable<MotionDataSourceSettings> OnDataSourceAdditionRequested => _dataSourceAdditionNotifier;
+        public Observable<MotionDataSourceSettings> OnDataSourceAdditionRequested => _dataSourceAdditionNotifier;
 
         void Awake() => Initialize();
 
         private void Initialize()
         {
             _addButton.OnClickAsObservable()
-                .TakeUntilDestroy(this)
-                .Subscribe(_ => NotifyDataSourceAddtionRequest());
-    
+                .Subscribe(_ => NotifyDataSourceAddtionRequest())
+                .AddTo(this);
+
             _dataSourceTypeDropdown.OnValueChangedAsObservable()
-                .TakeUntilDestroy(this)
-                .Subscribe(selectedIndex => 
+                .Subscribe(selectedIndex =>
                 {
                     if (selectedIndex < 1)
                     {
@@ -48,7 +47,8 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
                         var index = selectedIndex - 1;
                         _currentDataSourceType = _dataSourceTypes[index];
                     }
-                });
+                })
+                .AddTo(this);
         }
 
         public void UpdateDataSourceTypeDropdown(IReadOnlyList<MotionDataSourceType> dropdownItems)

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +15,8 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
         private readonly Subject<int> _connectionNotifier = new();
         private readonly Subject<int> _disconnectionNotifier = new();
 
-        public IObservable<int> OnConnectionRequested => _connectionNotifier;
-        public IObservable<int> OnDisconnectionRequested => _disconnectionNotifier;
+        public Observable<int> OnConnectionRequested => _connectionNotifier;
+        public Observable<int> OnDisconnectionRequested => _disconnectionNotifier;
 
         void OnDestroy() => RemoveAll();
 
@@ -51,12 +51,12 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
             itemView.SetValues(address, port, streamingDataId);
 
             itemView.OnConnectionRequested
-                .TakeUntilDestroy(this)
-                .Subscribe(id => _connectionNotifier.OnNext(id));
+                .Subscribe(id => _connectionNotifier.OnNext(id))
+                .AddTo(this);
 
             itemView.OnDisconnectionRequested
-                .TakeUntilDestroy(this)
-                .Subscribe(id => _disconnectionNotifier.OnNext(id));
+                .Subscribe(id => _disconnectionNotifier.OnNext(id))
+                .AddTo(this);
 
             _listItemViews.Add(dataSourceId, itemView);
         }

@@ -2,7 +2,7 @@ using System;
 using MessagePipe;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.Transmitter;
-using UniRx;
+using R3;
 
 namespace MocastStudio.Presentation.UIView.Transmitter
 {
