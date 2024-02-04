@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/MocastStudio.Application.Contents/Scenes/AppMain.unity
     guid: 279cec63dcb2d84429d8ac9ba7e048fb
   - enabled: 1
+    path: Assets/MocastStudio.Application.Contents/Scenes/BaseEnvironment.unity
+    guid: cf953510f2507814c9633468e4183f4e
+  - enabled: 1
     path: Assets/MocastStudio.Application.Contents/Scenes/CameraSystem.unity
     guid: 29cab5db486565c43976f4bcdffded4b
   - enabled: 1
     path: Assets/MocastStudio.Application.Contents/Scenes/SystemUIView.unity
     guid: 8790524e6df08724e843daefca25fe52
-  - enabled: 1
-    path: Assets/MocastStudio.Application.Contents/Scenes/DefaultStage.unity
-    guid: cf953510f2507814c9633468e4183f4e
   m_configObjects: {}
