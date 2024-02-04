@@ -42,6 +42,13 @@
       "dependencies": {},
       "hash": "3c80df7ee3ce7c58cb33f5820921a3b192e22c04"
     },
+    "com.llcheesell.led_screen_shader": {
+      "version": "https://github.com/llcheesell/LEDScreenShader.git?path=/Assets/LEDScreenShader#v0.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5b950779e456189baab40b84a0a3adb3e93f9368"
+    },
     "com.neuecc.messagepack": {
       "version": "https://github.com/MessagePack-CSharp/MessagePack-CSharp.git?path=src/MessagePack.UnityClient/Assets/Scripts/MessagePack#v2.5.140",
       "depth": 0,
