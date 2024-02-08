@@ -1,13 +1,13 @@
 using System;
 using MessagePipe;
 using MocapSignalTransmission.MotionActor;
-using MocastStudio.CameraSystem;
+using MocastStudio.Presentation.CameraSystem;
 using TransformControl;
 using VContainer;
 using VContainer.Unity;
 using Camera = UnityEngine.Camera;
 
-namespace MocastStudio.Presentation.UserInteraction.RuntimeGizmo
+namespace MocastStudio.Presentation.RuntimeGizmo
 {
     public sealed class MotionActorReferencePointControl : IInitializable, IDisposable
     {

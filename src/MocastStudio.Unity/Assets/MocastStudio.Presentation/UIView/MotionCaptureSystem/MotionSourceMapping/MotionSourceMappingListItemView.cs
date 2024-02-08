@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
@@ -14,9 +14,9 @@ namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 
         private MotionActorDataSourcePair _value;
 
-        public IObservable<MotionActorDataSourcePair> OnRemovalRequested =>
-            _removeButton.OnClickAsObservable().Select(_ => _value).TakeUntilDestroy(this);
-
+        public Observable<MotionActorDataSourcePair> OnRemovalRequested =>
+            _removeButton.OnClickAsObservable().Select(_ => _value);
+        
         public void SetValue(MotionActorDataSourcePair value)
         {
             _value = value;

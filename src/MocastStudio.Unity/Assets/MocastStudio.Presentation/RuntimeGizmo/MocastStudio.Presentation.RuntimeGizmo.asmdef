@@ -1,13 +1,13 @@
 {
-    "name": "MocastStudio.Presentation.UserInteraction",
-    "rootNamespace": "MocastStudio.Presentation.UserInteraction",
+    "name": "MocastStudio.Presentation.RuntimeGizmo",
+    "rootNamespace": "",
     "references": [
         "VContainer",
         "MessagePipe",
         "UniTask",
         "TransformControl",
         "MocapSignalTransmission.MotionActor",
-        "MocastStudio.CameraSystem"
+        "MocastStudio.Presentation.CameraSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

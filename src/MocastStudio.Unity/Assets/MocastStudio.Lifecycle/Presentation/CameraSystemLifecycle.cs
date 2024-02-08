@@ -1,20 +1,24 @@
 using MocastStudio.Presentation.CameraSystem;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace MocastStudio.Lifecycle.Presentation
 {
-    public sealed class CameraSystemLifecycle : LifetimeScope
+    public sealed class CameraSystemLifecycle : MonoBehaviour
     {
-        [Header("CameraSystem Components")]
-        [SerializeField] CameraSwitcher _cameraSwitcher;
+        [SerializeField] Camera _sceneViewCamera;
 
-        protected override void Configure(IContainerBuilder builder)
+        CameraSystemContext _cameraSystemContext;
+
+        [Inject]
+        public void Construct(CameraSystemContext cameraSystemContext)
         {
-            Debug.Log($"[{nameof(CameraSystemLifecycle)}] Configure");
-            builder.RegisterComponent(_cameraSwitcher);
-            builder.RegisterEntryPoint<CameraSystemPresenter>();
+            _cameraSystemContext = cameraSystemContext;
+        }
+ 
+        void Awake()
+        {
+            _cameraSystemContext.SceneViewCamera = _sceneViewCamera;
         }
     }
 }

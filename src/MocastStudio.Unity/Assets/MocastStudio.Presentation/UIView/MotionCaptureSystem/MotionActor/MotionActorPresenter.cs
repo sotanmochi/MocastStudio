@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MessagePipe;
 using MocapSignalTransmission.MotionActor;
-using UniRx;
+using R3;
 
 namespace MocastStudio.Presentation.UIView.MotionActor
 {

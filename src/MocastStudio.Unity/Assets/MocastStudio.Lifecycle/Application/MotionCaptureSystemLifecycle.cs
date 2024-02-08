@@ -1,52 +1,41 @@
 using MocapSignalTransmission.MotionActor;
 using MocapSignalTransmission.MotionDataSource;
 using MocapSignalTransmission.Transmitter;
-using MocapSignalTransmission.Infrastructure.Constants;
-using MocapSignalTransmission.Infrastructure.MotionActor;
-using MocapSignalTransmission.Infrastructure.MotionDataSource;
-using MocapSignalTransmission.Infrastructure.Transmitter;
-using SignalStreaming.Infrastructure;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace MocastStudio.Application.Lifecycle
 {
-    public sealed class MotionCaptureSystemLifecycle : LifetimeScope
+    public sealed class MotionCaptureSystemLifecycle : IPostLateTickable
     {
-        protected override void Configure(IContainerBuilder builder)
+        private readonly MotionActorService _motionActorService;
+        private readonly TransmitterService _transmitterService;
+        private readonly MotionActorServiceContext _motionActorServiceContext;
+        private readonly MotionDataSourceServiceContext _motionDataSourceServiceContext;
+
+        public MotionCaptureSystemLifecycle(
+            MotionActorService motionActorService,
+            TransmitterService transmitterService,
+            MotionActorServiceContext motionActorServiceContext,
+            MotionDataSourceServiceContext motionDataSourceServiceContext)
         {
-            Debug.Log($"[{nameof(MotionCaptureSystemLifecycle)}] Configure");
+            _motionActorService = motionActorService;
+            _transmitterService = transmitterService;
+            _motionActorServiceContext = motionActorServiceContext;
+            _motionDataSourceServiceContext = motionDataSourceServiceContext;
+        }
+ 
+        void IPostLateTickable.PostLateTick()
+        {
+            _motionActorService.UpdateMotionActorPose(
+                _motionDataSourceServiceContext.BodyTrackingDataSources,
+                _motionDataSourceServiceContext.FingerTrackingDataSources);
 
-            builder.Register<SignalStreamingClientFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            _motionActorService.UpdateMotionActorPose(_motionDataSourceServiceContext.HumanPoseTrackingDataSources);
 
-            builder.RegisterEntryPoint<MotionCaptureSystemEntryPoint>(Lifetime.Singleton);
+            _motionActorService.UpdateHumanPose();
 
-            builder.Register<MotionActorService>(Lifetime.Singleton);
-            builder.Register<MotionDataSourceService>(Lifetime.Singleton);
-            builder.Register<TransmitterService>(Lifetime.Singleton);
-
-            builder.Register<MotionActorServiceContext>(Lifetime.Singleton);
-            builder.Register<MotionDataSourceServiceContext>(Lifetime.Singleton);
-            builder.Register<TransmitterServiceContext>(Lifetime.Singleton);
-
-            builder.Register<TransmitterFactory>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<MotionActorFactory>(Lifetime.Singleton).AsImplementedInterfaces();
-
-            builder.Register<VrmAvatarResourceProvider>(Lifetime.Singleton).AsImplementedInterfaces()
-                .WithParameter<RenderPipelineType>(RenderPipelineType.UniversalRenderPipeline)
-                .WithParameter<IBinaryDataProvider>(new LocalFileBinaryDataProvider());
-
-            builder.Register<MotionDataSourceManager>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<VMCProtocolDataSourceManager>(Lifetime.Singleton).AsSelf();
-#if MOCOPI_RECEIVER_PLUGIN
-            builder.Register<MocopiDataSourceManager>(Lifetime.Singleton).AsSelf();
-#endif
-#if MOTION_BUILDER_RECEIVER_PLUGIN
-            builder.Register<MotionBuilderDataSourceManager>(Lifetime.Singleton).AsSelf();
-#endif
-            builder.Register<MocastStudioDataSourceManager>(Lifetime.Singleton).AsSelf()
-                .WithParameter<int>((int)SignalTransportType.ENet);
+            _transmitterService.SendMotionActorPose(_motionActorServiceContext.MotionActors);
         }
     }
 }

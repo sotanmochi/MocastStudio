@@ -3,44 +3,40 @@ using MocastStudio.Presentation.UIView.MotionCapture;
 using MocastStudio.Presentation.UIView.MotionDataSource;
 using MocastStudio.Presentation.UIView.MotionSourceMapping;
 using MocastStudio.Presentation.UIView.Transmitter;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace MocastStudio.Lifecycle.Presentation
 {
-    public sealed class MotionCaptureUIViewLifecycle : LifetimeScope
+    public sealed class MotionCaptureUIViewLifecycle : IInitializable
     {
-        [Header("UIView Components")]
-        [SerializeField] MotionCaptureSystemView _motionCaptureSystemView;
-        [SerializeField] MotionActorListView _motionActorListView;
-        [SerializeField] MotionActorLoaderView _motionActorLoaderView;
-        [SerializeField] MotionDataSourceListView _motionDataSourceListView;
-        [SerializeField] MotionDataSourceLoaderView _motionDataSourceLoaderView;
-        [SerializeField] MotionSourceMappingListView _motionSourceMappingListView;
-        [SerializeField] TransmitterListView  _transmitterListView;
-        [SerializeField] TransmitterLoaderView  _transmitterLoaderView;
+        readonly MotionCaptureSystemPresenter _motionCaptureSystemPresenter;
+        readonly MotionActorPresenter _motionActorPresenter;
+        readonly MotionDataSourcePresenter _motionDataSourcePresenter;
+        readonly MotionSourceMappingPresenter _motionSourceMappingPresenter;
+        readonly TransmitterPresenter _transmitterPresenter;
 
-        protected override void Configure(IContainerBuilder builder)
+        public MotionCaptureUIViewLifecycle(
+            MotionCaptureSystemPresenter motionCaptureSystemPresenter,
+            MotionActorPresenter motionActorPresenter,
+            MotionDataSourcePresenter motionDataSourcePresenter,
+            MotionSourceMappingPresenter motionSourceMappingPresenter,
+            TransmitterPresenter transmitterPresenter)
         {
-            Debug.Log($"[{nameof(MotionCaptureUIViewLifecycle)}] Configure");
+            _motionCaptureSystemPresenter = motionCaptureSystemPresenter;
+            _motionActorPresenter = motionActorPresenter;
+            _motionDataSourcePresenter = motionDataSourcePresenter;
+            _motionSourceMappingPresenter = motionSourceMappingPresenter;
+            _transmitterPresenter = transmitterPresenter;
+        }
 
-            builder.RegisterEntryPoint<MotionCaptureUIViewEntryPoint>();
-
-            builder.RegisterComponent(_motionCaptureSystemView);
-            builder.RegisterComponent(_motionActorListView);
-            builder.RegisterComponent(_motionActorLoaderView);
-            builder.RegisterComponent(_motionDataSourceListView);
-            builder.RegisterComponent(_motionDataSourceLoaderView);
-            builder.RegisterComponent(_motionSourceMappingListView);
-            builder.RegisterComponent(_transmitterListView);
-            builder.RegisterComponent(_transmitterLoaderView);
-
-            builder.Register<MotionCaptureSystemPresenter>(Lifetime.Singleton);
-            builder.Register<MotionActorPresenter>(Lifetime.Singleton);
-            builder.Register<MotionDataSourcePresenter>(Lifetime.Singleton);
-            builder.Register<MotionSourceMappingPresenter>(Lifetime.Singleton);
-            builder.Register<TransmitterPresenter>(Lifetime.Singleton);
+        void IInitializable.Initialize()
+        {
+            _motionCaptureSystemPresenter.Initialize();
+            _motionActorPresenter.Initialize();
+            _motionDataSourcePresenter.Initialize();
+            _motionSourceMappingPresenter.Initialize();
+            _transmitterPresenter.Initialize();
         }
     }
 }

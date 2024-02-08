@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace MocastStudio.ProceduralMeshGenerator
+namespace MocastStudio.Presentation.ProceduralMeshGenerator
 {
     [RequireComponent(typeof(MeshFilter))]
     public sealed class WireframeGrid : MonoBehaviour

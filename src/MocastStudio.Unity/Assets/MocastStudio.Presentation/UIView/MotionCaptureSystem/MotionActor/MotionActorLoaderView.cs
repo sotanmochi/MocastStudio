@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using SFB;
@@ -13,14 +13,13 @@ namespace MocastStudio.Presentation.UIView.MotionActor
 
         private readonly Subject<MotionActorLoadingParameters> _loadingSubject = new();
 
-        public IObservable<MotionActorLoadingParameters> OnLoadingRequested => _loadingSubject;
+        public Observable<MotionActorLoadingParameters> OnLoadingRequested => _loadingSubject;
 
         void Awake() => Initialize();
 
         private void Initialize()
         {
             _button.OnClickAsObservable()
-                .TakeUntilDestroy(this)
                 .Subscribe(async _ =>
                 {
                     try
@@ -33,7 +32,8 @@ namespace MocastStudio.Presentation.UIView.MotionActor
                     {
                         Debug.LogError(e);
                     }
-                });
+                })
+                .AddTo(this);
         }
 
         private async Task<string> GetResourcePathAsync()

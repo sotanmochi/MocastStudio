@@ -3,7 +3,7 @@ using System.Linq;
 using MessagePipe;
 using MocapSignalTransmission.MotionActor;
 using MocapSignalTransmission.MotionDataSource;
-using UniRx;
+using R3;
 
 namespace MocastStudio.Presentation.UIView.MotionSourceMapping
 {

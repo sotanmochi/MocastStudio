@@ -5,18 +5,15 @@ using VContainer.Unity;
 
 namespace MocastStudio.Application.Lifecycle
 {
-    public sealed class CameraSystemLifecycle : LifetimeScope
+    public sealed class VideoFrameStreamingLifetimeScope : LifetimeScope
     {
         [Header("Components")]
-        [SerializeField] CameraSystemEntryPoint _cameraSystemEntryPoint;
         [SerializeField] SpoutVideoFrameStreamer _spoutVideoFrameStreamer;
         [SerializeField] SyphonVideoFrameStreamer _syphonVideoFrameStreamer;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log($"[{nameof(CameraSystemLifecycle)}] Configure");
-
-            builder.RegisterComponent(_cameraSystemEntryPoint);
+            Debug.Log($"[{nameof(VideoFrameStreamingLifetimeScope)}] Configure");
 
 #if UNITY_STANDALONE_WIN
             builder.RegisterComponent(_spoutVideoFrameStreamer).AsImplementedInterfaces();

@@ -1,24 +1,20 @@
-using UnityEngine;
-using VContainer;
+using Cysharp.Threading.Tasks;
 using VContainer.Unity;
-using CameraSystemContext = MocastStudio.CameraSystem.CameraSystemContext;
 
 namespace MocastStudio.Application.Lifecycle
 {
-    public sealed class AppMainLifecycle : LifetimeScope
+    public sealed class AppMainLifecycle : IInitializable
     {
-        protected override void Configure(IContainerBuilder builder)
+        readonly AppMain _appMain;
+
+        public AppMainLifecycle(AppMain appMain)
         {
-            Debug.Log($"[{nameof(AppMainLifecycle)}] Configure");
+            _appMain = appMain;
+        }
 
-            builder.RegisterEntryPoint<AppMainEntryPoint>();
-
-            builder.Register<AppMain>(Lifetime.Singleton);
-            builder.Register<AppSettingsRepository>(Lifetime.Singleton)
-                .WithParameter("directoryPath", UnityEngine.Application.persistentDataPath)
-                .WithParameter("filename", "appsettings.json");
-
-            builder.Register<CameraSystemContext>(Lifetime.Singleton);
+        void IInitializable.Initialize()
+        {
+            _appMain.InitializeAsync().Forget();
         }
     }
 }

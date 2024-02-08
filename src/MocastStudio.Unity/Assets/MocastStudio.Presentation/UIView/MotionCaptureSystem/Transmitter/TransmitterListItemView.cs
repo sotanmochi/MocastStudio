@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
@@ -20,17 +20,15 @@ namespace MocastStudio.Presentation.UIView.Transmitter
 
         private int _id;
 
-        public IObservable<int> OnConnectionRequested => 
+        public Observable<int> OnConnectionRequested => 
             _connectionToggle.OnValueChangedAsObservable()
                 .Where(isOn => isOn)
-                .Select(_ => _id)
-                .TakeUntilDestroy(this);
+                .Select(_ => _id);
 
-        public IObservable<int> OnDisconnectionRequested => 
+        public Observable<int> OnDisconnectionRequested => 
             _connectionToggle.OnValueChangedAsObservable()
                 .Where(isOn => !isOn)
-                .Select(_ => _id)
-                .TakeUntilDestroy(this);
+                .Select(_ => _id);
 
         public void SetId(int id)
         {
