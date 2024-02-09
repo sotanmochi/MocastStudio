@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +10,7 @@ namespace MocastStudio.Presentation.UIView.About
         [SerializeField] Button _close;
         [SerializeField] Button _acknowledgements;
 
-        public IObservable<Unit> OnClose => _close.OnClickAsObservable();
-        public IObservable<Unit> OnOpenAcknowledgements => _acknowledgements.OnClickAsObservable();
+        public Observable<Unit> OnClose => _close.OnClickAsObservable();
+        public Observable<Unit> OnOpenAcknowledgements => _acknowledgements.OnClickAsObservable();
     }
 }

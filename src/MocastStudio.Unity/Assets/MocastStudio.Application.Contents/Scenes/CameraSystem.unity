@@ -1323,8 +1323,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1230940611}
   - component: {fileID: 1230940614}
-  - component: {fileID: 1230940613}
   - component: {fileID: 1230940615}
+  - component: {fileID: 1230940616}
   m_Layer: 0
   m_Name: Lifecycle
   m_TagString: Untagged
@@ -1347,19 +1347,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1230940613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230940610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93fb74e2bd8ce5479af1ca759809772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneViewCamera: {fileID: 1648345966}
 --- !u!114 &1230940614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,10 +1360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Application.Lifecycle.AppMainLifecycle
+    TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _cameraSystemEntryPoint: {fileID: 1230940613}
   _spoutVideoFrameStreamer: {fileID: 532402885}
   _syphonVideoFrameStreamer: {fileID: 532402884}
 --- !u!114 &1230940615
@@ -1392,10 +1378,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: MocastStudio.Application.Lifecycle.CameraSystemLifecycle
+    TypeName: MocastStudio.Application.Lifecycle.VideoFrameStreamingLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
+  _cameraSystemLifecycle: {fileID: 1230940616}
   _cameraSwitcher: {fileID: 1712373839}
+--- !u!114 &1230940616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230940610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86487ddd0abe5a644b27654c695ce493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneViewCamera: {fileID: 1648345966}
 --- !u!1 &1337063821
 GameObject:
   m_ObjectHideFlags: 0

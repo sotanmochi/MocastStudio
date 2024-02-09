@@ -11,7 +11,7 @@ namespace MocastStudio.Application
         {
             "CameraSystem",
             "SystemUIView",
-            "DefaultStage",
+            "BaseEnvironment",
         };
 
         readonly AppSettingsRepository _appSettingsRepository;
@@ -43,7 +43,7 @@ namespace MocastStudio.Application
                 await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             }
 
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("DefaultStage"));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("BaseEnvironment"));
 
             Debug.Log($"[{nameof(AppMain)}] Initialized");
         }

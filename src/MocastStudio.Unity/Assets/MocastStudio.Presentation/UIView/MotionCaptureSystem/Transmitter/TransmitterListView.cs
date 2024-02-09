@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using TransmitterStatusType = MocapSignalTransmission.Transmitter.TransmitterStatusType;
@@ -16,8 +16,8 @@ namespace MocastStudio.Presentation.UIView.Transmitter
         private readonly Subject<int> _onDisconnectionNotifier = new();
         private readonly Dictionary<int, TransmitterListItemView> _listItemViews = new();
 
-        public IObservable<int> OnConnectionRequested => _onConnectionNotifier;
-        public IObservable<int> OnDisconnectionRequested => _onDisconnectionNotifier;
+        public Observable<int> OnConnectionRequested => _onConnectionNotifier;
+        public Observable<int> OnDisconnectionRequested => _onDisconnectionNotifier;
 
         public void UpdateStatus(int transmitterId, TransmitterStatusType statusType)
         {
@@ -74,12 +74,12 @@ namespace MocastStudio.Presentation.UIView.Transmitter
             itemView.SetValues(settings.TransmitterType, settings.ServerAddress, settings.Port);
 
             itemView.OnConnectionRequested
-                .TakeUntilDestroy(this)
-                .Subscribe(id => _onConnectionNotifier.OnNext(id));
+                .Subscribe(id => _onConnectionNotifier.OnNext(id))
+                .AddTo(this);
 
             itemView.OnDisconnectionRequested
-                .TakeUntilDestroy(this)
-                .Subscribe(id => _onDisconnectionNotifier.OnNext(id));
+                .Subscribe(id => _onDisconnectionNotifier.OnNext(id))
+                .AddTo(this);
 
             _listItemViews.Add(transmitterId, itemView);
         }

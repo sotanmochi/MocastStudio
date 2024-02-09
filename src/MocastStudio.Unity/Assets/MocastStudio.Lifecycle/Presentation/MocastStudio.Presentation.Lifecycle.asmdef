@@ -4,8 +4,8 @@
     "references": [
         "VContainer",
         "MocastStudio.Presentation.UIView",
-        "MocastStudio.Presentation.UserInteraction",
-        "MocastStudio.Presentation.CameraSystem"
+        "MocastStudio.Presentation.CameraSystem",
+        "MocastStudio.Presentation.RuntimeGizmo"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

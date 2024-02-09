@@ -1,5 +1,5 @@
 using System;
-using UniRx;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TMP_Text;
@@ -18,18 +18,16 @@ namespace MocastStudio.Presentation.UIView.MotionDataSource
 
         private int _dataSourceId = -1;
 
-        public IObservable<int> OnConnectionRequested => 
+        public Observable<int> OnConnectionRequested =>
             _connectionToggle.OnValueChangedAsObservable()
                 .Where(isOn => isOn)
-                .Select(_ => _dataSourceId)
-                .TakeUntilDestroy(this);
+                .Select(_ => _dataSourceId);
 
-        public IObservable<int> OnDisconnectionRequested => 
+        public Observable<int> OnDisconnectionRequested =>
             _connectionToggle.OnValueChangedAsObservable()
                 .Where(isOn => !isOn)
-                .Select(_ => _dataSourceId)
-                .TakeUntilDestroy(this);
-
+                .Select(_ => _dataSourceId);
+        
         public void SetId(int dataSourceId)
         {
             _dataSourceId = dataSourceId;

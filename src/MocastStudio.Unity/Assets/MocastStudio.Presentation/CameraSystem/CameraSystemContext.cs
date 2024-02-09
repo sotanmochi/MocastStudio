@@ -1,6 +1,6 @@
 using Camera = UnityEngine.Camera;
 
-namespace MocastStudio.CameraSystem
+namespace MocastStudio.Presentation.CameraSystem
 {
     public sealed class CameraSystemContext
     {
