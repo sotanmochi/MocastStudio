@@ -34,14 +34,14 @@ namespace SignalStreaming
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, data);
-            _transportHub.Send(serializedMessage, reliable, destinationClientId);
+            _transportHub.Send(destinationClientId, serializedMessage, reliable);
         }
 
         public void Send(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint destinationClientId)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, rawMessagePackBlock);
-            _transportHub.Send(serializedMessage, reliable, destinationClientId);
+            _transportHub.Send(destinationClientId, serializedMessage, reliable);
         }
 
         public void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable)
@@ -62,14 +62,14 @@ namespace SignalStreaming
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, data);
-            _transportHub.Broadcast(serializedMessage, reliable, destinationClientIds);
+            _transportHub.Broadcast(destinationClientIds, serializedMessage, reliable);
         }
 
         public void Broadcast(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, IReadOnlyList<uint> destinationClientIds)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, rawMessagePackBlock);
-            _transportHub.Broadcast(serializedMessage, reliable, destinationClientIds);
+            _transportHub.Broadcast(destinationClientIds, serializedMessage, reliable);
         }
 
         void OnTransportConnected(uint clientId)
@@ -78,7 +78,7 @@ namespace SignalStreaming
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var connectionMessage = SerializeConnectionMessage(
                 messageId, originTimestamp: transmitTimestamp, transmitTimestamp, clientId, "ConnectedToHubServer");
-            _transportHub.Send(connectionMessage, reliable: true, clientId);
+            _transportHub.Send(clientId, connectionMessage, reliable: true);
         }
 
         void OnTransportDisconnected(uint clientId)
@@ -117,7 +117,7 @@ namespace SignalStreaming
                 var responseMessage = SerializeConnectionMessage((int)MessageType.ClientConnectionResponse,
                     originTimestamp: transmitTimestamp, transmitTimestamp, senderClientId, result);
 
-                _transportHub.Send(responseMessage, reliable: true, destinationClientId: senderClientId);
+                _transportHub.Send(destinationClientId: senderClientId, responseMessage, reliable: true);
 
                 if (result.Approved)
                 {

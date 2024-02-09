@@ -106,7 +106,7 @@ namespace SignalStreaming.Infrastructure.ENet
             _connectedClients.Clear();
         }
 
-        public void Send(ArraySegment<byte> data, bool reliable, uint destinationClientId)
+        public void Send(uint destinationClientId, ArraySegment<byte> data, bool reliable)
         {
             if (_connectedClients.TryGetValue(destinationClientId, out var peer))
             {
@@ -121,7 +121,7 @@ namespace SignalStreaming.Infrastructure.ENet
             }
         }
 
-        public void Broadcast(ArraySegment<byte> data, bool reliable, IReadOnlyList<uint> destinationClientIds)
+        public void Broadcast(IReadOnlyList<uint> destinationClientIds, ArraySegment<byte> data, bool reliable)
         {
             var flags = reliable
                 ? (PacketFlags.Reliable | PacketFlags.NoAllocate) // Reliable Sequenced

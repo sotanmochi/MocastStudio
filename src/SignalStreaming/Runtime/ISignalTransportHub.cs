@@ -19,8 +19,8 @@ namespace SignalStreaming
         void Disconnect(uint clientId);
         void DisconnectAll();
 
-        void Send(ArraySegment<byte> data, bool reliable, uint destinationClientId);
-        void Broadcast(ArraySegment<byte> data, bool reliable, IReadOnlyList<uint> destinationClientIds);
+        void Send(uint destinationClientId, ArraySegment<byte> data, bool reliable);
+        void Broadcast(IReadOnlyList<uint> destinationClientIds, ArraySegment<byte> data, bool reliable);
         void Broadcast(ArraySegment<byte> data, bool reliable);
     }
 }
