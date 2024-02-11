@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>net8.0</TargetFramework>
+      <OutputType>Exe</OutputType>
+      <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MessagePack" Version="2.5.140" />
+      <PackageReference Include="ENet-CSharp" Version="2.4.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\..\src\SignalStreaming\Runtime\**\*.cs" />
+      <Compile Include="..\..\..\src\SignalStreaming.Infrastructure\ENet\**\*.cs" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <DefineConstants>ENET_CSHARP</DefineConstants>
+    </PropertyGroup>
+
+</Project>
