@@ -18,7 +18,7 @@ namespace SignalStreaming.Samples.ENetSample
             _transportHub = new ENetTransportHub(_port, useAnotherThread: true, targetFrameRate: 60, isBackground: true);
             _streamingHub = new SignalStreamingHub(_transportHub);
 
-            _streamingHub.ConnectionRequestValidationFunc += IsValidConnectionRequest;
+            _streamingHub.OnClientConnectionRequested += OnClientConnectionRequested;
             _streamingHub.OnClientConnected += OnConnected;
             _streamingHub.OnClientDisconnected += OnDisconnected;
             _streamingHub.OnDataReceived += OnDataReceived;
@@ -31,7 +31,7 @@ namespace SignalStreaming.Samples.ENetSample
 
         void OnDestroy()
         {
-            _streamingHub.ConnectionRequestValidationFunc -= IsValidConnectionRequest;
+            _streamingHub.OnClientConnectionRequested -= OnClientConnectionRequested;
             _streamingHub.OnClientConnected -= OnConnected;
             _streamingHub.OnClientDisconnected -= OnDisconnected;
             _streamingHub.OnDataReceived -= OnDataReceived;
@@ -40,21 +40,16 @@ namespace SignalStreaming.Samples.ENetSample
             _transportHub.Dispose();
         }
 
-        RequestApprovalResult IsValidConnectionRequest(byte[] connectionRequestData)
+        ClientConnectionResponse OnClientConnectionRequested(uint clientId, ClientConnectionRequest connectionRequest)
         {
-            if (connectionRequestData == null)
-            {
-                return new RequestApprovalResult(false, "Connection request is rejected. Invalid connection request data.");
-            }
-
-            var connectionKey = System.Text.Encoding.UTF8.GetString(connectionRequestData);
+            var connectionKey = System.Text.Encoding.UTF8.GetString(connectionRequest.ConnectionKey);
 
             var approved = (connectionKey == _connectionKey);
             var message = approved
                 ? "Connection request is approved."
                 : "Connection request is rejected. Invalid connection request data.";
 
-            return new RequestApprovalResult(approved, message);
+            return new ClientConnectionResponse(approved, clientId, "", message);
         }
 
         void OnConnected(uint clientId)

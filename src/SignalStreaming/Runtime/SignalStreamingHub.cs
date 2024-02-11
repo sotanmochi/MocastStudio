@@ -9,7 +9,7 @@ namespace SignalStreaming
     {
         ISignalTransportHub _transportHub;
 
-        public event ISignalStreamingHub.ConnectionRequestValidationFunction ConnectionRequestValidationFunc;
+        public event ISignalStreamingHub.ConnectionRequestHandler OnClientConnectionRequested;
         public event ISignalStreamingHub.OnDataReceivedEventHandler OnDataReceived;
         public event Action<uint> OnClientConnected;
         public event Action<uint> OnClientDisconnected;
@@ -107,19 +107,23 @@ namespace SignalStreaming
 
             if (messageId == (int)MessageType.ClientConnectionRequest)
             {
-                var connectionRequestData = MessagePackSerializer.Deserialize<byte[]>(payload);
+                var connectionRequest = MessagePackSerializer.Deserialize<ClientConnectionRequest>(payload);
 
-                var result = ConnectionRequestValidationFunc != null
-                    ? ConnectionRequestValidationFunc.Invoke(connectionRequestData)
-                    : new RequestApprovalResult(approved: true, message: "No connection request validation.");
+                var response = OnClientConnectionRequested != null
+                    ? OnClientConnectionRequested.Invoke(senderClientId, connectionRequest)
+                    : new ClientConnectionResponse(
+                        requestApproved: true,
+                        clientId: senderClientId,
+                        connectionId: Guid.NewGuid().ToString(),
+                        message: "No connection request validation.");
 
                 var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
-                var responseMessage = SerializeConnectionMessage((int)MessageType.ClientConnectionResponse,
-                    originTimestamp: transmitTimestamp, transmitTimestamp, senderClientId, result);
+                var responseMessage = Serialize((int)MessageType.ClientConnectionResponse, 0,
+                    originTimestamp, transmitTimestamp, response);
 
                 _transportHub.Send(destinationClientId: senderClientId, responseMessage, reliable: true);
 
-                if (result.Approved)
+                if (response.RequestApproved)
                 {
                     OnClientConnected?.Invoke(senderClientId);
                 }

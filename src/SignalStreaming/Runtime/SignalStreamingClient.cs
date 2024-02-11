@@ -12,6 +12,7 @@ namespace SignalStreaming
         static readonly string DefaultDisconnectionReason = "Disconnected from server";
 
         ISignalTransport _transport;
+        string _connectionId = "";
 
         uint _clientId;
         bool _connecting;
@@ -24,6 +25,7 @@ namespace SignalStreaming
         public event Action<uint> OnConnected;
         public event Action<string> OnDisconnected;
 
+        public string ConnectionId => _connectionId;
         public uint ClientId => _clientId;
         public bool IsConnecting => _connecting;
         public bool IsConnected => _connected;
@@ -127,13 +129,11 @@ namespace SignalStreaming
             }
             else if (messageId == (int)MessageType.ClientConnectionResponse)
             {
-                var connectedClientId = reader.ReadUInt32();
-
                 var payloadOffset = data.Offset + (int)reader.Consumed;
                 var payloadCount = data.Count - (int)reader.Consumed;
                 var payload = new ReadOnlyMemory<byte>(data.Array, payloadOffset, payloadCount);
 
-                HandleConnectionResponse(connectedClientId, payload);
+                HandleConnectionResponse(payload);
             }
             else
             {
@@ -158,25 +158,27 @@ namespace SignalStreaming
 
             var originTimestamp = TimestampProvider.GetCurrentTimestamp();
 
-            var data = Serialize((int)MessageType.ClientConnectionRequest, clientId, originTimestamp, sendOptions, _connectionRequestData);
+            var connectionRequest = new ClientConnectionRequest(_connectionRequestData);
+            var data = Serialize((int)MessageType.ClientConnectionRequest, clientId, originTimestamp, sendOptions, connectionRequest);
             _transport.Send(data, sendOptions);
         }
 
-        void HandleConnectionResponse(uint clientId, ReadOnlyMemory<byte> data)
+        void HandleConnectionResponse(ReadOnlyMemory<byte> data)
         {
-            var result = MessagePackSerializer.Deserialize<RequestApprovalResult>(data);
-            DebugLogger.Log($"<color=cyan>[{nameof(SignalStreamingClient)}] Connection result: {result.Message}</color>");
+            var response = MessagePackSerializer.Deserialize<ClientConnectionResponse>(data);
+            DebugLogger.Log($"<color=cyan>[{nameof(SignalStreamingClient)}] Connection result: {response.Message}</color>");
 
-            if (result.Approved)
+            if (response.RequestApproved)
             {
-                _clientId = clientId;
+                _connectionId = response.ConnectionId;
+                _clientId =  response.ClientId;
                 _connected = true;
                 _connectionTcs.SetResult(true);
                 OnConnected?.Invoke(_clientId);
             }
             else
             {
-                _disconnectionReason = result.Message;
+                _disconnectionReason = response.Message;
                 _connectionTcs.SetResult(false);
             }
         }

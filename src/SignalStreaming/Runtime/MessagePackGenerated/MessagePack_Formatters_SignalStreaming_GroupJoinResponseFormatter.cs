@@ -16,18 +16,19 @@
 
 namespace MessagePack.Formatters.SignalStreaming
 {
-    public sealed class RequestApprovalResultFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::SignalStreaming.RequestApprovalResult>
+    public sealed class GroupJoinResponseFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::SignalStreaming.GroupJoinResponse>
     {
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::SignalStreaming.RequestApprovalResult value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::SignalStreaming.GroupJoinResponse value, global::MessagePack.MessagePackSerializerOptions options)
         {
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
-            writer.WriteArrayHeader(2);
-            writer.Write(value.Approved);
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Message, options);
+            writer.WriteArrayHeader(3);
+            writer.Write(value.RequestApproved);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.GroupId, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.ConnectionId, options);
         }
 
-        public global::SignalStreaming.RequestApprovalResult Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::SignalStreaming.GroupJoinResponse Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -37,18 +38,22 @@ namespace MessagePack.Formatters.SignalStreaming
             options.Security.DepthStep(ref reader);
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             var length = reader.ReadArrayHeader();
-            var __Approved__ = default(bool);
-            var __Message__ = default(string);
+            var __RequestApproved__ = default(bool);
+            var __GroupId__ = default(string);
+            var __ConnectionId__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        __Approved__ = reader.ReadBoolean();
+                        __RequestApproved__ = reader.ReadBoolean();
                         break;
                     case 1:
-                        __Message__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
+                        __GroupId__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    case 2:
+                        __ConnectionId__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();
@@ -56,7 +61,7 @@ namespace MessagePack.Formatters.SignalStreaming
                 }
             }
 
-            var ____result = new global::SignalStreaming.RequestApprovalResult(__Approved__, __Message__);
+            var ____result = new global::SignalStreaming.GroupJoinResponse(__RequestApproved__, __GroupId__, __ConnectionId__);
             reader.Depth--;
             return ____result;
         }

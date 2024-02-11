@@ -8,7 +8,7 @@ namespace SignalStreaming
         /// <summary>
         /// 
         /// </summary>
-        public delegate RequestApprovalResult ConnectionRequestValidationFunction(byte[] connectionRequestData);
+        public delegate ClientConnectionResponse ConnectionRequestHandler(uint clientId, ClientConnectionRequest connectionRequest);
 
         /// <summary>
         /// Some message IDs are reserved by the core module of SignalStreaming (ID: 250 ~ 255).
@@ -18,7 +18,7 @@ namespace SignalStreaming
         /// <summary>
         /// 
         /// </summary>
-        event ConnectionRequestValidationFunction ConnectionRequestValidationFunc;
+        event ConnectionRequestHandler OnClientConnectionRequested;
 
         /// <summary>
         /// Some message IDs are reserved by the core module of SignalStreaming (ID: 250 ~ 255).
@@ -27,10 +27,10 @@ namespace SignalStreaming
 
         event Action<uint> OnClientConnected;
         event Action<uint> OnClientDisconnected;
-    
+
         void Send<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, uint destinationClientId);
         void Send(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint destinationClientId);
-    
+
         void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable);
         void Broadcast(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable);
         void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, IReadOnlyList<uint> destinationClientIds);

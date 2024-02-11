@@ -47,11 +47,16 @@ namespace MessagePack.Resolvers
 
         static SignalStreamingGeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(3)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(8)
             {
                 { typeof(global::SignalStreaming.StreamingType), 0 },
-                { typeof(global::SignalStreaming.RequestApprovalResult), 1 },
-                { typeof(global::SignalStreaming.SendOptions), 2 },
+                { typeof(global::SignalStreaming.ClientConnectionRequest), 1 },
+                { typeof(global::SignalStreaming.ClientConnectionResponse), 2 },
+                { typeof(global::SignalStreaming.GroupJoinRequest), 3 },
+                { typeof(global::SignalStreaming.GroupJoinResponse), 4 },
+                { typeof(global::SignalStreaming.GroupLeaveRequest), 5 },
+                { typeof(global::SignalStreaming.GroupLeaveResponse), 6 },
+                { typeof(global::SignalStreaming.SendOptions), 7 },
             };
         }
 
@@ -66,8 +71,13 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new MessagePack.Formatters.SignalStreaming.StreamingTypeFormatter();
-                case 1: return new MessagePack.Formatters.SignalStreaming.RequestApprovalResultFormatter();
-                case 2: return new MessagePack.Formatters.SignalStreaming.SendOptionsFormatter();
+                case 1: return new MessagePack.Formatters.SignalStreaming.ClientConnectionRequestFormatter();
+                case 2: return new MessagePack.Formatters.SignalStreaming.ClientConnectionResponseFormatter();
+                case 3: return new MessagePack.Formatters.SignalStreaming.GroupJoinRequestFormatter();
+                case 4: return new MessagePack.Formatters.SignalStreaming.GroupJoinResponseFormatter();
+                case 5: return new MessagePack.Formatters.SignalStreaming.GroupLeaveRequestFormatter();
+                case 6: return new MessagePack.Formatters.SignalStreaming.GroupLeaveResponseFormatter();
+                case 7: return new MessagePack.Formatters.SignalStreaming.SendOptionsFormatter();
                 default: return null;
             }
         }
