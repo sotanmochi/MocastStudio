@@ -3,8 +3,7 @@
     "rootNamespace": "SignalStreaming.Infrastructure.ENet",
     "references": [
         "SignalStreaming",
-        "ENet-CSharp",
-        "Ulid"
+        "ENet-CSharp"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

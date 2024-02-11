@@ -5,7 +5,8 @@
         "SignalStreaming",
         "SignalStreaming.Infrastructure.ENet",
         "SignalStreaming.MessagePackGenerated",
-        "MessagePack"
+        "MessagePack",
+        "Ulid"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

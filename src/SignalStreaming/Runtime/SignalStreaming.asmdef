@@ -3,8 +3,7 @@
     "rootNamespace": "SignalStreaming",
     "references": [
         "MessagePack",
-        "MessagePack.Annotations",
-        "Ulid"
+        "MessagePack.Annotations"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
