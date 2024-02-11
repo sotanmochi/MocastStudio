@@ -5,7 +5,7 @@ namespace SignalStreaming.Infrastructure.ENet
 {
     public sealed class ENetGroup : IGroup
     {
-        public Ulid Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
         public Peer[] Clients { get; internal set; }

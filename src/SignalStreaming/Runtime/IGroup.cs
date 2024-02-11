@@ -4,7 +4,7 @@ namespace SignalStreaming
 {
     public interface IGroup
     {
-        Ulid Id { get; }
+        string Id { get; }
         string Name { get; }
         bool IsActive { get; }
     }
