@@ -202,7 +202,14 @@ namespace SignalStreaming.Infrastructure.ENet
             {
                 var begin = Stopwatch.GetTimestamp();
 
-                PollEvent();
+                try
+                {
+                    PollEvent();
+                }
+                catch (Exception e)
+                {
+                    DebugLogger.LogError(e);
+                }
 
                 var end = Stopwatch.GetTimestamp();
                 var elapsedTicks = (end - begin) * TimestampsToTicks;
@@ -215,7 +222,7 @@ namespace SignalStreaming.Infrastructure.ENet
                 }
             }
         }
-        
+
         uint GetClientId(Peer peer) => peer.ID + 1;
     }
 }
