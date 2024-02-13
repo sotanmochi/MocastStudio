@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using MessagePack;
 using DebugLogger = SignalStreaming.DevelopmentOnlyLogger;
@@ -13,6 +14,8 @@ namespace SignalStreaming
         public event ISignalStreamingHub.OnDataReceivedEventHandler OnDataReceived;
         public event Action<uint> OnClientConnected;
         public event Action<uint> OnClientDisconnected;
+        public event Action<uint, GroupJoinRequest> OnGroupJoinRequestReceived;
+        public event Action<uint, GroupLeaveRequest> OnGroupLeaveRequestReceived;
 
         public SignalStreamingHub(ISignalTransportHub transportHub)
         {
@@ -30,6 +33,24 @@ namespace SignalStreaming
             _transportHub = null;
         }
 
+        public bool TryGetGroupId(uint clientId, out string groupId)
+            => _transportHub.TryGetGroupId(clientId, out groupId);
+
+        public bool TryGetGroup(string groupId, out IGroup group)
+            => _transportHub.TryGetGroup(groupId, out group);
+
+        public bool TryAddGroup(string groupId, string groupName, out IGroup group)
+            => _transportHub.TryAddGroup(groupId, groupName, out group);
+
+        public bool TryRemoveGroup(string groupId)
+            => _transportHub.TryRemoveGroup(groupId);
+
+        public bool TryAddClientToGroup(uint clientId, string groupId)
+            => _transportHub.TryAddClientToGroup(clientId, groupId);
+
+        public bool TryRemoveClientFromGroup(uint clientId, string groupId)
+            => _transportHub.TryRemoveClientFromGroup(clientId, groupId);
+
         public void Send<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, uint destinationClientId)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
@@ -44,18 +65,18 @@ namespace SignalStreaming
             _transportHub.Send(destinationClientId, serializedMessage, reliable);
         }
 
-        public void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable)
+        public void Broadcast<T>(string groupId, int messageId, T data, bool reliable, uint senderClientId, long originTimestamp)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, data);
-            _transportHub.Broadcast(serializedMessage, reliable);
+            _transportHub.Broadcast(groupId, serializedMessage, reliable);
         }
 
-        public void Broadcast(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable)
+        public void Broadcast(string groupId, int messageId, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint senderClientId, long originTimestamp)
         {
             var transmitTimestamp = TimestampProvider.GetCurrentTimestamp();
             var serializedMessage = Serialize(messageId, senderClientId, originTimestamp, transmitTimestamp, rawMessagePackBlock);
-            _transportHub.Broadcast(serializedMessage, reliable);
+            _transportHub.Broadcast(groupId, serializedMessage, reliable);
         }
 
         public void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, IReadOnlyList<uint> destinationClientIds)
@@ -131,6 +152,16 @@ namespace SignalStreaming
                 {
                     _transportHub.Disconnect(senderClientId);
                 }
+            }
+            else if (messageId == (int)MessageType.GroupJoinRequest)
+            {
+                var joinRequest = MessagePackSerializer.Deserialize<GroupJoinRequest>(payload);
+                OnGroupJoinRequestReceived?.Invoke(senderClientId, joinRequest);
+            }
+            else if (messageId == (int)MessageType.GroupLeaveRequest)
+            {
+                var leaveRequest = MessagePackSerializer.Deserialize<GroupLeaveRequest>(payload);
+                OnGroupLeaveRequestReceived?.Invoke(senderClientId, leaveRequest);
             }
             else
             {

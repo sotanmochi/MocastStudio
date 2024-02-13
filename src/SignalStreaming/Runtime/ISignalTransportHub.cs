@@ -19,7 +19,15 @@ namespace SignalStreaming
         void Disconnect(uint clientId);
         void DisconnectAll();
 
+        bool TryGetGroupId(uint clientId, out string groupId);
+        bool TryGetGroup(string groupId, out IGroup group);
+        bool TryAddGroup(string groupId, string groupName, out IGroup group);
+        bool TryRemoveGroup(string groupId);
+        bool TryAddClientToGroup(uint clientId, string groupId);
+        bool TryRemoveClientFromGroup(uint clientId, string groupId);
+
         void Send(uint destinationClientId, ArraySegment<byte> data, bool reliable);
+        void Broadcast(string groupId, ArraySegment<byte> data, bool reliable);
         void Broadcast(IReadOnlyList<uint> destinationClientIds, ArraySegment<byte> data, bool reliable);
         void Broadcast(ArraySegment<byte> data, bool reliable);
     }

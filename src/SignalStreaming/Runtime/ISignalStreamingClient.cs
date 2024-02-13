@@ -19,6 +19,8 @@ namespace SignalStreaming
 
         event Action<uint> OnConnected;
         event Action<string> OnDisconnected;
+        event Action<GroupJoinResponse> OnGroupJoinResponseReceived;
+        event Action<GroupLeaveResponse> OnGroupLeaveResponseReceived;
 
         uint ClientId { get; }
         bool IsConnecting { get; }
@@ -26,6 +28,9 @@ namespace SignalStreaming
 
         Task<bool> ConnectAsync<T>(T connectParameters, CancellationToken cancellationToken = default) where T : IConnectParameters;
         Task DisconnectAsync(CancellationToken cancellationToken = default);
+
+        Task<bool> JoinGroupAsync(string groupId, CancellationToken cancellationToken = default);
+        Task LeaveGroupAsync(string groupId, CancellationToken cancellationToken = default);
 
         void Send(int messageId, ReadOnlySequence<byte> rawMessageBuffer, SendOptions sendOptions, uint[] destinationClientIds = null);
         void Send<T>(int messageId, T data, SendOptions sendOptions, uint[] destinationClientIds = null);

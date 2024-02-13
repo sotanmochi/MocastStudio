@@ -27,12 +27,22 @@ namespace SignalStreaming
 
         event Action<uint> OnClientConnected;
         event Action<uint> OnClientDisconnected;
+        event Action<uint, GroupJoinRequest> OnGroupJoinRequestReceived;
+        event Action<uint, GroupLeaveRequest> OnGroupLeaveRequestReceived;
+
+        bool TryGetGroupId(uint clientId, out string groupId);
+        bool TryGetGroup(string groupId, out IGroup group);
+        bool TryAddGroup(string groupId, string groupName, out IGroup group);
+        bool TryRemoveGroup(string groupId);
+        bool TryAddClientToGroup(uint clientId, string groupId);
+        bool TryRemoveClientFromGroup(uint clientId, string groupId);
 
         void Send<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, uint destinationClientId);
         void Send(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint destinationClientId);
 
-        void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable);
-        void Broadcast(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable);
+        void Broadcast<T>(string groupId, int messageId, T data, bool reliable, uint senderClientId, long originTimestamp);
+        void Broadcast(string groupId, int messageId, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, uint senderClientId, long originTimestamp);
+
         void Broadcast<T>(int messageId, uint senderClientId, long originTimestamp, T data, bool reliable, IReadOnlyList<uint> destinationClientIds);
         void Broadcast(int messageId, uint senderClientId, long originTimestamp, ReadOnlyMemory<byte> rawMessagePackBlock, bool reliable, IReadOnlyList<uint> destinationClientIds);
     }

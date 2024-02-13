@@ -21,9 +21,14 @@ namespace SignalStreaming
         byte[] _connectionRequestData = new byte[0];
         TaskCompletionSource<bool> _connectionTcs;
 
+        bool _joining;
+        TaskCompletionSource<bool> _joinTcs;
+
         public event ISignalStreamingClient.OnDataReceivedEventHandler OnDataReceived;
         public event Action<uint> OnConnected;
         public event Action<string> OnDisconnected;
+        public event Action<GroupJoinResponse> OnGroupJoinResponseReceived;
+        public event Action<GroupLeaveResponse> OnGroupLeaveResponseReceived;
 
         public string ConnectionId => _connectionId;
         public uint ClientId => _clientId;
@@ -75,6 +80,46 @@ namespace SignalStreaming
         {
             await _transport.DisconnectAsync(cancellationToken);
             _connected = false;
+        }
+
+        public async Task<bool> JoinGroupAsync(string groupId, CancellationToken cancellationToken = default)
+        {
+            if (_joining) return await _joinTcs.Task;
+
+            _joinTcs = new TaskCompletionSource<bool>();
+            _joining = true;
+
+            try
+            {
+                var request = new GroupJoinRequest(groupId, _connectionId);
+                var sendOptions = new SendOptions(StreamingType.ToHubServer, reliable: true);
+                var originTimestamp = TimestampProvider.GetCurrentTimestamp();
+
+                var payload = Serialize(messageId: (int)MessageType.GroupJoinRequest, message: request,
+                    sendOptions: sendOptions, senderClientId: _clientId, originTimestamp: originTimestamp);
+
+                _transport.Send(payload, sendOptions, null);
+            }
+            catch (Exception e)
+            {
+                _joining = false;
+                _joinTcs.SetResult(false);
+                throw;
+            }
+
+            return await _joinTcs.Task;
+        }
+
+        public async Task LeaveGroupAsync(string groupId, CancellationToken cancellationToken = default)
+        {
+            var request = new GroupLeaveRequest(groupId, _connectionId);
+            var sendOptions = new SendOptions(StreamingType.ToHubServer, reliable: true);
+            var originTimestamp = TimestampProvider.GetCurrentTimestamp();
+
+            var payload = Serialize(messageId: (int)MessageType.GroupLeaveRequest, message: request,
+                sendOptions: sendOptions, senderClientId: _clientId, originTimestamp: originTimestamp);
+
+            _transport.Send(payload, sendOptions, null);
         }
 
         public void Send(int messageId, ReadOnlySequence<byte> rawMessageBuffer, SendOptions sendOptions, uint[] destinationClientIds = null)
@@ -132,8 +177,21 @@ namespace SignalStreaming
                 var payloadOffset = data.Offset + (int)reader.Consumed;
                 var payloadCount = data.Count - (int)reader.Consumed;
                 var payload = new ReadOnlyMemory<byte>(data.Array, payloadOffset, payloadCount);
-
                 HandleConnectionResponse(payload);
+            }
+            else if (messageId == (int)MessageType.GroupJoinResponse)
+            {
+                var payloadOffset = data.Offset + (int)reader.Consumed;
+                var payloadCount = data.Count - (int)reader.Consumed;
+                var payload = new ReadOnlyMemory<byte>(data.Array, payloadOffset, payloadCount);
+                HandleGroupJoinResponse(payload);
+            }
+            else if (messageId == (int)MessageType.GroupLeaveResponse)
+            {
+                var payloadOffset = data.Offset + (int)reader.Consumed;
+                var payloadCount = data.Count - (int)reader.Consumed;
+                var payload = new ReadOnlyMemory<byte>(data.Array, payloadOffset, payloadCount);
+                HandleGroupLeaveResponse(payload);
             }
             else
             {
@@ -180,6 +238,31 @@ namespace SignalStreaming
             {
                 _disconnectionReason = response.Message;
                 _connectionTcs.SetResult(false);
+            }
+        }
+
+        void HandleGroupJoinResponse(ReadOnlyMemory<byte> data)
+        {
+            var response = MessagePackSerializer.Deserialize<GroupJoinResponse>(data);
+
+            if (_joining)
+            {
+                _joining = false;
+                _joinTcs.SetResult(response.RequestApproved);
+            }
+
+            if (response.RequestApproved)
+            {
+                OnGroupJoinResponseReceived?.Invoke(response);
+            }
+        }
+
+        void HandleGroupLeaveResponse(ReadOnlyMemory<byte> data)
+        {
+            var response = MessagePackSerializer.Deserialize<GroupLeaveResponse>(data);
+            if (response.RequestApproved)
+            {
+                OnGroupLeaveResponseReceived?.Invoke(response);
             }
         }
 
