@@ -12,6 +12,8 @@ namespace SignalStreaming
 
         bool IsConnected { get; }
 
+        void PollEvent();
+
         Task<bool> ConnectAsync<T>(T connectParameters, CancellationToken cancellationToken = default) where T : IConnectParameters;
         Task DisconnectAsync(CancellationToken cancellationToken = default);
 
