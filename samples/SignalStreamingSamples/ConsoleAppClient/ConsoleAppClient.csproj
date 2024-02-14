@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="MessagePack" Version="2.5.140" />
       <PackageReference Include="ENet-CSharp" Version="2.4.8" />
+      <PackageReference Include="Ulid" Version="1.3.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,7 +18,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <DefineConstants>ENET_CSHARP</DefineConstants>
+        <DefineConstants>ENET_CSHARP;DEVELOPMENT_BUILD</DefineConstants>
     </PropertyGroup>
 
 </Project>
