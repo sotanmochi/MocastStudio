@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using MessagePack;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.MotionData;
@@ -61,7 +62,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
             return true;
         }
 
-        public void Enqueue(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlyMemory<byte> serializedMessage)
+        public void Enqueue(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlySequence<byte> serializedMessage)
         {
             if (messageId != MotionCaptureMessageId) return;
 

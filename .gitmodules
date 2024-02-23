@@ -4,3 +4,6 @@
 [submodule "src/__MocastStudio.ThirdParty.Private"]
 	path = src/__MocastStudio.ThirdParty.Private
 	url = https://github.com/sotanmochi/__MocastStudio.ThirdParty.Private.git
+[submodule "src/SignalStreaming"]
+	path = src/SignalStreaming
+	url = https://github.com/sotanmochi/SignalStreaming.git

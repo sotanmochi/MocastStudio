@@ -79,7 +79,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
             }
 
             var dataBuffer = new MocastStudioDataBuffer(dataSourceId, (uint)dataSourceSettings.StreamingDataId);
-            _streamingReceivers[dataSourceId].OnDataReceived += dataBuffer.Enqueue;
+            _streamingReceivers[dataSourceId].OnIncomingSignalDequeued += dataBuffer.Enqueue;
             _dataSourceSettings.Add(dataSourceId, dataSourceSettings);
 
             return dataBuffer;
