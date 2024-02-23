@@ -66,7 +66,7 @@
       "hash": "284d5c50d3f1ddd9fa7df3d382ea904732a9c2ff"
     },
     "com.nxrighthere.enet-csharp": {
-      "version": "file:../../ThirdParty/ENet-CSharp",
+      "version": "file:../../SignalStreaming/src/ThirdParty/ENet-CSharp",
       "depth": 0,
       "source": "local",
       "dependencies": {}
@@ -327,13 +327,19 @@
       "hash": "3c3b9e9761c0c7b3d3ce89d5cef336df4e0a410c"
     },
     "jp.sotanmochi.signalstreaming": {
-      "version": "file:../../SignalStreaming",
+      "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "jp.sotanmochi.signalstreaming.collections": {
+      "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Collections",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "jp.sotanmochi.signalstreaming.infrastructure": {
-      "version": "file:../../SignalStreaming.Infrastructure",
+      "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Infrastructure",
       "depth": 0,
       "source": "local",
       "dependencies": {}
