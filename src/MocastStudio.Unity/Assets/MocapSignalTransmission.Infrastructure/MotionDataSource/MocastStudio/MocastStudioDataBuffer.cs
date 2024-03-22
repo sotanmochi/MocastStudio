@@ -62,7 +62,7 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
             return true;
         }
 
-        public void Enqueue(int messageId, uint senderClientId, long originTimestamp, long transmitTimestamp, ReadOnlySequence<byte> serializedMessage)
+        public void Enqueue(int messageId, ReadOnlySequence<byte> serializedMessage, uint senderClientId)
         {
             if (messageId != MotionCaptureMessageId) return;
 

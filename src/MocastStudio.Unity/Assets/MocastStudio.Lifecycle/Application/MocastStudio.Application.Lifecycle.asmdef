@@ -15,7 +15,10 @@
         "MocapSignalTransmission.Infrastructure.MotionActor",
         "MocapSignalTransmission.Infrastructure.MotionDataSource",
         "MocapSignalTransmission.Infrastructure.Transmitter",
-        "SignalStreaming.Infrastructure"
+        "SignalStreaming",
+        "SignalStreaming.Infrastructure",
+        "SignalStreaming.Infrastructure.LiteNetLib",
+        "SignalStreaming.Serialization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
