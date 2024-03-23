@@ -1,0 +1,16 @@
+{
+    "name": "MocastStudio.Infrastructure.OnlineStudio",
+    "rootNamespace": "",
+    "references": [
+        "MocastStudio.Application.OnlineStudio"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

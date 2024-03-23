@@ -4,9 +4,12 @@
     "references": [
         "VContainer",
         "UniTask",
+        "MessagePack",
         "MessagePipe",
         "MessagePipe.VContainer",
         "MocastStudio.Application",
+        "MocastStudio.Application.OnlineStudio",
+        "MocastStudio.Infrastructure.OnlineStudio",
         "MocastStudio.Infrastructure.VideoFrameStreaming",
         "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.MotionDataSource",

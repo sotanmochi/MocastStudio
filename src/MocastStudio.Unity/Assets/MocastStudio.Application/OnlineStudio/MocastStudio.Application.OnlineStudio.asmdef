@@ -1,0 +1,24 @@
+{
+    "name": "MocastStudio.Application.OnlineStudio",
+    "rootNamespace": "",
+    "references": [
+        "SignalStreaming",
+        "SignalStreaming.Infrastructure.LiteNetLib",
+        "SignalStreaming.Serialization",
+        "MocapSignalTransmission.MotionActor",
+        "MocapSignalTransmission.MotionData",
+        "MocapSignalTransmission.Infrastructure.Constants",
+        "MocapSignalTransmission.MotionDataSource",
+        "R3.Unity",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
