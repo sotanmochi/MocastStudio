@@ -18,7 +18,7 @@
         {
             "name": "jp.sotanmochi.signalstreaming",
             "expression": "",
-            "define": "SIGNAL_STREAMING"
+            "define": "__SIGNAL_STREAMING"
         }
     ],
     "noEngineReferences": false

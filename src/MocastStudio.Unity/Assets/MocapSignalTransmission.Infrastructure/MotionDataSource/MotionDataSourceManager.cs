@@ -11,7 +11,9 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
     {
         private readonly List<IMotionDataSourceManager> _dataSourceManagers = new();
 
+#if SIGNAL_STREAMING
         private MocastStudioDataSourceManager _mocastStudioDataSourceManager;
+#endif
         private VMCProtocolDataSourceManager _vmcProtocolDataSourceManager;
 #if MOCOPI_RECEIVER_PLUGIN
         private MocopiDataSourceManager _mocopiDataSourceManager;
@@ -22,7 +24,9 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 
         public MotionDataSourceManager
         (
+#if SIGNAL_STREAMING
             MocastStudioDataSourceManager mocastStudioDataSourceManager,
+#endif
             VMCProtocolDataSourceManager vmcProtocolDataSourceManager
 #if MOCOPI_RECEIVER_PLUGIN
             ,MocopiDataSourceManager mocopiDataSourceManager
@@ -32,10 +36,11 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
 #endif
         )
         {
+#if SIGNAL_STREAMING
             // Mocast Studio
             _mocastStudioDataSourceManager = mocastStudioDataSourceManager;
             _dataSourceManagers.Add(mocastStudioDataSourceManager);
-
+#endif
             // VMC Protocol
             _vmcProtocolDataSourceManager = vmcProtocolDataSourceManager;
             _dataSourceManagers.Add(vmcProtocolDataSourceManager);
@@ -82,7 +87,9 @@ namespace MocapSignalTransmission.Infrastructure.MotionDataSource
         {
             return settings.DataSourceType switch
             {
+#if SIGNAL_STREAMING
                 (int)MotionDataSourceType.MocastStudio_Remote => await _mocastStudioDataSourceManager.CreateAsync(dataSourceId, settings),
+#endif
                 (int)MotionDataSourceType.VMCProtocol_TypeA => await _vmcProtocolDataSourceManager.CreateAsync(dataSourceId, settings),
                 (int)MotionDataSourceType.VMCProtocol_TypeB => await _vmcProtocolDataSourceManager.CreateAsync(dataSourceId, settings),
 #if MOCOPI_RECEIVER_PLUGIN

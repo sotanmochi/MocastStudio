@@ -34,6 +34,11 @@
             "name": "jp.sotanmochi.mocapstreamingreceiver.motionbuilder",
             "expression": "",
             "define": "MOTION_BUILDER_RECEIVER_PLUGIN"
+        },
+        {
+            "name": "jp.sotanmochi.signalstreaming",
+            "expression": "",
+            "define": "__SIGNAL_STREAMING"
         }
     ],
     "noEngineReferences": false
