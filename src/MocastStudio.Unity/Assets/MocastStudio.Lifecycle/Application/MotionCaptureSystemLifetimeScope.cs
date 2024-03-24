@@ -34,7 +34,10 @@ namespace MocastStudio.Application.Lifecycle
             builder.Register<TransmitterFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MotionActorFactory>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.Register<LocalFileBinaryDataProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<CompositeBinaryDataProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<LocalFileBinaryDataProvider>(Lifetime.Singleton);
+            builder.Register<StreamingAssetBinaryDataProvider>(Lifetime.Singleton);
+
             builder.Register<VrmAvatarResourceProvider>(Lifetime.Singleton).AsImplementedInterfaces()
                 .WithParameter<RenderPipelineType>(RenderPipelineType.UniversalRenderPipeline);
 
