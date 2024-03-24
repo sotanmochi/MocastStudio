@@ -23,6 +23,10 @@ namespace MocastStudio.Application.OnlineStudio
             _context = context;
             _endpointProvider = endpointProvider;
             _streamingClient = streamingClient;
+        }
+
+        public void Initialize()
+        {
             _streamingClient.OnConnected += OnConnected;
             _streamingClient.OnDisconnected += OnDisconnected;
             _streamingClient.OnIncomingSignalDequeued += OnIncomingSignalDequeued;
