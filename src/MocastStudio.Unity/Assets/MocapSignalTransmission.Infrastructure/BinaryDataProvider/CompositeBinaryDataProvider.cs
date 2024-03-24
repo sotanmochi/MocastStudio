@@ -4,7 +4,7 @@ using MocapSignalTransmission.BinaryDataProvider;
 
 namespace MocapSignalTransmission.Infrastructure.BinaryDataProvider
 {
-    public sealed class CompositeBinaryDataProvider
+    public sealed class CompositeBinaryDataProvider : IBinaryDataProvider
     {
         readonly LocalFileBinaryDataProvider _localFileBinaryDataProvider;
         readonly StreamingAssetBinaryDataProvider _streamingAssetBinaryDataProvider;
