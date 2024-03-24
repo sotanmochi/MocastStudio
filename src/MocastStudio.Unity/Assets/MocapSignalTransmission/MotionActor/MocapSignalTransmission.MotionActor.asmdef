@@ -2,6 +2,7 @@
     "name": "MocapSignalTransmission.MotionActor",
     "rootNamespace": "MocapSignalTransmission.MotionActor",
     "references": [
+        "MocapSignalTransmission.BinaryDataProvider",
         "MocapSignalTransmission.MotionData",
         "MocapSignalTransmission.MotionDataSource",
         "MessagePipe"

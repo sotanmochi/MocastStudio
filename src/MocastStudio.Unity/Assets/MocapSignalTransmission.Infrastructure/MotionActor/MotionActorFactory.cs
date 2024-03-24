@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using MocapSignalTransmission.BinaryDataProvider;
 using MocapSignalTransmission.MotionActor;
 
 namespace MocapSignalTransmission.Infrastructure.MotionActor
@@ -14,9 +15,9 @@ namespace MocapSignalTransmission.Infrastructure.MotionActor
             _characterAvatarResourceProvider = characterAvatarResourceProvider;
         }
 
-        public async Task<HumanoidMotionActor> CreateAsync(int actorId, string resourcePath, CancellationToken cancellationToken = default)
+        public async Task<HumanoidMotionActor> CreateAsync(int actorId, IBinaryDataLoadingRequest request, CancellationToken cancellationToken = default)
         {
-            var characterAvatarResource = await _characterAvatarResourceProvider.LoadAsync(resourcePath, cancellationToken);
+            var characterAvatarResource = await _characterAvatarResourceProvider.LoadAsync(request, cancellationToken);
 
             if (characterAvatarResource is VrmAvatar vrmAvatar)
             {

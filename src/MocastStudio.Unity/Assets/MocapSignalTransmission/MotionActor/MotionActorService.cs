@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MocapSignalTransmission.BinaryDataProvider;
 using MocapSignalTransmission.MotionDataSource;
 using Debug = UnityEngine.Debug;
 using HumanPose = UnityEngine.HumanPose;
@@ -105,11 +106,11 @@ namespace MocapSignalTransmission.MotionActor
             }
         }
 
-        public async Task<HumanoidMotionActor> AddHumanoidMotionActorAsync(string resourcePath)
+        public async Task<HumanoidMotionActor> AddHumanoidMotionActorAsync(IBinaryDataLoadingRequest request, CancellationToken cancellationToken = default)
         {
             var actorId = Interlocked.Increment(ref _humanoidMotionActorCount) - 1;
 
-            var motionActor = await _motionActorFactory.CreateAsync(actorId, resourcePath);
+            var motionActor = await _motionActorFactory.CreateAsync(actorId, request, cancellationToken);
             if (motionActor is HumanoidMotionActor humanoidMotionActor)
             {
                 _context._bodyTrackingActors.Add(humanoidMotionActor.BodyTrackingActorBehaviour);
@@ -120,7 +121,7 @@ namespace MocapSignalTransmission.MotionActor
             }
             else
             {
-                Debug.LogError($"[{nameof(MotionActorService)}] The motion actor is not humanoid. Resource path: {resourcePath}");
+                // Debug.LogError($"[{nameof(MotionActorService)}] The motion actor is not humanoid. Resource path: {resourcePath}");
                 // TODO: Add comment
                 _context._bodyTrackingActors.Add(null);
                 _context._fingerTrackingActors.Add(null);

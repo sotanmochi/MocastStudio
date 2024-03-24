@@ -8,6 +8,7 @@
         "R3.Unity",
         "StandaloneFileBrowser",
         "MocapSignalTransmission.Infrastructure.Constants",
+        "MocapSignalTransmission.BinaryDataProvider",
         "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.MotionDataSource",
         "MocapSignalTransmission.Transmitter"

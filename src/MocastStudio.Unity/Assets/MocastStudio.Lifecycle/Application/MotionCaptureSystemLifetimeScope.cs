@@ -1,6 +1,7 @@
 using MocapSignalTransmission.MotionActor;
 using MocapSignalTransmission.MotionDataSource;
 using MocapSignalTransmission.Transmitter;
+using MocapSignalTransmission.Infrastructure.BinaryDataProvider;
 using MocapSignalTransmission.Infrastructure.Constants;
 using MocapSignalTransmission.Infrastructure.MotionActor;
 using MocapSignalTransmission.Infrastructure.MotionDataSource;
@@ -33,9 +34,9 @@ namespace MocastStudio.Application.Lifecycle
             builder.Register<TransmitterFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MotionActorFactory>(Lifetime.Singleton).AsImplementedInterfaces();
 
+            builder.Register<LocalFileBinaryDataProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<VrmAvatarResourceProvider>(Lifetime.Singleton).AsImplementedInterfaces()
-                .WithParameter<RenderPipelineType>(RenderPipelineType.UniversalRenderPipeline)
-                .WithParameter<IBinaryDataProvider>(new LocalFileBinaryDataProvider());
+                .WithParameter<RenderPipelineType>(RenderPipelineType.UniversalRenderPipeline);
 
             builder.Register<MotionDataSourceManager>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<VMCProtocolDataSourceManager>(Lifetime.Singleton).AsSelf();

@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using MocapSignalTransmission.BinaryDataProvider;
 using MocapSignalTransmission.Infrastructure.Constants;
 using UniGLTF;
 using UniVRM10;
@@ -17,9 +18,10 @@ namespace MocapSignalTransmission.Infrastructure.MotionActor
             _binaryDataProvider = binaryDataProvider;
         }
 
-        public async Task<ICharacterAvatarResource> LoadAsync(string path, CancellationToken cancellationToken = default)
+        public async Task<ICharacterAvatarResource> LoadAsync<T>(T request, CancellationToken cancellationToken = default) where T : IBinaryDataLoadingRequest
         {
-            if (string.IsNullOrEmpty(path)) return null;
+            var bytes = await _binaryDataProvider.LoadAsync(request, cancellationToken);
+            if (bytes == null || bytes.Length == 0) return null;
 
             IMaterialDescriptorGenerator materialGenerator = _renderPipelineType switch
             {
@@ -28,7 +30,6 @@ namespace MocapSignalTransmission.Infrastructure.MotionActor
                 _ => new BuiltInVrm10MaterialDescriptorGenerator()
             };
 
-            var bytes = await _binaryDataProvider.LoadAsync(path, cancellationToken);
             var loadedVrm = await Vrm10.LoadBytesAsync(bytes,
                 canLoadVrm0X: true,
                 showMeshes: false,

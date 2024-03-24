@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using MessagePipe;
+using MocapSignalTransmission.BinaryDataProvider;
 using MocapSignalTransmission.MotionActor;
 using R3;
 
@@ -38,7 +39,13 @@ namespace MocastStudio.Presentation.UIView.MotionActor
             _motionActorLoaderView.OnLoadingRequested
                 .Subscribe(parameters =>
                 {
-                    _motionActorService.AddHumanoidMotionActorAsync(parameters.ResourcePath);
+                    var directoryPath = Path.GetDirectoryName(parameters.ResourcePath);
+                    var filename = Path.GetFileName(parameters.ResourcePath);
+                    _motionActorService.AddHumanoidMotionActorAsync(new LocalFileLoadingRequest()
+                    {
+                        DirectoryPath = directoryPath,
+                        Filename = filename,
+                    });
                 })
                 .AddTo(_compositeDisposable);
 

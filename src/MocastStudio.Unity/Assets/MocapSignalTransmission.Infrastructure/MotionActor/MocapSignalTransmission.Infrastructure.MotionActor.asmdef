@@ -2,6 +2,7 @@
     "name": "MocapSignalTransmission.Infrastructure.MotionActor",
     "rootNamespace": "MocapSignalTransmission.Infrastructure.MotionActor",
     "references": [
+        "MocapSignalTransmission.BinaryDataProvider",
         "MocapSignalTransmission.MotionActor",
         "MocapSignalTransmission.Infrastructure.Constants",
         "UniTask",
