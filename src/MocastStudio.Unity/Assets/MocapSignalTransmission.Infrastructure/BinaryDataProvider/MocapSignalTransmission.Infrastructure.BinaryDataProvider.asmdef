@@ -1,0 +1,17 @@
+{
+    "name": "MocapSignalTransmission.Infrastructure.BinaryDataProvider",
+    "rootNamespace": "",
+    "references": [
+        "MocapSignalTransmission.BinaryDataProvider",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
