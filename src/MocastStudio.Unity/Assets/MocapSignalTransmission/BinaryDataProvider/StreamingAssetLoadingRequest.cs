@@ -1,6 +1,6 @@
 using MocapSignalTransmission.BinaryDataProvider;
 
-namespace MocapSignalTransmission.Infrastructure.BinaryDataProvider
+namespace MocapSignalTransmission.BinaryDataProvider
 {
     public sealed class StreamingAssetLoadingRequest : IBinaryDataLoadingRequest
     {
