@@ -19,17 +19,15 @@ namespace MocapSignalTransmission.Infrastructure.BinaryDataProvider
 
         public async Task<byte[]> LoadAsync<T>(T request, CancellationToken cancellationToken = default) where T : IBinaryDataLoadingRequest
         {
-            if (typeof(T) == typeof(LocalFileLoadingRequest))
+            if (request is LocalFileLoadingRequest localFileLoadingRequest)
             {
-                var loadingRequest = request as LocalFileLoadingRequest;
-                if (loadingRequest == null) return null;
-                return await _localFileBinaryDataProvider.LoadAsync(loadingRequest, cancellationToken);
+                if (localFileLoadingRequest == null) return null;
+                return await _localFileBinaryDataProvider.LoadAsync(localFileLoadingRequest, cancellationToken);
             }
-            else if (typeof(T) == typeof(StreamingAssetLoadingRequest))
+            else if (request is StreamingAssetLoadingRequest streamingAssetLoadingRequest)
             {
-                var loadingRequest = request as StreamingAssetLoadingRequest;
-                if (loadingRequest == null) return null;
-                return await _streamingAssetBinaryDataProvider.LoadAsync(loadingRequest, cancellationToken);
+                if (streamingAssetLoadingRequest == null) return null;
+                return await _streamingAssetBinaryDataProvider.LoadAsync(streamingAssetLoadingRequest, cancellationToken);
             }
             else
             {

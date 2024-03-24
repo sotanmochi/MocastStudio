@@ -22,7 +22,7 @@ namespace MocapSignalTransmission.Infrastructure.BinaryDataProvider
                 return null;
             }
 
-            var path = Path.Combine(UnityEngine.Application.streamingAssetsPath, loadingRequest.Filename);
+            var path = Path.Combine(UnityEngine.Application.streamingAssetsPath, loadingRequest.FolderName, loadingRequest.Filename);
 
             // NOTE: Enable to load streaming asset files on Android.
             if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
