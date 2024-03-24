@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "jp.sotanmochi.ilpostprocessingkit": "https://github.com/sotanmochi/ILPostProcessingKit.git?path=Packages/ILPostProcessingKit#v1.2.0",
+    "com.nxrighthere.netstack": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/NetStack",
+    "jp.sotanmochi.signalstreaming.serialization": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Serialization",
     "jp.sotanmochi.signalstreaming.infrastructure": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Infrastructure",
     "jp.sotanmochi.signalstreaming.collections": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Collections",
     "jp.sotanmochi.signalstreaming": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming",

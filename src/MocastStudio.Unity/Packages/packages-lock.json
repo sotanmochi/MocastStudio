@@ -71,6 +71,12 @@
       "source": "local",
       "dependencies": {}
     },
+    "com.nxrighthere.netstack": {
+      "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/NetStack",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.8.8",
       "depth": 1,
@@ -340,6 +346,12 @@
     },
     "jp.sotanmochi.signalstreaming.infrastructure": {
       "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Infrastructure",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "jp.sotanmochi.signalstreaming.serialization": {
+      "version": "file:../../SignalStreaming/src/SignalStreaming.Unity/Packages/SignalStreaming.Serialization",
       "depth": 0,
       "source": "local",
       "dependencies": {}
